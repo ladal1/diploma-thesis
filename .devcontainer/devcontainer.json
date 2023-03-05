@@ -1,0 +1,24 @@
+{
+    "name": "KAM Tex Live",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+          "extensions": [
+            "ms-azuretools.vscode-docker",
+            "mhutchie.git-graph",
+            "James-Yu.latex-workshop",
+            "streetsidesoftware.code-spell-checker",
+            "streetsidesoftware.code-spell-checker-czech",
+            "github.copilot",
+            "eamodio.gitlens"
+          ],
+          "settings": {
+            "files.eol": "\n",
+            "editor.formatOnSave": true
+          }
+        }
+      }
+  
+}

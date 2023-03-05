@@ -1,0 +1,45 @@
+{
+    "latex-workshop.latex.outDir": "./tmp",
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.latex.autoBuild.run": "onFileChange",
+    "latex-workshop.latex.autoClean.run": "never",
+    // "latex-workshop.synctex.afterBuild.enabled": true,
+    "cSpell.language": "en,cs",
+    "latex-workshop.latex.build.forceRecipeUsage": false,
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk++",
+            "command": "latexmk",
+            "args": [
+                "-xelatex",
+                "-shell-escape",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "copyPDF",
+            "command": "cp",
+            "args": [
+                "%OUTDIR%/%DOCFILE%.pdf",
+                "%DIR%",
+            ],
+            "env": {}
+        },
+    ],
+    "latex-workshop.latex.recipe.default": "first",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk++ ➞ copyPDF",
+            "tools": [
+                "latexmk++",
+                "copyPDF"
+            ]
+        }
+    ],
+}
