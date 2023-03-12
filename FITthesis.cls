@@ -271,7 +271,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 % 	\begin{titlingpage}
 % 		\begin{center}
 % 			\noindent\begin{tabular*}{\textwidth}{m{.77\textwidth}m{.165\textwidth}}
-% 				{\large\scshape \if\@lang1{
+% 				{\large \if\@lang1{
 % 						{\v C}esk{\' e} vysok{\' e} u{\v c}en{\' i} technick{\' e} v~Praze
 % 					}\else\if\@lang2{
 % 						{\v C}esk{\' e} vysok{\' e} u{\v c}en{\' i} technick{\' e} v~Praze
@@ -351,7 +351,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
                \if\thetitle\empty
                        \ClassError{FITthesis}{Thesis' title unspecified}{Specify title of this thesis using the \protect\title\space command.}
                \else
-                       \noindent\textbf{\LARGE \begin{flushleft}\thetitle\end{flushleft}}
+                       \noindent{\LARGE \begin{flushleft}\thetitle\end{flushleft}}
                \fi
 
  
@@ -360,7 +360,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 
                \if@authorwithdegreesdefined
 
-                       \noindent\textbf{\Large \textit{\theauthorwithdegrees}}
+                       \noindent{\Large \textit{\theauthorwithdegrees}}
 
                \else
 
@@ -508,8 +508,8 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 \renewcommand{\counterwithin}{\@ifstar{\@csinstar}{\@csin}}
 
 	\thispagestyle{empty}
-	\if\@lang1{Sem vlo{\v z}te zad{\' a}n{\' i} Va{\v s}{\' i} pr{\' a}ce.}\else\if\@lang2{Sem vlo{\v z}te zadanie Va{\v s}ej pr{\' a}ce.}\else{Insert here your thesis' task.}\fi\fi
-
+	\includepdf[pages={1-}]{assets/loukalad-assignment.pdf} 
+	
 	\frontmatter
 	\pagestyle{plain}
 	\cleardoublepage

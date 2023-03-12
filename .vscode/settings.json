@@ -42,4 +42,17 @@
             ]
         }
     ],
+    "ltex.language": "en-GB",
+    "cSpell.words": [
+        "azuretools",
+        "behaviours",
+        "eamodio",
+        "Firestore",
+        "grammarly",
+        "ltex",
+        "mhutchie",
+        "noncomparative",
+        "valentjn",
+        "znck"
+    ],
 }

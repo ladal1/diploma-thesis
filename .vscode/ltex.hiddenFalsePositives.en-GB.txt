@@ -1,0 +1,1 @@
+{"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QEven non-Web entities and applications often need significant data storage and, as a result, the ability to manage and manipulate data has become a critical skill for developers and organisations alike.\\E$"}

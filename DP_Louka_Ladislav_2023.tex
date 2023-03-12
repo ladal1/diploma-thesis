@@ -12,6 +12,7 @@
 % \usepackage[cp1250]{inputenc} % LaTeX source encoded as Windows-1250
 
 \usepackage{subfig} %subfigures
+\usepackage{pdfpages}
 \usepackage{amsmath} %advanced maths
 \usepackage{amssymb} %additional math symbols
 \usepackage{amsthm}
@@ -19,8 +20,10 @@
 \usepackage{todonotes}
 \usepackage[outputdir=./tmp]{minted}
 \usepackage{xcolor}
-\DeclareRobustCommand{\bxseries}{\fontseries{bx}\selectfont}
-\DeclareTextFontCommand{\textbx}{\fontseries{bx}}
+
+\newcommand{\tg}{\mathop{\mathrm{tg}}} %cesky tangens
+\newcommand{\cotg}{\mathop{\mathrm{cotg}}} %cesky cotangens
+
 % % list of acronyms
 % \usepackage[acronym,nonumberlist,toc,numberedsection=autolabel]{glossaries}
 % \iflanguage{czech}{\renewcommand*{\acronymname}{Seznam pou{\v z}it{\' y}ch zkratek}}{}
@@ -47,8 +50,8 @@
 \authorWithDegrees{Bc. Ladislav Louka} %author's name with academic degrees
 \supervisor{Ing. Jan Matoušek}
 \acknowledgements{THANKS (remove entirely in case you do not with to thank anyone)}
-\abstractEN{Summarize the contents and contribution of your work in a few sentences in English language.}
-\abstractCS{V n{\v e}kolika v{\v e}t{\' a}ch shr{\v n}te obsah a p{\v r}{\' i}nos t{\' e}to pr{\' a}ce v {\v c}esk{\' e}m jazyce.}
+\abstractEN{TODO Summarize the contents and contribution of your work in a few sentences in English language.}
+\abstractCS{TODO}
 \placeForDeclarationOfAuthenticity{Prague}
 \keywordsCS{Replace with comma-separated list of keywords in Czech.}
 \keywordsEN{Replace with comma-separated list of keywords in English.}
@@ -64,8 +67,6 @@
 
 % \newacronym{CVUT}{{\v C}VUT}{{\v C}esk{\' e} vysok{\' e} u{\v c}en{\' i} technick{\' e} v Praze}
 % \newacronym{FIT}{FIT}{Fakulta informa{\v c}n{\' i}ch technologi{\' i}}
-
-
 
 \include{content/0-Introduction.tex}
 

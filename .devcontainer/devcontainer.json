@@ -1,5 +1,5 @@
 {
-    "name": "KAM Tex Live",
+    "name": "LaTeX Live, FIT Workspace",
     "build": {
         "dockerfile": "Dockerfile"
     },
@@ -12,7 +12,9 @@
             "streetsidesoftware.code-spell-checker",
             "streetsidesoftware.code-spell-checker-czech",
             "github.copilot",
-            "eamodio.gitlens"
+            "eamodio.gitlens",
+            "valentjn.vscode-ltex",
+            "znck.grammarly"
           ],
           "settings": {
             "files.eol": "\n",

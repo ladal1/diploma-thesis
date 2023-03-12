@@ -16,6 +16,11 @@ RUN cd /tmp && wget -qO- https://mirror.ctan.org/systems/texlive/tlnet/install-t
     && luaotfload-tool -u \
     && rm -rf /tmp/install-tl-*
 
+# Uncomment if running on M1/M2 Mac
+# RUN tlmgr install latexindent 
+#     && cpan -i YAML::Tiny
+#     && cpan -i File::HomeDir
+
 RUN apt-get install -y --no-install-recommends python3 python3-pip libfontconfig make git && \
     apt-get clean && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/* && \
@@ -23,5 +28,7 @@ RUN apt-get install -y --no-install-recommends python3 python3-pip libfontconfig
 
 WORKDIR /tmp/workdir
 
+# Uncomment if running on M1/M2 Mac and comment out the ENV PATH line below
+# ENV PATH="/usr/local/texlive/bin/aarch64-linux:${PATH}"
 ENV PATH="/usr/local/texlive/bin/x86_64-linux:${PATH}"
 ENV TERM='xterm-256color'
