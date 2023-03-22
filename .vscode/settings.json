@@ -4,7 +4,7 @@
     "latex-workshop.latex.autoBuild.run": "onFileChange",
     "latex-workshop.latex.autoClean.run": "never",
     // "latex-workshop.synctex.afterBuild.enabled": true,
-    "cSpell.language": "en,cs",
+    "cSpell.language": "en-GB,cs",
     "latex-workshop.latex.build.forceRecipeUsage": false,
     "latex-workshop.latex.tools": [
         {

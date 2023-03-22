@@ -13,12 +13,10 @@ RUN cd /tmp && wget -qO- https://mirror.ctan.org/systems/texlive/tlnet/install-t
     && /tmp/install-tl*/install-tl -profile /tmp/texlive.profile \
     && tlmgr init-usertree \
     && tlmgr install latexmk pgf memoir setspace caption titlesec mathtools ellipsis pdfpages lipsum csquotes listings pdflscape minted fontspec todonotes pgfplots polyglossia booktabs enumitem multirow blindtext cleveref standalone beamer subfig textcase \
-    && luaotfload-tool -u \
+    && luaotfload-tool latexindent -u \
     && rm -rf /tmp/install-tl-*
 
-# Uncomment if running on M1/M2 Mac
-# RUN tlmgr install latexindent 
-#     && cpan -i YAML::Tiny
+# RUN cpan -i YAML::Tiny \
 #     && cpan -i File::HomeDir
 
 RUN apt-get install -y --no-install-recommends python3 python3-pip libfontconfig make git && \
