@@ -1,0 +1,55 @@
+\chapter{Benchmark database schema design}
+
+This chapter describes the database used for performance testing of the ORM and
+query builder packages. The database is designed around imaginary data
+collection about cats, their home domiciles and toys found within these houses,
+and the toys’ manufacturers. The database comprises six main entities – cat, cat
+colours, colour hex codes, houses, toys and toy producers.
+
+The cat entity instances represent individual cats which we want to monitor.
+Each has a unique identifier, name and date of birth, all of which are nullable
+except for the identifier. This entity aims to represent the basic database
+table and to verify the correct handling of the data type from Postgres, as
+JavaScript Date time represents a moment, including time. In contrast, the
+database entry would only contain the date. Additionally, the cat entity uses
+big integer data type, and handling numbers beyond the standard range allocated
+in JavaScript is tested. The cat colour and colour hex code are two entities
+that represent the cat colour by its name and by its hex code. The entities are
+intentionally split in this way to use identifying relation – the primary key of
+the hex colour entity is also a foreign key referencing the id of the cat colour
+entity. 
+
+House entity represents domiciles where the cats spend their time at their
+behest. The relation must also account for ambitious cats using several houses
+as their homes. The main aim is to test the difficulty of implementing and using
+simple many-to-many relations. The only attribute that provides new data type or
+behaviour is the simple has\_dog attribute, specified as a Boolean. It is one of
+several attributes that test the frameworks’ ability to correctly type and
+convert the data recovered from the database. The database types which are
+tested are Date, Timestamp (with time zone), Boolean, Big Integer, JSON, JSONB
+(decomposed binary representation of JSON) and Numeric (Decimal representation
+of numbers). 
+
+The houses can be equipped with many toys for the cats to use. The relation
+between houses and toys is modelled through a decomposition table which contains
+attributes representing the number of the same toy in the house. While the
+primary keys are the identifiers of the house and toy, the decomposition with
+the amount, rather than several records with an additional identifier, is
+designed to test the ability to insert a record if it does not exist or update
+the value referencing its previous state. If more toys are purchased, the owner
+of the house does not suddenly throw out all toys they already had; they will
+add them to their current pile. This operation is often called “upsert” – a
+combination of update and insert, and some database engines, such as
+CockroachDB, implement it explicitly under this name. PostgreSQL achieves it
+using the ON CONFLICT statement in INSERT query. It also tests the handling of
+composite primary keys, a standard paradigm in many databases. 
+
+The toy entity purpose in testing is in numeric data type used in price
+attribute and usage of additional column attributes such as CHECK constraints or
+DEFAULT values in the column. Column naughty is focused on commonly problematic
+strings in software development, such as special Unicode characters, emojis and
+other issues that could come up in handling data from the database, especially
+if the encoding is not correctly handled. Toys producers host the JSON columns
+to test if it is possible to use advanced JSON traversal and query operators
+provided in PostgreSQL (and their equivalents in other database management
+systems).
