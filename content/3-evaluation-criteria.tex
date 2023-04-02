@@ -1,16 +1,117 @@
-\chapter{Ranking and grading of the frameworks}
+\chapter{Ranking and Grading of the Frameworks}
 
-This chapter outlines and explains the criteria for evaluating ORM and SQL query builder packages chosen for the comparison. These criteria will be the core points which will be considered, but other specific notes will be made about each package. The main criteria were the level of TypeScript support, range of compatible database management systems, popularity, support, documentation quality, dependency count and performance in different scenarios.
-The main section of the evaluation criteria focuses on technical aspects of the frameworks, specifically their usage of TypeScript, support for different databases and difficulty composing queries. As these qualities are quantifiable, they were given the highest priority in comparing the packages.
-Quantifiable criteria
-The quality and extent of TypeScript support vary among the packages, with some offering better integration and type safety without the need for casts. In contrast, others only provide basic typing or require result type definitions to be written into each request, which amounts to the same behaviour as if the result was cast. Such functionality often comes when the package initially written for JavaScript is not rewritten in TypeScript but is only provided with a “types” file, which specifies call signatures, but cannot provide other assurances.
-Database compatibility is not necessary when working with a large project which may encompass many services, or when choosing a toolchain for a team, as the one database may not satisfy all the needs the team might have, and building experience with multiple frameworks could considered unnecessary spending. Providing unified API over multiple databases can be one of the benefits of query builders or object-relational mapping frameworks. 
-Performance in different scenarios is abstract, but flexibility and performance are crucial in a database access framework. Suppose the package would restrict the ability to access the data, requiring roundabout ways to deal with basic operations. In that case, there are better ways to simplify development, just as if the framework creates excessively suboptimal queries or adds excessive overhead. One of the requirements for a comprehensive ORM framework is the ability to support many use cases and represent and work with many different data models. If ORM cannot allow use cases or cannot represent commonly used database design patterns, it is lacking in some ways compared to one that does. 
-Package properties criteria
-However, technical criteria are only some that should be considered when selecting a framework. Many of these factors are interconnected; often, success in one is either caused by or preceded by doing well in others. For example, while the popularity of the package can show the reliability and usability of the package, it also often results in more issues reported and fixed, and more users are more likely to create community resources supplying or improving official documentation.
-Popularity measures usage, as indicated by package downloads, the number of issues and the number of users on GitHub who favourited or followed the repository. While all imperfect measures for absolute popularity, they help compare popularity between packages by their relative difference. The number of resolved and still open issues is connected mainly to the popularity metric of issues. With such a metric, support can be measured, and the statistic will be included; however, more important than that is the patterns of behaviour which maintainers have shown previously. If the release schedule is predictable, bugs and security issues are fixed quickly, hesitant adopters can be assured that this pattern will continue, and the framework is a safe investment. On the contrary, a project which is officially or probably no longer supported can be assumed to be a wrong choice, as it cannot react to newly found errors and problems with dependencies and might be unusable due to changes with typescript or Node.js runtime.
-As dependencies require maintenance due to their changes and vulnerable versions, their amount should also be manageable. Otherwise, it might increase the maintenance cost for the package and application size. Even though data storage is less critical than previously, having a more storage-conscious package is still beneficial.
-Documentation quality is critical for new adoption and onboarding for working with the framework. It also cannot be measured with reasonable objectivity. Perceived quality depends on language understanding and users’ previous experience with the programming language and similar frameworks. Evaluation of documentation will therefore summarize clarity, extensiveness and whether features such as Javadoc annotations are used to contain or link to the documentation.
-Performance is often secondary when choosing an ORM framework, as quite often, even frameworks adding significant overhead and creating suboptimal queries are not noticeably slowing down the application. As the application grows, the performance can become significantly more critical, and the resources needed can be more expensive to scale. A high-performing package can support this growth by maintaining efficacy under load and effectively using its available resources.
-Performance was measured in multiple ways; the first metric was the execution time of a single query to measure the latency added by using the framework, compared to using other frameworks or plain database drivers. Benchmarking this way provides information about the amount of overhead the framework requires to function, and if the connection pool is well initialized, connections are assigned optimally, and data are correctly retrieved. The second benchmark run repeats the test multiple times to eliminate any inconsistency that could occur in a single run. 
-The following chapters aim to provide a comprehensive and in-depth analysis of packages compared by evaluating each package by these comprehensive criteria with additional added when.
+This chapter outlines and explains the criteria for evaluating ORM and SQL query
+builder packages chosen for the comparison. These criteria will be the core
+points which will be considered, but other specific notes will be made about
+each package. The main criteria were the level of TypeScript support, range of
+compatible database management systems, popularity, support, documentation
+quality, dependency count, and performance in different scenarios.
+
+\section{Quantifiable Criteria}
+
+The main section of the evaluation criteria focuses on technical aspects of the
+frameworks, specifically their usage of TypeScript, support for different
+databases, and difficulty composing queries. As these qualities are
+quantifiable, they were given the highest priority in comparing the packages.
+
+\subsection{TypeScript Support}
+
+The quality and extent of TypeScript support vary among the packages, with some
+offering better integration and type safety without the need for casts. In
+contrast, others only provide basic typing or require result type definitions to
+be written into each request, which amounts to the same behavior as if the
+result was cast. Such functionality often comes when the package initially
+written for JavaScript is not rewritten in TypeScript but is only provided with
+a \texttt{types} file, which specifies call signatures, but cannot provide other
+assurances.
+
+\subsection{Database Compatibility}
+
+Database compatibility is not necessary when working with a large project that
+may encompass many services or when choosing a toolchain for a team, as the one
+database may not satisfy all the needs the team might have, and building
+experience with multiple frameworks could be considered unnecessary spending.
+Providing a unified API over multiple databases can be one of the benefits of
+query builders or object-relational mapping frameworks.
+
+\subsection{Performance}
+
+Performance in different scenarios is abstract, but flexibility and performance
+are crucial in a database access framework. Suppose the package would restrict
+the ability to access the data, requiring roundabout ways to deal with basic
+operations. In that case, there are better ways to simplify development, just as
+if the framework creates excessively suboptimal queries or adds excessive
+overhead. One of the requirements for a comprehensive ORM framework is the
+ability to support many use cases and represent and work with many different
+data models. If ORM cannot allow use cases or cannot represent commonly used
+database design patterns, it is lacking in some ways compared to one that does.
+
+\section{Package Properties Criteria}
+
+However, technical criteria are only some that should be considered when
+selecting a framework. Many of these factors are interconnected; often, success
+in one is either caused by or preceded by doing well in others. For example,
+while the popularity of the package can show the reliability and usability of
+the package, it also often results in more issues reported and fixed, and more
+users are more likely to create community resources supplying or improving
+official documentation.
+
+\subsection{Popularity}
+
+Popularity measures usage, as indicated by package downloads, the number of
+issues, and the number of users on GitHub who favourited or followed the
+repository. While all imperfect measures for absolute popularity, they help
+compare popularity between packages by their relative difference.
+
+\subsection{Support}
+
+The number of resolved and still open issues is connected mainly to the
+popularity metric of issues. With such a metric, support can be measured, and
+the statistic will be included; however, more important than that is the
+patterns of behavior which maintainers have shown previously. If the release
+schedule is predictable, bugs and security issues are fixed quickly, hesitant
+adopters can be assured that this pattern will continue, and the framework is a
+safe investment. On the contrary, a project which is officially or probably no
+longer supported can be assumed to be a wrong choice, as it cannot react to
+newly found errors and problems with dependencies and might be unusable due to
+changes with TypeScript or Node.js runtime.
+
+\subsection{Dependencies}
+
+As dependencies require maintenance due to their changes and vulnerable
+versions, their amount should also be manageable. Otherwise, it might increase
+the maintenance cost for the package and application size. Even though data
+storage is less critical than previously, having a more storage-conscious
+package is still beneficial.
+
+\subsection{Documentation Quality}
+
+Documentation quality is critical for new adoption and onboarding for working
+with the framework. It also cannot be measured with reasonable objectivity.
+Perceived quality depends on language understanding and users’ previous
+experience with the programming language and similar frameworks. Evaluation of
+documentation will therefore summarize clarity, extensiveness and whether
+features such as Javadoc annotations are used to contain or link to the
+documentation.
+
+\subsection{Performance}
+
+Performance is often secondary when choosing an ORM framework, as quite often,
+even frameworks adding significant overhead and creating suboptimal queries are
+not noticeably slowing down the application. As the application grows, the
+performance can become significantly more critical, and the resources needed can
+be more expensive to scale. A high-performing package can support this growth by
+maintaining efficacy under load and effectively using its available resources.
+
+Performance was measured in multiple ways; the first metric was the execution
+time of a single query to measure the latency added by using the framework,
+compared to using other frameworks or plain database drivers. Benchmarking this
+way provides information about the amount of overhead the framework requires to
+function, and if the connection pool is well initialized, connections are
+assigned optimally, and data are correctly retrieved. The second benchmark run
+repeats the test multiple times to eliminate any inconsistency that could occur
+in a single run.
+
+The following chapters aim to provide a comprehensive and in-depth analysis of
+packages compared by evaluating each package by these comprehensive criteria
+with additional added when.

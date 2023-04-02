@@ -1,0 +1,78 @@
+\chapter{Benchmark Framework Design}
+
+The benchmarking process was designed to compare the performance of various ORM
+and SQL query builder packages. As such, it was important to ensure that the
+benchmarking framework was developed in the same environment as the packages
+themselves. To achieve this, the framework was implemented in TypeScript, the
+same language used by the packages being tested.
+
+The benchmarking framework had to be designed to accommodate errors that could
+occur during development and testing of the packages. Additionally, it had to
+support testing of multiple database schemas and allow results to be exported in
+a variety of formats for further analysis. The resulting benchmarking framework
+provides a robust and comprehensive means of comparing database access packages.
+
+\section{Test Suite and Schema Separation}
+
+The benchmarking framework was designed to support separation of tests into
+multiple test suites, a common practice with JavaScript test frameworks such as
+Jest or Mocha. Test suite separation allows for organization of tests by subject
+and contains specifications about the database schema and data expected to be
+executed. Input and output parameters must be typed to test types support, and
+the framework should provide sufficient functionality to avoid the need for
+casting.
+
+The tests are expected to be run simultaneously with snapshots of the database
+schema and should not interfere with data used by another test suite. As a
+deliberate choice, this limits the scope of each test's modifications over the
+database and data. However, it eliminates the need to reset the database to the
+original state after each test suite, reducing the time it takes to run the
+benchmark.
+
+\section{Test type and Error Handling}
+
+The framework needs to support multiple tests to ensure the validity of any
+results it produces. If performance is measured, multiple runs can reduce the
+impact of statistical anomalies, which can occur due to the innumerable number
+of external events.
+
+Along with performance, the correctness of both query types, resulting runtime
+types, and the result value are essential. As types are only visible before
+compilation, and with typed test suite definitions TypeScript compiler would not
+compile the code, as it would raise type inconsistency. Even incorrect types
+will be necessary to be cast into their expected value. However, even just the
+need for such modification means the package must allow more type definitions.
+
+Resulting runtime types and values are validated using the node module
+\texttt{node:assert}, which provides assertion functions. It is provided to
+function with testing frameworks such as mocha, which do not offer verification
+functions. Included are even deep equality checking functions. The main
+advantage, however, comes from being included in the Node.js standard library,
+meaning that no additional package has to be included.
+
+Returning an incorrect result is one of many ways the benchmark test can be
+failed; the package can return an unexpected error, or the test is impossible to
+perform. Both are fail-states, which the benchmark suite must account for with
+error handling. One choice during the design process was that a single failure
+would mark the real test as failed, even though other iterations succeeded. If
+the package caused the issue, that means the package is not reliable enough.
+
+\section{Multi-Framework support}
+
+The benchmarking bootstrap is designed for sequential testing of multiple
+packages. This design, rather than separate execution, allows for comprehensive
+comparison under the same conditions, ensuring accurate results. As managing the
+dependencies could prove problematic if packages had different dependencies
+required, npm workspaces were selected as a project structure. That way,
+top-level dependencies of the framework can be separated from the individual
+implementations.
+
+\section{Reporters - Output options}
+
+An integral part of the design was the inclusion of reporters. Reporters provide
+an interface and implementation of multiple output options, enabling the results
+to be saved and shown in various formats. Standard test frameworks utilise
+reporters to make code coverage or detailed error stack inspectable. The
+reporters can interpret the data in different formats with a benchmarking
+framework. The reporter interface is designed to be extensible, allowing for the
+easy addition of other output options or data interpretations in the future.
