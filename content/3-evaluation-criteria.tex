@@ -34,17 +34,75 @@ experience with multiple frameworks could be considered unnecessary spending.
 Providing a unified API over multiple databases can be one of the benefits of
 query builders or object-relational mapping frameworks.
 
-\subsection{Performance}
+\subsection{Flexibility and Performance}
 
-Performance in different scenarios is abstract, but flexibility and performance
-are crucial in a database access framework. Suppose the package would restrict
-the ability to access the data, requiring roundabout ways to deal with basic
-operations. In that case, there are better ways to simplify development, just as
-if the framework creates excessively suboptimal queries or adds excessive
-overhead. One of the requirements for a comprehensive ORM framework is the
-ability to support many use cases and represent and work with many different
-data models. If ORM cannot allow use cases or cannot represent commonly used
-database design patterns, it is lacking in some ways compared to one that does.
+Flexibility and performance are crucial in a database access framework. Suppose
+the package would restrict the ability to access the data, requiring roundabout
+ways to deal with basic operations. In that case, there are better ways to
+simplify development, just as if the framework creates excessively suboptimal
+queries or adds excessive overhead. One of the requirements for a comprehensive
+ORM framework is the ability to support many use cases and represent and work
+with many different data models. If ORM cannot allow use cases or cannot
+represent commonly used database design patterns, it is lacking in some ways
+compared to one that does.
+
+Performance is often secondary when choosing an ORM framework, as quite often,
+even frameworks adding significant overhead and creating suboptimal queries are
+not noticeably slowing down the application. As the application grows, the
+performance can become significantly more critical, and the resources needed can
+be more expensive to scale. A high-performing package can support this growth by
+maintaining efficacy under load and effectively using its available resources.
+
+Performance was measured in multiple ways; the first metric was the execution
+time of a single query to measure the latency added by using the framework,
+compared to using other frameworks or plain database drivers. Benchmarking this
+way provides information about the amount of overhead the framework requires to
+function, and if the connection pool is well initialized, connections are
+assigned optimally, and data are correctly retrieved. The second benchmark run
+repeats the test multiple times to eliminate any inconsistency that could occur
+in a single run.
+
+\subsection{ECMAScript and CommonJS compatibility}
+There are two different standards for JavaScript syntax, ECMAScript and
+CommonJS. They primarily differ in how the inclusion of modules is
+written and the mechanism of the module import. While CommonJS was prevalent in
+the server backend space for a long time, however, ECMAScript modules are
+becoming significantly more popular, with support added in both Node.js
+and TypeScript.
+
+Combining packages from both ecosystems can still lead to problems. The best way
+to support all possible combinations is to provide both types of dependency
+declarations.
+
+\subsection{Licence}
+As developers consider integrating packages into their projects, it is crucial
+to consider and understand the significance of licences governing their use.
+Open-source software is often regarded as a valuable resource, offering a large
+amount of reusable code and often the best solution. However, it is essential to
+understand that open-source does not necessarily equate to unregulated use.
+Licenses still dictate the terms under which the package and its code can be
+employed, modified and redistributed. Therefore, developers must examine the
+licenses of potential packages to ensure their intended use aligns with the
+terms granted.
+
+The most permissive licences allow for usage, modification and redistribution
+without any requirement to credit the original author/authors or maintain the
+same licence in derivative works. Examples of such permissive licences are
+\textit{MIT License} or \textit{Apache License 2.0}. These are generally
+preferable for projects that demand flexibility in their use of the software.
+
+While still free, the opposite side to the permissive licences are copyleft
+licences, which impose more stringent requirements on the usage, especially
+modifications and redistributions of the software. The primary example of such a
+licence is \textit{GNU General Public License}, which requires derived works to
+be distributed under the same licence. While the Free Software Foundation, the
+entity behind the licence, recommends against using the licence for
+library-style software (recommending \textit{GNU Lesser Public License} or
+\textit{Apache License 2.0} instead \todo{LINK EXPLANATION}), it had nonetheless
+happened before, that a library was published with such licence.
+
+Since copyleft or other provisions might limit the use cases of libraries such
+as ORMs, it is necessary to include the licence as a grading criterion.
 
 \section{Package Properties Criteria}
 
@@ -61,7 +119,10 @@ official documentation.
 Popularity measures usage, as indicated by package downloads, the number of
 issues, and the number of users on GitHub who favourited or followed the
 repository. While all imperfect measures for absolute popularity, they help
-compare popularity between packages by their relative difference.
+compare popularity between packages by their relative difference. In the case
+that the package usage requires multiple dependencies to be installed, for
+example command line interface for development and runtime dependency, the
+highest number is listed.
 
 \subsection{Support}
 
@@ -94,23 +155,6 @@ documentation will therefore summarize clarity, extensiveness and whether
 features such as Javadoc annotations are used to contain or link to the
 documentation.
 
-\subsection{Performance}
-
-Performance is often secondary when choosing an ORM framework, as quite often,
-even frameworks adding significant overhead and creating suboptimal queries are
-not noticeably slowing down the application. As the application grows, the
-performance can become significantly more critical, and the resources needed can
-be more expensive to scale. A high-performing package can support this growth by
-maintaining efficacy under load and effectively using its available resources.
-
-Performance was measured in multiple ways; the first metric was the execution
-time of a single query to measure the latency added by using the framework,
-compared to using other frameworks or plain database drivers. Benchmarking this
-way provides information about the amount of overhead the framework requires to
-function, and if the connection pool is well initialized, connections are
-assigned optimally, and data are correctly retrieved. The second benchmark run
-repeats the test multiple times to eliminate any inconsistency that could occur
-in a single run.
 
 The following chapters aim to provide a comprehensive and in-depth analysis of
 packages compared by evaluating each package by these comprehensive criteria
