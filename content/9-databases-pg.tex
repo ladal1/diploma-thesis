@@ -1,1 +1,40 @@
 \section{@databases/pg}
+The \texttt{@databases/pg} package is developed by Lindsay Forbes, a prominent
+contributor to the Node.js ecosystem with hundreds of published packages. The
+package offers a simple interface for CRUD operations on individual tables in
+TypeScript. The package's typed interface is derived from schema definitions in
+interfaces, which can be automatically generated using the
+\texttt{@databases/pg-schema-cli} package. However, the package lacks support
+for table joining, making it suitable only for basic queries. Complex queries
+require a combination of templated SQL and conditions written using module
+functions with types.
+
+Though not as feature-rich as a typical ORM, the package simplifies basic
+querying more than a standard query builder. It is exported as an ES module and
+was initially licensed under GPLv3 but is now published under the MIT License.
+The \texttt{@databases} project supports multiple databases via modular drivers,
+with official support for Postgres, MySQL, SQLite, and Expo/WebSQL. Postgres has
+the most advanced support, with additional databases supported through modular
+drivers.
+
+The package has 517 stars on GitHub and 26,613 weekly downloads which makes it
+the fourth least downloaded and the second least known on GitHub. The project is
+actively developed and comprises numerous subpackages, with new databases being
+added and bugs frequently addressed. The package depends solely on internal
+modules or widely used packages, such as \texttt{assert-never} and
+\texttt{cuid}, along with the \texttt{pg} driver as a dependency.
+
+While the documentation quality could be better, offering basic information, a
+quick-start guide, and examples, there is no inline documentation requiring
+developers to consult the online documentation. Database migrations can be
+managed and executed using the \texttt{@databases/pg-migrations} package,
+supporting both .sql and .ts formats. However, no interface is provided for
+TypeScript migrations, necessitating custom scripts, and no schema modification
+methods are included in the package.
+
+\texttt{@databases/pg} is a package that simplifies basic querying in TypeScript
+by providing a straightforward interface for CRUD operations. Although it lacks
+the extensive functionality of a traditional ORM, it offers compatibility with
+multiple databases and has an active development community. However, the absence
+of inline documentation and limited support for complex queries and migrations
+may require developers to rely on additional resources and tools.

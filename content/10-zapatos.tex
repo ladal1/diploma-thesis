@@ -1,0 +1,37 @@
+\section{Zapatos}
+The Zapatos package, developed by George MacKerron, is designed to provide type
+safety for database querying in TypeScript, specifically for PostgreSQL through
+the \texttt{pg} driver. It generates a TypeScript schema of the database via
+introspection, offering methods for basic CRUD operations that are instantly
+typed and function as shortcuts for generic queries. Additionally, it features
+tagged templates for writing arbitrary SQL.
+
+Unlike pgTyped, which analyses queries and generates types, Zapatos disallows
+the inclusion of any data not specified in the manually typed query. This
+approach can lead to issues if the type is not defined correctly initially,
+potentially resulting in an unreliable type \todo{Example of incorrect typing
+due to different cols and select}. Despite this limitation, the package supports
+lateral joins, enabling the return of nested objects, a feature typically not
+found in packages with such low abstraction levels. However, as with other
+TypeScript-dependent packages, Zapatos can generate compilation errors that are
+difficult to parse.
+
+Released under the MIT license, the package uses ESModule dependencies and has
+14,933 weekly downloads and 980 GitHub stars, ranking it third least downloaded
+and starred. It is regularly updated, and none of the reported issues in the
+repository significantly limit its use. The package has no runtime dependencies,
+only development dependencies.
+
+While the documentation quality is generally good, it is brief but covers most
+of the necessary information for getting started, although lacking in detail.
+Similarly, the annotations for types provide only brief information,
+insufficient for guiding development on their own.
+
+In summary, Zapatos is a package that provides type safety for database querying
+with PostgreSQL, offering typed CRUD operations and tagged templates for SQL.
+Although it takes a different approach to type generation than \texttt{pgTyped},
+it supports lateral joins and nested objects. However, the package's limitations
+include possible type inaccuracies and challenging compilation errors. With
+moderate popularity and concise documentation, Zapatos is suitable for
+developers working with PostgreSQL who prioritize type safety and can navigate
+its potential issues.
