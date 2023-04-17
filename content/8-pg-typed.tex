@@ -37,3 +37,24 @@ making it easily accessible during development. PgTyped is a unique and flexible
 package for TypeScript developers working with PostgreSQL. However, it may
 provide a different abstraction level for those seeking a traditional ORM or
 query builder solution.
+
+\subsection{Performance in benchmarks}
+In line with expectations, the pgTyped package outperformed all other packages
+examined in the study. Most pgTyped operations are executed before or during
+compile time, yielding performance metrics comparable to those achieved using
+the plain \textit{pg} driver. While the package does not offer explicit support for
+parsing esoteric primitive types such as Decimal or Big Integer—resulting in
+their return as strings (akin to the \textit{pg} driver's approach) — it does provide a
+specific type for \texttt{JSON} and \texttt{JSONb} columns. However, these types
+must be sufficiently generic, which limits their overall value.
+
+As is typical with intricate TypeScript interfaces, the errors frequently
+encountered when using pgTyped can be challenging to interpret and offer
+limited guidance regarding type hinting. Despite this, the package proves
+advantageous in error detection.
+
+It is important to note that the pgTyped package solely supports
+single-command queries. Consequently, each query had to be separated during the
+transaction tests, with the commands for initiating and rolling back
+transactions explicitly written as SQL code. This limitation warrants
+consideration when selecting a package for implementation within a context.

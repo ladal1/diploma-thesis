@@ -52,3 +52,25 @@ collection and advanced data structures manipulation. While Knex is inflating
 the download numbers of these packages by a significant amount, they are also
 popular and supported on their own accord. None seem to have any outstanding or
 long-lasting issues.
+
+\subsection{Performance in benchmarks}
+
+The package evaluation demonstrated the ability to formulate queries for the
+benchmarks as flexibly as the SQL language. However, a notable limitation was
+its inability to accommodate operators with the \texttt{?} character. This issue
+arises due to the package's utilization of \texttt{?} as a parameter replacement
+character. Consequently, this poses challenges for PostgreSQL when checking key
+existence in JSONB data types and even generates complications in Oracle
+databases when conducting regex comparisons, as documented in issue \#3112 on
+the Knex GitHub repository. Despite its persistence since at least 2019, no
+resolution for this issue appears imminent.
+
+Regarding type checking, the typing offered by Knex.js is insufficient at best.
+Consequently, calls to the package are almost equivalent to manually composing
+the query. Furthermore, many methods are specific to the database engine and
+offer minimal abstraction, necessitating frequent consultation of the package's
+high-quality documentation.
+
+Regarding speed, 'Knex.js' ranks the slowest among query builders and other
+lower-level packages assessed in the study. Nevertheless, it consistently
+outperforms Object Relational Mapping (ORM) solutions.
