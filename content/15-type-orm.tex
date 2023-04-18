@@ -1,1 +1,104 @@
-\section{Type-ORM}
+\section{TypeORM}
+
+TypeORM is a pioneering ORM framework designed to support TypeScript and
+leverage its features. It is compatible with both active directory and data
+mapper patterns, allowing for easy exchange of entity definitions during
+development. TypeORM supports a wide range of database engines, including MySQL,
+PostgreSQL, SQLite, Oracle DB, and SAP Hana, and even has experimental support
+for the NoSQL database MongoDB.
+
+The framework employs its own query builder and uses Model classes with property
+decorators to describe its methods. TypeORM supports Lazy Loading and Eager
+loading when working with models and is compatible with CommonJS and ECMAScript.
+It offers automatic migrations based on its models and manually written
+migrations. However, it lacks support for seed files, requiring them to be
+included as migrations if executed through its CLI.
+
+TypeORM is highly popular, boasting the second-highest download number and the
+highest amount of stars among those compared, with 1,192,427 weekly downloads
+and 30,947 stars on GitHub. Released under the MIT License, TypeORM is the ORM
+with the highest number of downloads and full support for TypeScript, as
+Sequelize only outperforms it when considering the \textit{sequelize} package's
+download numbers, not the \textit{sequelize-typescript} package used for comparison.
+
+Despite its stable support, TypeORM's development has shifted towards
+maintaining existing features in 2018 due to the amount of work for purely
+volunteer supported development. This maintenance mode has led to 1,873 open
+issues as of now. Although the project has now resumed development due to receiving
+financial support, it primarily focuses on more minor updates every few weeks.
+It is not as actively developed as other "active" projects in this analysis.
+
+The documentation for TypeORM is of good quality, providing all the necessary
+information for development. However, it needs more formatting and chapters,
+making it easier to follow even if the developer does not know what precisely
+they are looking for. The model methods include brief descriptions but are
+mostly limited to a single-sentence short explanation.
+
+TypeORM has the highest number of dependencies among the packages compared, with
+many dependencies like "buffer" being necessary to support various runtimes,
+including browser or React Native environments that lack the same standard
+library support as Node.js. These dependencies are actively developed and have
+high download numbers, posing no additional risk to the toolchain. However,
+TypeORM's early adoption of the TypeScript ecosystem has largely overlooked its
+JavaScript functionality, as evidenced by the documentation and example
+projects.
+
+\subsection{Performance in benchmarks}
+
+When examining the performance of TypeORM in various benchmarks, it was observed
+that this ORM solution closely competes with its main rival, Sequelize. In most
+tests, TypeORM either slightly outperformed or marginally fell behind Sequelize,
+with negligible differences in performance. These outcomes can be attributed
+minimally to disparities in the generated queries, as both ORMs are comparable
+in their query generation and execution capabilities.
+
+However, TypeORM's query generation approach raises some concerns when working
+with complex joined tables. The generated queries are often complex for humans
+to read due to excessive naming or using hashes instead of more recognizable
+names. This complexity necessitates additional parsing for developers to
+effectively understand and work with these queries. Moreover, TypeORM often
+prefers LEFT JOINs, which are computationally more demanding than INNER JOINs
+and, in this case, will yield the same output thanks to the database schema.
+
+Another issue encountered with TypeORM relates to its handling of automatically
+generated primary keys. The ORM disregards user input for these columns if they
+can be generated automatically, limiting developers' flexibility when working
+with databases. For instance, this constraint poses challenges when inserting
+seed data with hard-coded IDs.
+
+In terms of upsert functionality, TypeORM, like Sequelize, does not provide
+support for increment operations. Additionally, it is impossible to formulate an
+equivalent query using the included query builder, as the syntax does not allow
+for custom update SQL and only supports ignoring specific data that would be
+otherwise inserted.
+
+When handling transactions, TypeORM lets developers create an explicit
+transaction handler that includes entity manager methods and functions for
+starting, managing, and ending transactions. While the filter types are only
+lightly typed, they offer sufficient guidance for developers navigating the
+available filtering options.
+
+\begin{minted}{sql}
+SELECT 
+  "Toy"."id"               AS "Toy_id",
+  "Toy"."toy_name"         AS "Toy_toy_name",
+  "Toy"."barcode"          AS "Toy_barcode",
+  "Toy"."price"            AS "Toy_price",
+  "Toy"."currency"         AS "Toy_currency",
+  "Toy"."naughty"          AS "Toy_naughty",
+  "Toy"."date_introduced"  AS "Toy_date_introduced",
+  "Toy"."toys_producer_id" AS "Toy_toys_producer_id"
+FROM "toy" "Toy"
+  LEFT JOIN "toy_house" "Toy__Toy_toyHouses" 
+    ON "Toy__Toy_toyHouses"."toy_id" = "Toy"."id"
+  LEFT JOIN "house" "Toy__Toy_toyHouses__Toy__Toy_toyHouses_house"
+    ON "Toy__Toy_toyHouses__Toy__Toy_toyHouses_house"."id" = "Toy__Toy_toyHouses"."house_id"
+  LEFT JOIN "house_cat" "859f7912a2d4ce14675c955dc00d5e1101503c58e113dba9c125d65aab7b94c"
+    ON "859f7912a2d4ce14675c955dc00d5e1101503c58e113dba9c125d65aab7b94c"."house_id" =
+      "Toy__Toy_toyHouses__Toy__Toy_toyHouses_house"."id"
+  LEFT JOIN "cat" "521c7a07a3cd212cc1564d159554f82ebf641a8398676fa24cabb9988acfd85"
+    ON "521c7a07a3cd212cc1564d159554f82ebf641a8398676fa24cabb9988acfd85"."id" =
+      "859f7912a2d4ce14675c955dc00d5e1101503c58e113dba9c125d65aab7b94c"."cat_id"
+WHERE ("521c7a07a3cd212cc1564d159554f82ebf641a8398676fa24cabb9988acfd85"."id" = 1)
+\end{minted}
+

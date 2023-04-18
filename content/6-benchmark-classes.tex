@@ -24,7 +24,7 @@ initialise the database to preserve a consistent state. In order to perform
 these tasks, \texttt{BenchmarkRunner} maintains its database connection using
 the default \texttt{pg} module.
 
-The benchmark runner is also responsible for ordering, initialisation and
+The benchmark runner is also responsible for ordering, initialization and
 execution of individual packages and tests. Each package is declared using a
 unified interface, which defines initialisation and destruction methods for
 efficient memory usage, implemented test suites and package name. The order of
@@ -44,7 +44,7 @@ to execute for repeated tests. Class methods implement individual types of
 tests, error handling for individual runs and measuring the execution time of
 each test run.
 
-Two implemented test workflows, validity test and throughput test; validity test
+Two implemented test workflows, validity test and latency test; validity test
 runs each implementation once, tests if the value is equal to reference in both
 value and the runtime type and returns test result. The latency test executes
 the tests in a loop, intending to show if the framework can create well-crafted
@@ -52,11 +52,11 @@ queries without adding significant overhead.
 
 \section{Reporters}
 As the output of the benchmarks is meant to be interpreted by humans, the
-measured data needs to be transformed into a human-readable format.
-Test objects contain vital information, but the benchmark output consists of
-thousands of such objects; therefore, they must be converted into valuable data.
-Two reporters were implemented for this benchmarking framework, with an
-interface for further reporters.
+measured data needs to be transformed into a human-readable format. Test objects
+contain vital information, but the benchmark output consists of thousands of
+such objects; therefore, they must be converted into valuable data. Two
+reporters were implemented for this benchmarking framework, with an interface
+for further reporters.
 
 \subsection{Console Reporter}
 The primary reporter for use in development intends to provide simple benchmark
@@ -84,7 +84,7 @@ individual packages. In addition to comparing performance, the requirements for
 implementation are comparison, as an easily implemented framework is better than
 one that's difficult to, provided they both perform similarly.
 
-\subsection{MVPBench}
+\subsection{MVP Benchmark}
 This test suite was only implemented under the \textit{Knex.js} package as its
 purpose is to test the functionality of the benchmarking framework and does not
 test any database functionality. It is proof of concept for correct validation
@@ -96,20 +96,51 @@ and a test that throws generic error on execution. Additionally, MVPBench
 examines if test configurations are working as they should be, testing both
 validity and latency settings.
 
-\subsection{EntityTraversalBench}
+\subsection{Entity Traversal Benchmark}
 One of the generally provided functionalities of ORMs is the ability to define
 entities and their relations. This benchmark aims to test the ability to use
 these defined relations to find objects using these connections. The first test
 of the suit focuses on finding a cat's colour in hex by traversing two
 relations, one of which is identifying. The framework starts with the cat's ID
-and needs to fetch the \texttt{color\_hex} instance through its connection to the
-\texttt{cat\_color} instance. Thanks to the relation design, there is a guarantee
-that only one result will be returned at any time. The second test counts cats
-by their colour hex code, traversing the relations from the first test in the
-opposite direction. Instead of selecting, the test counts the cats, testing if
-the query difficulty changes if we use aggregate functions instead of basic
-\texttt{SELECT} query. The third test in this benchmark selects all toys
+and needs to fetch the \texttt{color\_hex} instance through its connection to
+the \texttt{cat\_color} instance. Thanks to the relation design, there is a
+guarantee that only one result will be returned at any time. The second test
+counts cats by their colour hex code, traversing the relations from the first
+test in the opposite direction. Instead of selecting, the test counts the cats,
+testing if the query difficulty changes if we use aggregate functions instead of
+basic \texttt{SELECT} query. The third test in this benchmark selects all toys
 available to a cat, primarily focusing on the format of the returned data and
 how well the decomposition table can be accessed or avoided. The decomposition
 table exists because of the M:N relation between toys and houses, but the
 additional amount attribute is not used.
+
+\subsection{Edge Cases Benchmark}
+
+The edge cases benchmark aims to evaluate database adapter performance in
+specific situations that may not be commonly encountered but can potentially
+cause problems. The two tests in this benchmark focus on data type conversion
+and parameter handling.
+
+BigIntColumn test examines the data type conversion for the BigInteger type in
+PostgreSQL. JavaScript's Number type can lose precision when handling large
+integers since the maximum safe integer for Number is \(2^{53} - 1\), while
+PostgreSQL's \texttt{bigint} type can store numbers up to \(2^{63} - 1\).
+Although the BigInt primitive, which can store integers with arbitrary
+precision, was introduced in ECMAScript 2020 (ES11) and has been implemented in
+Node.js since 2018, not all frameworks handle this type correctly. The
+frameworks can either cast the value to Number, losing precision and failing the
+test, or return the value as a string or, ideally, as a BigInt primitive.
+
+SQL Injection test assesses the framework's basic handling of parameters. One of
+the main reasons for using a database access package over a basic driver is to
+improve security against SQL injection attacks. The code will return all records
+if the parameter is sent as part of the SQL query. If the package incorrectly
+escapes the query, it will result in no results returned. Only the correct
+handling of arguments will return the specific Cat with the fascinating name a
+\enquote{\texttt{' or true --}}. It is important to note that this test does not evaluate
+whether the package is entirely vulnerable to SQL injection attacks but rather
+if the basic handling of arguments is not vulnerable.
+
+\subsection{Special SQL Actions Benchmark}
+
+\todo{Special sql actions benchmark descriptions}

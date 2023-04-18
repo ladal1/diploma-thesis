@@ -1,1 +1,70 @@
 \section{Objection.js}
+
+Objection.js is an ORM based on the Knex.js query builder and is closely
+connected to the Knex ecosystem. Developed partially by the same team, it
+supports SQLite3, Postgres, and MySQL while also being compatible with many
+other database engines supported by Knex. Unlike Sequelize or TypeORM,
+Objection.js does not provide extensive abstraction; it only offers Models that
+assist with query composition, types, and relation fetching. The Models
+primarily serve as a starting point for SQL queries rather than offering the
+complex functionality of ActiveDirectory or DataMapper patterns. 
+
+The package has 128,872 weekly downloads and 6,972 stars on GitHub. Objection.js
+predates the popularization of TypeScript. Its leading developer admits that the
+package requires a significant rewrite of types to compete in TypeScript
+support, which is not feasible due to the workload required. Objection.js was
+not maintained for over a year, accumulating technical debt and leading to
+incompatibility with TypeScript 4.8 and newer due to enhancements to the
+\texttt{strictNullChecks} option. A new version has since been published, fixing
+some issues that arose during that time. New developers have started working on
+maintaining the project as of writing this thesis.
+
+The package is released under the MIT Licence and offers high-quality web
+documentation, including extensive usage guides and a detailed API Reference. A
+unique feature of Objection.js is the ability to provide JSON Schema validation
+for inserted objects, ensuring database data consistency.
+
+Objection.js has only three dependencies for full functionality: Knex, AJV, and
+db-errors. The AJV dependency provides JSON Schema validation, while db-errors,
+originating from the same company that published Objection.js, aims to deliver a
+unified API for handling various errors produced by different database engines.
+Although the db-errors package has not been updated for over four years, it is
+unlikely to pose a significant security threat to the package. Objection.js now
+also supports both ESM and CommonJS, with the latest release fixing ESM
+compatibility issues.
+
+\subsection{Perfomance in benchmarks}
+
+Objection.js was included in the performance benchmarks only after its typings
+were updated to be compatible with TypeScript 4.8 and later while maintaining
+\texttt{strictNullChecks}, a requirement for the proper functioning of other
+packages like Zapatos. Once the compatibility issues were resolved, Objection.js
+demonstrated performance largely on par with other ORM packages such as MikroORM
+and TypeORM. However, a notable exception was observed in the getCatColor test,
+where Objection.js was significantly slower than its counterparts.
+
+This performance discrepancy was traced back to the method
+\texttt{withGraphFetched}, the only type-supported way to fetch relations beyond
+a single relationship in Objection.js without resorting to plain Knex query
+builder calls. This method was selected for type support, but it also caused the
+speed issue encountered. The method retrieves data through three separate,
+dependent database calls, resulting in considerably longer query execution times
+even with minimal latency. While this approach may offer some benefits in
+specific scenarios, such as applying limits to individual queries to alleviate
+the load on massive databases, it generally falls short of the performance
+optimization capabilities offered by relational database management systems
+(RDBMS) that utilize single, more complex queries.
+
+Another challenge posed by Objection.js lies in its limited typing support. Many
+inherited methods from Knex lack template variables to specify the result,
+despite their original counterparts providing such functionality. Consequently,
+developers often need to cast the results manually to ensure the correct final
+type, except for the most basic queries.
+
+The composition of Objection.js, which positions itself as not quite an ORM nor
+a pure query builder, often requires developers to have direct access to the
+query. However, this approach often obscures vital information, forcing
+developers to rely on experience or testing to understand certain aspects of the
+system. For instance, the table name is hidden when using predefined relations
+for joining. Developers must determine the alias assigned to the joined table
+for \texttt{WHERE} clauses without any clear guidance from the package.

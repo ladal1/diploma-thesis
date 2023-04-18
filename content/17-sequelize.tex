@@ -1,1 +1,76 @@
 \section{Sequelize}
+
+Sequelize is one of the oldest, still popular, and actively supported ORM
+frameworks for the JavaScript ecosystem, with development starting in 2010.
+After over 12 years of development, it supports various databases, including
+PostgreSQL, MySQL, and SQLite3. Its popularity is attributed to its simple
+syntax and flexible usage. Sequelize supports read replication, using
+round-robin scheduling for read queries and a write pool for write or explicitly
+marked database calls. It also provides a command-line interface for managing
+schema and data, offering migration and seeding options.
+
+Sequelize can use either manually written migrations or automatically generated
+ones based on Model definitions. The framework also supports programmatic
+synchronization of the database state to reflect the Model definition using the
+\texttt{sequelize.sync()} method. Unlike other ORMs discussed in this work,
+Sequelize does not expose a query builder interface, only allowing for raw query
+execution when integrated entity fetching is insufficient.
+
+Full TypeScript support for the main project is still in progress. However, a
+separate project called \textit{sequelize-typescript} offers support for
+TypeScript native definitions, using decorators for Model and property
+specifications. One of the original features of Sequelize is its support for the
+automatic creation and update of timestamp fields on database tables and the
+option for "paranoid" tables. In this mode, calling a deletion method sets the
+\texttt{deletedAt} attribute instead of removing the record. The framework
+behaves like the deleted records do not exist unless previously restored.
+
+Both Sequelize and sequelize-typescript are provided under the MIT Licence and
+actively supported. Due to its extensive user base, the framework has over 750
+reported issues, with a minority marked as bugs and the majority being feature
+requests. The central repository of the package has 27,729 stars on GitHub and
+the largest number of weekly downloads out of all packages compared, at
+1,505,485.
+
+Sequelize has 16 dependencies, plus TypeScript-specific helpers required for
+usage with the current TypeScript version. These dependencies primarily relate
+to inflexion, code analysis for model dependency graphs, and various data types
+supported by the framework, including GeoJSON and advanced Date types. While the
+package offers extensive documentation, differences in Model definition when
+using, TypeScript can be confusing. Documentation for additional operators and
+decorators is lacking, as it is primarily contained in several Markdown files in
+its repository.
+
+\subsection{Performance in benchmarks}
+
+In performance benchmarks, the Sequelize ORM demonstrated competitive results,
+closely matching its main rival, TypeORM. Sequelize generated efficient queries
+for basic operations and performed within 10-50\% of the reference pgTyped
+implementation. However, with more complex queries, Sequelize preferred using
+LEFT OUTER JOINs when they were not necessarily based on the conceptual schema
+of the database. Consequently, these test scenarios took 50-150\% of the
+reference solution execution time.
+
+While query execution remained relatively fast, the increased complexity due to
+unnecessary LEFT JOINs may lead to performance issues that necessitate manual
+optimization in some instances. As the LEFT JOINs are some of the more complex
+operations databases perform, and their complexity grows rapidly with the amount
+of data joined, this approach can quickly impact the application's overall
+performance.
+
+Sequelize's filter types were limited, as even essential attribute matching for
+search by attribute equality is not typed. This lack of typing support increases
+the likelihood of developers making errors that may only become apparent during
+runtime. Furthermore, Sequelize does not provide a dedicated API for WHERE
+clauses on joined tables, requiring developers to rely on dot notation and
+unchecked fields to define such filters.
+
+While defining models is documented, the example code provided was found to
+throw errors related to shadowing attribute names. Although the solution to this
+issue can be quickly addressed using the TypeScript "declare" keyword, it is
+essential to mention such features in the introductory documentation for models
+to minimize confusion for developers.
+
+Like most other ORMs, Sequelize does not support abstracting upsert operations
+with increments or decrementation on updates. As a result, developers must
+resort to implementing such operations using raw queries.

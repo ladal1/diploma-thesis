@@ -1,1 +1,25 @@
-\section{Waterline}
+\subsection{Waterline}
+
+The Sails framework, an MVC-style architecture framework for JavaScript, is
+designed for building modern web applications. As part of this framework, the
+Model component is implemented using an ORM called Waterline, which, like many
+others in this thesis, internally relies on Knex.js for database communication.
+Sails is relatively less popular in the JavaScript ecosystem, with only 31,492
+downloads, which pales in comparison to giants like Express (28,825,585 weekly
+downloads) or Koa (1,600,532 weekly downloads). While Waterline's primary
+purpose is to serve as a component within the Sails framework, it is also
+available as a standalone package.
+
+However, during the implementation process, several issues were encountered with
+Waterline. The package does not provide its own types but relies on optional
+types from the @types repository, which is maintained by volunteers.
+Unfortunately, these types are outdated, as they only cover version 0.13.x,
+while the latest Waterline version is 0.15.2. As a result, these types do not
+accurately reflect the package's functionality, and initialization using them
+does not work. Similarly, following the documentation for a standalone setup, as
+shown on the framework's website, also proved nonfunctional as the documentation
+is written mainly for the full framework usage, with pure waterline usage being
+an afterthought.
+
+Due to these inconsistencies and the inability to overcome them, Waterline was
+disqualified from the comparison.

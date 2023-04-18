@@ -1,1 +1,32 @@
-\section{RDB}
+\subsection{RDB}
+
+RDB, a lesser-known ORM package, was initially selected for comparison due to
+its distinctive model definition approach and appearance in the npm repository
+under the ORM tag. At the time of selection, RDB had only 284 weekly downloads
+and 291 stars on GitHub, making it the least popular package among those
+considered. What set RDB apart was its alternative model definition method,
+which relied on method calls to create the entity model, unlike the schema-based
+approaches employed by other frameworks.
+
+However, further examination of RDB revealed several limitations that led to its
+disqualification from the comparison. Firstly, the package does not provide any
+types for methods beyond connection and model initialization. This lack of
+typing support significantly hinders its compatibility with TypeScript, making
+it challenging to work with in a typed environment.
+
+Additionally, RDB does not offer a solution for circular dependency issues that
+may arise when defining models across multiple files. Consequently, developers
+must either use a singleton method to encapsulate the definition or repeat it
+for each file, both of which are suboptimal approaches. Given these limitations,
+RDB is most suited for single-file projects that can initially define their
+database logic.
+
+The framework also lacks typings for search method attributes and resulting
+object types, further limiting its usefulness in TypeScript-based projects. Due
+to these issues, as well as the file separation requirements of the benchmark,
+RDB was ultimately disqualified from the comparison.
+
+In conclusion, while RDB presents an interesting alternative approach to model
+definition, its limitations in typing support and handling of multi-file
+projects make it less appealing for developers seeking a robust and flexible ORM
+solution, mainly when working with TypeScript.
