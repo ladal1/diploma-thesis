@@ -19,14 +19,14 @@ their respective database schemas.
 
 Database administration tasks include setting up and tearing down example
 databases used in testing. Tests are currently written only for the database
-examined in chapter \todo{Which chapter}, so this functionality is only used to
-initialise the database to preserve a consistent state. In order to perform
+examined in chapter \ref{ch:database}, therefore this functionality is only used
+to initialize the database to preserve a consistent state. In order to perform
 these tasks, \texttt{BenchmarkRunner} maintains its database connection using
 the default \texttt{pg} module.
 
 The benchmark runner is also responsible for ordering, initialization and
 execution of individual packages and tests. Each package is declared using a
-unified interface, which defines initialisation and destruction methods for
+unified interface, which defines initialization and destruction methods for
 efficient memory usage, implemented test suites and package name. The order of
 executions is guided by the database schema selected, the package, and
 individual test suites. If any suites are not implemented in the individual
@@ -137,10 +137,43 @@ improve security against SQL injection attacks. The code will return all records
 if the parameter is sent as part of the SQL query. If the package incorrectly
 escapes the query, it will result in no results returned. Only the correct
 handling of arguments will return the specific Cat with the fascinating name a
-\enquote{\texttt{' or true --}}. It is important to note that this test does not evaluate
-whether the package is entirely vulnerable to SQL injection attacks but rather
-if the basic handling of arguments is not vulnerable.
+\enquote{\texttt{' or true --}}. It is important to note that this test does not
+evaluate whether the package is entirely vulnerable to SQL injection attacks but
+rather if the basic handling of arguments is not vulnerable.
 
 \subsection{Special SQL Actions Benchmark}
 
-\todo{Special sql actions benchmark descriptions}
+The Special SQL Actions benchmark evaluates the performance of frameworks in
+scenarios that go beyond basic querying, focusing on unique ways of interacting
+with the database. This benchmark comprises several tests, each targeting
+different aspects of database interactions.
+
+The \textit{upsertToysToHouse} test examines whether the package contains an
+upsert operation method and assesses its flexibility, such as the ability to
+differentiate between the insertion and update objects, as well as the capacity
+to reference the updated value. The test uses a CatDatabase schema that includes
+a decomposition table called ToysHouse, which stores references between houses
+and toys and the quantity of each toy type in the house.
+
+The suite also contains tests which evaluate the handling of JSON columns in the
+database. The \textit{JSONColumn} test checks the ability to parse JSON values
+from the database, while the \textit{JSONWhere} test focuses on querying based
+on the value of an object key inside the JSON column. PostgreSQL provides two
+ways to query the value: extraction operator \texttt{->>} for simple comparisons
+or @> operator for more complex comparisons with JSONB datatype, which are
+useful for developers using SQL, but the abstraction of ORM might remove the
+access to these methods.
+
+The \textit{transactionalOperations} test investigates how individual packages
+handle transactions, assessing the full range of operations available for
+reverting changes to the data.
+
+Lastly, the \textit{likeQuery} test examines the methods each framework uses for
+pattern-matching queries, evaluating basic search functionality in the database
+by searching for a part of a house address.
+
+By understanding how different frameworks handle these particular SQL actions,
+developers can make informed decisions when selecting a database adapter that
+aligns with their project's unique requirements. The benchmark ensures that
+developers are aware of each package's various capabilities and limitations,
+enabling them to choose the most suitable solution for their specific use cases.
