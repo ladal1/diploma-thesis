@@ -12,7 +12,7 @@ COPY ./texlive.profile /tmp/
 RUN cd /tmp && wget -qO- https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz \
     && /tmp/install-tl*/install-tl -profile /tmp/texlive.profile \
     && tlmgr init-usertree \
-    && tlmgr install latexmk pgf memoir setspace caption titlesec mathtools ellipsis pdfpages lipsum csquotes listings pdflscape minted fontspec todonotes pgfplots polyglossia booktabs enumitem multirow blindtext cleveref standalone beamer subfig textcase \
+    && tlmgr install latexmk pgf memoir setspace caption titlesec mathtools ellipsis pdfpages lipsum csquotes listings pdflscape minted fontspec todonotes pgfplots polyglossia booktabs enumitem multirow blindtext cleveref standalone beamer subfig textcase booktabs adjustbox ifoddpage threeparttable makecell \
     && luaotfload-tool latexindent -u \
     && rm -rf /tmp/install-tl-*
 
