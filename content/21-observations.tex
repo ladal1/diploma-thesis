@@ -222,6 +222,14 @@ and filters. MikroORM, though smaller in scale, proved to be functionally rich
 and benefited from access to the well-established and thoroughly tested Knex.js
 query builder when model methods were insufficient.
 
+Most ORMs lost out to query builders mainly because they prefer left joins over
+stricter inner joins for many select operations. This behaviour is primarily
+caused by the inability to specify precisely all the details necessary for the
+realization of a query in a relational schema using the model schema these
+packages used. PrismaORM avoided many of these mistakes thanks to its more
+expressive and purpose-built prisma schema, which can be more expressive than
+class or object definition.
+
 
 \begin{figure}
   \caption{getColorLatency Results}
@@ -505,3 +513,4 @@ query builder when model methods were insufficient.
 \end{axis}
 \end{tikzpicture}
 \end{figure}
+
