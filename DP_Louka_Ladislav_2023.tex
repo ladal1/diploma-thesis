@@ -13,6 +13,7 @@
 
 \usepackage{subfig} %subfigures
 \usepackage{pdfpages}
+\usepackage{fvextra}
 \usepackage{csquotes}
 \usepackage{amsmath} %advanced maths
 \usepackage{amssymb} %additional math symbols
@@ -28,6 +29,9 @@
 \usepackage{makecell}
 \usepackage{pgfplots}
 \usepackage{tabularx}
+\usepackage[backend=biber, bibencoding=utf8, style=iso-numeric, sorting=none]{biblatex}
+\addbibresource{mybibliographyfile.bib}
+\graphicspath{ {./content/img}}
 
 \newcommand{\tg}{\mathop{\mathrm{tg}}} %cesky tangens
 \newcommand{\cotg}{\mathop{\mathrm{cotg}}} %cesky cotangens
@@ -42,14 +46,6 @@
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 
 \nocite{*}
-
-% \includeonly{
-%  content/0-Introduction,
-%  content/1-terminology,
-%  content/2-framework-selection,
-%  content/3-evaluation-criteria,
-%  content/4-implementation
-% }
 
 \pgfplotsset{compat=1.17}
 
@@ -79,7 +75,19 @@
 % \newacronym{CVUT}{{\v C}VUT}{{\v C}esk{\' e} vysok{\' e} u{\v c}en{\' i} technick{\' e} v Praze}
 % \newacronym{FIT}{FIT}{Fakulta informa{\v c}n{\' i}ch technologi{\' i}}
 
+\setsecnumdepth{part}
+
+\chapter{Acronyms}
+% \printglossaries
+\begin{description}
+	\item[ORM] Object relational mapping
+	\item[QB] Query builder
+	\item[CLI] Command Line Interface
+	\item[SQL] Structured Query Language
+\end{description}
+
 \include{content/0-Introduction.tex}
+\setsecnumdepth{all}
 \include{content/1-terminology.tex}
 \include{content/2-framework-selection.tex}
 \include{content/3-evaluation-criteria.tex}
@@ -92,21 +100,18 @@
 \include{content/21-observations.tex}
 \include{content/22-conclusion.tex}
 
-\setsecnumdepth{part}
-\bibliographystyle{assets/iso690}
-\bibliography{mybibliographyfile}
+% \setsecnumdepth{part}
+
+% \bibliographystyle{assets/iso690}
+% \bibliography{mybibliographyfile}
 
 \setsecnumdepth{all}
 \appendix
 
-\chapter{Acronyms}
-% \printglossaries
-\begin{description}
-	\item[ORM] Object relational mapping
-	\item[QB] Query builder
-	\item[CLI] Command Line Interface
-\end{description}
-
+{
+	\setlength{\emergencystretch}{1em}
+	\printbibliography
+}
 
 \chapter{Contents of enclosed medium}
 

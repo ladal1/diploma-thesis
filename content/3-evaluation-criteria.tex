@@ -19,7 +19,7 @@ quantifiable, they were given the highest priority in comparing the packages.
 The quality and extent of TypeScript support vary among the packages, with some
 offering better integration and type safety without the need for casts. In
 contrast, others only provide basic typing or require result type definitions to
-be written into each request, which amounts to the same behavior as if the
+be written into each request, which amounts to the same behaviour as if the
 result was cast. Such functionality often comes when the package initially
 written for JavaScript is not rewritten in TypeScript but is only provided with
 a \texttt{types} file, which specifies call signatures, but cannot provide other
@@ -63,12 +63,11 @@ repeats the test multiple times to eliminate any inconsistency that could occur
 in a single run.
 
 \subsection{ECMAScript and CommonJS compatibility}
-There are two different standards for JavaScript syntax, ECMAScript and
-CommonJS. They primarily differ in how the inclusion of modules is
-written and the mechanism of the module import. While CommonJS was prevalent in
-the server backend space for a long time, however, ECMAScript modules are
-becoming significantly more popular, with support added in both Node.js
-and TypeScript.
+There are two different primary standards for JavaScript syntax, ECMAScript and
+CommonJS. They primarily differ in how the inclusion of modules is written and
+the mechanism of the module import. While CommonJS was prevalent in the server
+backend space for a long time, however, ECMAScript modules are becoming
+significantly more popular, with support added in both Node.js and TypeScript.
 
 Combining packages from both ecosystems can still lead to problems. The best way
 to support all possible combinations is to provide both types of dependency
@@ -80,16 +79,17 @@ to consider and understand the significance of licences governing their use.
 Open-source software is often regarded as a valuable resource, offering a large
 amount of reusable code and often the best solution. However, it is essential to
 understand that open-source does not necessarily equate to unregulated use.
-Licenses still dictate the terms under which the package and its code can be
+Licences still dictate the terms under which the package and its code can be
 employed, modified and redistributed. Therefore, developers must examine the
-licenses of potential packages to ensure their intended use aligns with the
+licences of potential packages to ensure their intended use aligns with the
 terms granted.
 
 The most permissive licences allow for usage, modification and redistribution
 without any requirement to credit the original author/authors or maintain the
 same licence in derivative works. Examples of such permissive licences are
-\textit{MIT License} or \textit{Apache License 2.0}. These are generally
-preferable for projects that demand flexibility in their use of the software.
+\textit{MIT License}\cite{MITLicense} or \textit{Apache License
+2.0}\cite{ApacheLicense2}. These are generally preferable for projects that
+demand flexibility in their use of the software.
 
 While still free, the opposite side to the permissive licences are copyleft
 licences, which impose more stringent requirements on the usage, especially
