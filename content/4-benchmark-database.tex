@@ -7,6 +7,12 @@ and the toys' manufacturers. The database comprises six main entities -
 \texttt{cat}, \texttt{cat colours}, colour \texttt{hex codes}, \texttt{houses},
 \texttt{toys} and \texttt{toy producers}.
 
+\begin{figure}[b]
+    \caption{Schema of benchmark database}
+    \centering
+    \includegraphics[width=0.9\textwidth]{databaseSchema}
+\end{figure}
+
 \section{Cat Entity}
 The \texttt{cat} entity instances represent individual cats which we want to
 monitor. Each has a unique identifier, name and date of birth, all of which are
@@ -40,17 +46,19 @@ the value referencing its previous state. If more toys are purchased, the owner
 of the house does not suddenly throw out all toys they already had; they will
 add them to their current pile. This operation is often called \textit{upsert} -
 a combination of update and insert, and some database engines, such as
-CockroachDB, implement it explicitly under this name. PostgreSQL achieves it
-using the \texttt{ON CONFLICT} statement in \texttt{INSERT} query. It also tests
-the handling of composite primary keys, a standard paradigm in many databases.
+CockroachDB \cite{upsertCockroachDB}, implement it explicitly under this name.
+PostgreSQL achieves it using the \texttt{ON CONFLICT} statement in
+\texttt{INSERT} query \cite{INSERT_postgres_2023}. It also tests the handling of
+composite primary keys, a standard paradigm in many databases.
 
 \section{Toy Entity}
 The \texttt{toy} entity purpose in testing is in numeric data type used in
 \texttt{price} attribute and usage of additional column attributes such as
-\texttt{CHECK} constraints or \texttt{DEFAULT} values in the column. Column
-\texttt{naughty} is focused on commonly problematic strings in software
-development, such as special Unicode characters, emojis and other issues that
-could come up in handling data from the database, especially if the encoding is
-not correctly handled. Toys producers host the JSON columns to test if it is
-possible to use advanced JSON traversal and query operators provided in
-PostgreSQL (and their equivalents in other database management systems).
+\texttt{CHECK} constraints or \texttt{DEFAULT} values in the column
+\cite{Constraints_Postgres_2023}. Column \texttt{naughty} is focused on commonly
+problematic strings in software development, such as special Unicode characters,
+emojis and other issues that could come up in handling data from the database,
+especially if the encoding is not correctly handled. Toys producers host the
+JSON columns to test if it is possible to use advanced JSON traversal and query
+operators provided in PostgreSQL \cite{postgres-json} (and their equivalents in
+other database management systems).

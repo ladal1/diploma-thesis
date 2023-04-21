@@ -94,15 +94,12 @@ demand flexibility in their use of the software.
 While still free, the opposite side to the permissive licences are copyleft
 licences, which impose more stringent requirements on the usage, especially
 modifications and redistributions of the software. The primary example of such a
-licence is \textit{GNU General Public License}, which requires derived works to
-be distributed under the same licence. While the Free Software Foundation, the
-entity behind the licence, recommends against using the licence for
-library-style software (recommending \textit{GNU Lesser Public License} or
-\textit{Apache License 2.0} instead \todo{LINK EXPLANATION}), it had nonetheless
-happened before, that a library was published with such licence.
+licence is \textit{GNU General Public License} \cite{GNUGPL}, which requires
+derived works to be distributed under the same licence.
 
-Since copyleft or other provisions might limit the use cases of libraries such
-as ORMs, it is necessary to include the licence as a grading criterion.
+Since copyleft or other provisions might limit the usability of libraries such
+as ORMs for many projects, it is necessary to include the licence as a grading
+criterion.
 
 \section{Package Properties Criteria}
 
@@ -117,7 +114,7 @@ official documentation.
 \subsection{Popularity}
 
 Popularity measures usage, as indicated by package downloads, the number of
-issues, and the number of users on GitHub who favourited or followed the
+issues, and the number of users on GitHub who have shown interest in the
 repository. While all imperfect measures for absolute popularity, they help
 compare popularity between packages by their relative difference. In the case
 that the package usage requires multiple dependencies to be installed, for
@@ -126,16 +123,16 @@ highest number is listed.
 
 \subsection{Support}
 
-The number of resolved and still open issues is connected mainly to the
-popularity metric of issues. With such a metric, support can be measured, and
-the statistic will be included; however, more important than that is the
-patterns of behavior which maintainers have shown previously. If the release
-schedule is predictable, bugs and security issues are fixed quickly, hesitant
-adopters can be assured that this pattern will continue, and the framework is a
-safe investment. On the contrary, a project which is officially or probably no
-longer supported can be assumed to be a wrong choice, as it cannot react to
-newly found errors and problems with dependencies and might be unusable due to
-changes with TypeScript or Node.js runtime.
+The number of resolved and still open issues can be used to show popularity and
+support of the project. With such a metric, support can be measured; however,
+more important than that are the patterns of behaviour which maintainers have
+shown previously. If the release schedule is predictable, bugs and security
+issues are fixed quickly, hesitant adopters can be assured that this pattern
+will continue, and the framework is a safe investment. On the contrary, a
+project which is officially or probably no longer supported can be assumed to be
+a wrong choice, as it cannot react to newly found errors and problems with
+dependencies and might be unusable due to changes with TypeScript or Node.js
+runtime.
 
 \subsection{Dependencies}
 
@@ -152,8 +149,8 @@ with the framework. It also cannot be measured with reasonable objectivity.
 Perceived quality depends on language understanding and users’ previous
 experience with the programming language and similar frameworks. Evaluation of
 documentation will therefore summarize clarity, extensiveness and whether
-features such as Javadoc annotations are used to contain or link to the
-documentation.
+features such as JSdoc annotations \cite{Typescript-jsdoc} which can be parsed
+by IDEs are used to contain or link to the documentation.
 
 
 The following chapters aim to provide a comprehensive and in-depth analysis of
