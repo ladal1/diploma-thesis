@@ -29,9 +29,17 @@
 \usepackage{makecell}
 \usepackage{pgfplots}
 \usepackage{tabularx}
+\usepackage{url}
 \usepackage[backend=biber, bibencoding=utf8, style=iso-numeric, sorting=none]{biblatex}
 \addbibresource{mybibliographyfile.bib}
 \graphicspath{ {./content/img}}
+\setcounter{biburllcpenalty}{100}
+\setcounter{biburlucpenalty}{100}
+\setcounter{biburlnumpenalty}{100}
+\biburlnumskip=0mu plus 1mu\relax
+\biburlucskip=0mu plus 1mu\relax
+\biburllcskip=0mu plus 1mu\relax
+
 
 \newcommand{\tg}{\mathop{\mathrm{tg}}} %cesky tangens
 \newcommand{\cotg}{\mathop{\mathrm{cotg}}} %cesky cotangens
