@@ -16,11 +16,11 @@ provides a robust and comprehensive means of comparing database access packages.
 
 The benchmarking framework was designed to support separation of tests into
 multiple test suites, a common practice with JavaScript test frameworks such as
-Jest or Mocha. Test suite separation allows for organization of tests by subject
-and contains specifications about the database schema and data expected to be
-executed. Input and output parameters must be typed to test types support, and
-the framework should provide sufficient functionality to avoid the need for
-casting.
+Jest \cite{Jest} or Mocha \cite{Mocha}. Test suite separation allows for
+organization of tests by subject and contains specifications about the database
+schema and data expected to be executed. Input and output parameters must be
+typed to test types support, and the framework should provide sufficient
+functionality to avoid the need for casting.
 
 The tests are expected to be run simultaneously with snapshots of the database
 schema and should not interfere with data used by another test suite. As a
@@ -44,11 +44,11 @@ will be necessary to be cast into their expected value. However, even just the
 need for such modification means the package must allow more type definitions.
 
 Resulting runtime types and values are validated using the node module
-\texttt{node:assert}, which provides assertion functions. It is provided to
-function with testing frameworks such as mocha, which do not offer verification
-functions. Included are even deep equality checking functions. The main
-advantage, however, comes from being included in the Node.js standard library,
-meaning that no additional package has to be included.
+\texttt{node:assert} \cite{NodeAssert}, which provides assertion functions. It
+is provided to function with testing frameworks such as mocha, which do not
+offer verification functions. Included are even deep equality checking
+functions. The main advantage, however, comes from being included in the Node.js
+standard library, meaning that no additional package has to be included.
 
 Returning an incorrect result is one of many ways the benchmark test can be
 failed; the package can return an unexpected error, or the test is impossible to
@@ -63,15 +63,15 @@ The benchmarking bootstrap is designed for sequential testing of multiple
 packages. This design, rather than separate execution, allows for comprehensive
 comparison under the same conditions, ensuring accurate results. As managing the
 dependencies could prove problematic if packages had different dependencies
-required, npm workspaces were selected as a project structure. That way,
-top-level dependencies of the framework can be separated from the individual
-implementations.
+required, npm workspaces \cite{npmWorkspaces} were selected as a project
+structure. That way, top-level dependencies of the framework can be separated
+from the individual implementations.
 
 \section{Reporters - Output options}
 
 An integral part of the design was the inclusion of reporters. Reporters provide
 an interface and implementation of multiple output options, enabling the results
-to be saved and shown in various formats. Standard test frameworks utilise
+to be saved and shown in various formats. Standard test frameworks utilize
 reporters to make code coverage or detailed error stack inspectable. The
 reporters can interpret the data in different formats with a benchmarking
 framework. The reporter interface is designed to be extensible, allowing for the

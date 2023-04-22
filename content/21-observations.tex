@@ -99,14 +99,13 @@ Several notable observations can be made from the flexibility comparison. Prisma
 
 MikroORM held an advantage over TypeORM, using Knex.js as its query builder, which could express the operation. In contrast, TypeORM's internal query builder could not. On the other hand, Zapatos was the only package that partially failed in any test. It could not correctly parse bigint values from PostgreSQL as strings or BigInt primitives in JavaScript when using native methods, casting the result into a number instead. However, this issue was resolved when a manually written query was used.
 
-Lastly, it is worth noting that only @databases/pg parsed bigint values into JavaScript BigInt primitives. All other packages returned character representations of the value.
-
+Lastly, it is worth noting that only @databases/pg parsed bigint values into JavaScript BigInt primitives. All other packages returned character representations of the value. 
 
 
 \begin{table}[htbp]
+\centering
     \begin{threeparttable}[b]
 
-    \centering
     \caption{Entity Traversal Benchmark implementation methods}
     \label{table:EntityTraversal}
     \begin{tabular}{lccc}
@@ -129,9 +128,8 @@ Lastly, it is worth noting that only @databases/pg parsed bigint values into Jav
 \end{table}
 
 \begin{table}[htbp]
+\centering
     \begin{threeparttable}[b]
-
-    \centering
     \caption{Special SQL Actions Benchmark implementation methods}
     \label{table:SpecialSQLActions}
     \begin{tabular}{lccccc}
@@ -157,9 +155,8 @@ Lastly, it is worth noting that only @databases/pg parsed bigint values into Jav
 \end{table}
 
 \begin{table}[htbp]
+\centering
     \begin{threeparttable}[b]
-
-    \centering
     \caption{Edge Cases Benchmark implementation methods}
     \label{table:EdgeCases}
     \begin{tabular}{lcc}
@@ -230,6 +227,24 @@ packages used. PrismaORM avoided many of these mistakes thanks to its more
 expressive and purpose-built prisma schema, which can be more expressive than
 class or object definition.
 
+Other than the few noted exceptions, the test results were as expected, with
+packages using less abstraction of the database logic being able to use optimal
+queries, which gave them an advantage over generic ORM queries.
+Object-relational mapping packages carry a drawback of possible less optimal
+data path resolution, as shown by Objection.js results in
+\autoref{fig:getColorLatency} or \autoref{fig:getToysAvailableToCat}. However,
+the drawback is only prominent when dealing with complex queries involving
+multiple joins. It is preferable to use ORMs where the amount of data in the
+database will not result in suboptimal computation time, as the overhead of the
+package itself is negligible. Figures \ref{fig:countCatsByColor},
+\ref{fig:JSONColumn}, \ref{fig:JSONWhere}, \ref{fig:transactions} and
+\ref{fig:likeQuery} show that while the relative performance of the queries is
+almost double that of reference, it is still minor for the amount of data
+usually considered for most smaller projects. When considering enterprise-level
+databases, the toll in which the suboptimal queries can result will accumulate.
+It can result in redundant work as the application must be repeatedly optimized
+while the ORM obfuscates which application operation is causing the slowdown. 
+
 
 \begin{figure}
   \caption{getColorLatency Results}
@@ -274,6 +289,7 @@ class or object definition.
 
 \begin{figure}
   \caption{countCatsByColor Results}
+  \label{fig:countCatsByColor}
 \begin{tikzpicture}
 \begin{axis}[
     ybar,
@@ -314,6 +330,7 @@ class or object definition.
 
 \begin{figure}
   \caption{getToysAvailableToCat Results}
+  \label{fig:getToysAvailableToCat}
 \begin{tikzpicture}
 \begin{axis}[
     ybar,
@@ -395,6 +412,7 @@ class or object definition.
 
 \begin{figure}
   \caption{JSON Where query Results}
+  \label{fig:JSONWhere}
 \begin{tikzpicture}
 \begin{axis}[
     ybar,
@@ -435,6 +453,7 @@ class or object definition.
 
 \begin{figure}
   \caption{Transactional operations Results}
+  \label{fig:transactions}
 \begin{tikzpicture}
 \begin{axis}[
     ybar,
@@ -476,6 +495,7 @@ class or object definition.
 
 \begin{figure}
   \caption{Pattern Matching (likeQuery) Results}
+  \label{fig:likeQuery}
 \begin{tikzpicture}
 \begin{axis}[
     ybar,

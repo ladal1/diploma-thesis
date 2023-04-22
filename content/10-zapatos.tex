@@ -9,12 +9,23 @@ tagged templates for writing arbitrary SQL.
 Unlike pgTyped, which analyses queries and generates types, Zapatos disallows
 the inclusion of any data not specified in the manually typed query. This
 approach can lead to issues if the type is not defined correctly initially,
-potentially resulting in an unreliable type \todo{Example of incorrect typing
-due to different cols and select}. Despite this limitation, the package supports
-lateral joins, enabling the return of nested objects, a feature typically not
-found in packages with such low abstraction levels. However, as with other
-TypeScript-dependent packages, Zapatos can generate compilation errors that are
-difficult to parse.
+potentially resulting in an unreliable type and is less explicit way to cast the
+result. Despite this limitation, the package supports lateral joins, enabling
+the return of nested objects, a feature typically not found in packages with
+such low abstraction levels. However, as with other TypeScript-dependent
+packages, Zapatos can generate compilation errors that are difficult to parse. Example of such error is shown in 
+
+\begin{minted}{shell}
+\caption{Zapatos compile error}
+\label{zapatos:error}
+error TS2345: 
+Argument of type '{ id: db.ParentColumn<"id">; is: string; }' 
+is not assignable to parameter of type 
+'unique symbol | Whereable | SQLFragment<any, never>'.
+Object literal may only specify known properties, 
+and 'is' does not exist in type 
+'Whereable | SQLFragment<any, never>'.
+\end{minted}
 
 Released under the MIT license, the package uses ESModule dependencies and has
 14,933 weekly downloads and 980 GitHub stars, ranking it third least downloaded

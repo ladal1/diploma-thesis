@@ -7,7 +7,12 @@ work together to manage the ordering of tests, database administration, and
 execution of test suites, as well as handling packages, test suites, and
 reporters.
 
-\todo{Add class diagram}
+
+\begin{figure}[h]
+    \caption{Simplified schema of the Benchmark class architecture}
+    \centering
+    \includegraphics[width=\textwidth]{BenchmarkClasses}
+\end{figure}
 
 \section{BenchmarkRunner}
 
@@ -69,9 +74,9 @@ run. It consists of a template file and the reporter. The reporter receives data
 from the benchmark using the unified API, parses it, and inserts it into the
 template file as a JSON string once the benchmark is finished. Along with the
 data, cascading style sheets are also inserted, as they are written in
-\texttt{Sass} language, which must be compiled before the HTML file viewer uses
-them. After the template is completed, the file is saved separately, and graphs
-are created on runtime using JavaScript.
+\texttt{Sass} language \cite{Sass}, which must be compiled before the HTML file
+viewer uses them. After the template is completed, the file is saved separately,
+and graphs are created on runtime using JavaScript.
 
 While the data could be served dynamically, this separate file allows for
 multiple runs to be saved and be independent of the server which would provide
@@ -123,13 +128,15 @@ and parameter handling.
 
 BigIntColumn test examines the data type conversion for the BigInteger type in
 PostgreSQL. JavaScript's Number type can lose precision when handling large
-integers since the maximum safe integer for Number is \(2^{53} - 1\), while
-PostgreSQL's \texttt{bigint} type can store numbers up to \(2^{63} - 1\).
-Although the BigInt primitive, which can store integers with arbitrary
-precision, was introduced in ECMAScript 2020 (ES11) and has been implemented in
-Node.js since 2018, not all frameworks handle this type correctly. The
-frameworks can either cast the value to Number, losing precision and failing the
-test, or return the value as a string or, ideally, as a BigInt primitive.
+integers since the maximum safe integer for Number is \(2^{53} - 1\)
+\cite{MDNNumber}, while PostgreSQL's \texttt{bigint} type can store numbers up
+to \(2^{63} - 1\) \cite{PostgresNumeric}. Although the BigInt primitive
+\cite{MDNBigInt}, which can store integers with arbitrary precision, was
+introduced in ECMAScript 2020 (ES11) \cite{ecma-262} and has been implemented in
+Node.js since 2018 \cite{MDNBigInt}, not all frameworks handle this type
+correctly. The frameworks can either cast the value to Number, losing precision
+and failing the test, or return the value as a string or, ideally, as a BigInt
+primitive.
 
 SQL Injection test assesses the framework's basic handling of parameters. One of
 the main reasons for using a database access package over a basic driver is to
@@ -160,9 +167,9 @@ database. The \textit{JSONColumn} test checks the ability to parse JSON values
 from the database, while the \textit{JSONWhere} test focuses on querying based
 on the value of an object key inside the JSON column. PostgreSQL provides two
 ways to query the value: extraction operator \texttt{->>} for simple comparisons
-or @> operator for more complex comparisons with JSONB datatype, which are
-useful for developers using SQL, but the abstraction of ORM might remove the
-access to these methods.
+or \texttt{@>} operator for more complex comparisons with JSONB datatype
+\cite{postgres-json}, which are useful for developers using SQL, but the
+abstraction of ORM might remove the access to these methods.
 
 The \textit{transactionalOperations} test investigates how individual packages
 handle transactions, assessing the full range of operations available for

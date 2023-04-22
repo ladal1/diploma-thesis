@@ -1,5 +1,5 @@
 \section{pgTyped}
-PgTyped, primarily developed by Adel Salakh, is an open-source package that,
+PgTyped, primarily developed by Adel Salakh \cite{pgTyped}, is an open-source package that,
 while not technically an ORM or query builder, offers unique functionality for
 TypeScript developers. It analyzes SQL queries written by developers and,
 through database introspection, creates typed helper methods for executing those
@@ -9,17 +9,17 @@ other highly typed language-based packages like Kysely.
 
 The package is compatible only with PostgreSQL, as each database requires its
 own parser and introspection process. PgTyped uses the 'pg' connection package,
-which behaves differently across databases. It provides complete SQL flexibility
-with minimal overhead, allowing developers to use it without limitations
-compared to direct SQL queries. However, it lacks the abstraction typically
-found in ORM or query builder packages, making direct comparisons challenging.
+which is only compatible with PostgreSQL. It provides complete SQL flexibility
+with minimal overhead, allowing developers to use it without limitations that
+come with pure SQL queries. However, it lacks the abstraction typically found in
+ORM or query builder packages, making direct comparisons challenging.
 
 PgTyped supports both ESM and CommonJS dependency initialization, ensuring
 excellent compatibility at the expense of a slightly larger package size. It is
 released under the MIT license, a highly permissive option. Its popularity ranks
 relatively low, with its main package, "\texttt{@pgtyped/cli}" receiving only
-about 10,000 downloads weekly. On GitHub, it has more stars but still falls
-within the lowest third of the packages compared.
+about 10,000 downloads weekly \cite{pgtyped/cli}. On GitHub, it has more stars
+but still falls within the lowest third of the packages compared.
 
 The package is well-supported, with regular version releases and active issue
 resolution. Most long-lasting issues are feature requests rather than bug
@@ -28,15 +28,15 @@ CLI package can afford more dependencies than combined packages. The runtime
 dependency has only three direct dependencies: the widely-used \texttt{chalk}
 and \texttt{debug} packages, and the parser dependency, which adds
 \texttt{antlr4ts} for ANTLR 4 (ANother Tool for Language Recognition) grammar
-functionality in TypeScript/JavaScript.
+functionality in TypeScript/JavaScript \cite{pgtyped/runtime}.
 
-The documentation is of high quality, providing examples and a quick start guide
-that covers the essentials for using the package. While the generated types lack
-method information, the original query is included in the Javadoc annotation,
-making it easily accessible during development. PgTyped is a unique and flexible
-package for TypeScript developers working with PostgreSQL. However, it may
-provide a different abstraction level for those seeking a traditional ORM or
-query builder solution.
+The documentation is brief \cite{pgtyped-docs}, providing examples and a quick
+start guide that covers the essentials for using the package. While the
+generated types lack method information, the original query is included in the
+Javadoc annotation, making it easily accessible during development. PgTyped is a
+unique and flexible package for TypeScript developers working with PostgreSQL.
+However, it may provide a different abstraction level for those seeking a
+traditional ORM or query builder solution.
 
 \subsection*{Performance in benchmarks}
 In line with expectations, the pgTyped package outperformed all other packages
