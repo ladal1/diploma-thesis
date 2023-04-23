@@ -56,9 +56,10 @@ However, TypeORM's query generation approach raises some concerns when working
 with complex joined tables. The generated queries are often complex for humans
 to read due to excessive naming or using hashes instead of more recognizable
 names. This complexity necessitates additional parsing for developers to
-effectively understand and work with these queries. Moreover, TypeORM often
-prefers LEFT JOINs, which are computationally more demanding than INNER JOINs
-and, in this case, will yield the same output thanks to the database schema.
+effectively understand and work with these queries, one such query is shown in
+\autoref{lst:typeorm-query}. Moreover, TypeORM often prefers LEFT JOINs, which
+are computationally more demanding than INNER JOINs and, in this case, will
+yield the same output thanks to the database schema.
 
 Another issue encountered with TypeORM relates to its handling of automatically
 generated primary keys. The ORM disregards user input for these columns if they
@@ -78,6 +79,9 @@ starting, managing, and ending transactions. While the filter types are only
 lightly typed, they offer sufficient guidance for developers navigating the
 available filtering options.
 
+\begin{listing}
+  \label{lst:typeorm-query}
+  \caption{}
 \begin{minted}{sql}
 SELECT 
   "Toy"."id"               AS "Toy_id",
@@ -101,4 +105,4 @@ FROM "toy" "Toy"
       "859f7912a2d4ce14675c955dc00d5e1101503c58e113dba9c125d65aab7b94c"."cat_id"
 WHERE ("521c7a07a3cd212cc1564d159554f82ebf641a8398676fa24cabb9988acfd85"."id" = 1)
 \end{minted}
-
+\end{listing}

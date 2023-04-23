@@ -2,12 +2,12 @@
 
 Despite its last update occurring in July 2020, Bookshelf.js remains a popular
 database access package on npm, with 103,607 weekly downloads at the time of
-writing this thesis. Developed by Tim Grissier, who also initiated the
-development of the query builder Knex, Bookshelf.js is unsurprisingly based on
-Knex and implements the Data Mapper pattern for entities in the database.
-Designed to work with PostgreSQL, MySQL, and SQLite3, Bookshelf.js has not been
-actively developed for an extended period, resulting in compatibility issues
-with more recent versions of Knex.
+writing this thesis. Started by Tim Grissier, who also initiated the development
+of the query builder Knex, Bookshelf.js is an ORM which is based on Knex and
+implements the Data Mapper pattern for entities in the database. Designed to
+work with PostgreSQL, MySQL, and SQLite3, Bookshelf.js has not been actively
+developed for an extended period, resulting in compatibility issues with more
+recent versions of Knex.
 
 The last officially supported Knex version for Bookshelf.js was 0.21.17, whereas
 the current Knex version is 2.4.2. This discrepancy has led to several type
@@ -18,7 +18,7 @@ developed in pure JavaScript, with types generated as an afterthought.
 
 The primary reason for disqualifying Bookshelf.js from the comparison was the
 numerous dependencies with unmaintained and outdated versions, which pose
-significant security risks. These risks include prototype pollution and SQL
-injection attacks, making the package unsuitable for modern, secure
-applications. The package itself cannot run unless these dependencies are
-installed or at least overridden.
+significant security risks. These risks include prototype pollution
+\cite{cve-2019-10744} and SQL injection attacks \cite{cve-2016-20018}, making
+the package unsuitable for modern, secure applications. The package itself
+cannot run unless these dependencies are installed or at least overridden.

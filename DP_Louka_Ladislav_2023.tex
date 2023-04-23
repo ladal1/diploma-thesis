@@ -30,7 +30,7 @@
 \usepackage{pgfplots}
 \usepackage{tabularx}
 \usepackage{url}
-\usepackage[backend=biber, bibencoding=utf8, style=iso-numeric, sorting=none]{biblatex}
+\usepackage[sorting=none,backend=biber,bibencoding=utf8,style=iso-numeric]{biblatex}
 \addbibresource{mybibliographyfile.bib}
 \graphicspath{ {./content/img}}
 \setcounter{biburllcpenalty}{100}
@@ -39,7 +39,8 @@
 \biburlnumskip=0mu plus 1mu\relax
 \biburlucskip=0mu plus 1mu\relax
 \biburllcskip=0mu plus 1mu\relax
-
+\renewcommand\listingscaption{Listing}
+\providecommand*{\listingautorefname}{Listing}
 
 \newcommand{\tg}{\mathop{\mathrm{tg}}} %cesky tangens
 \newcommand{\cotg}{\mathop{\mathrm{cotg}}} %cesky cotangens
@@ -53,8 +54,6 @@
 % EDIT THIS
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 
-\nocite{*}
-
 \pgfplotsset{compat=1.17}
 
 \department{Department of Software Engineering}
@@ -65,12 +64,19 @@
 \authorWithDegrees{Bc. Ladislav Louka} %author's name with academic degrees
 \supervisor{Ing. Jan Matoušek}
 \acknowledgements{THANKS (remove entirely in case you do not with to thank anyone)}
-\abstractEN{TODO Summarize the contents and contribution of your work in a few sentences in English language.}
-\abstractCS{TODO}
-\placeForDeclarationOfAuthenticity{Prague}
-\keywordsCS{Replace with comma-separated list of keywords in Czech.}
-\keywordsEN{Replace with comma-separated list of keywords in English.}
-\declarationOfAuthenticityOption{1} %select as appropriate, according to the desired license (integer 1-6)
+
+\abstractEN{In this thesis, we investigate the role of Object Relational Mapping
+(ORM) and query builder packages in JavaScript, focusing on the support of
+TypeScript. Such comparison is important due to modern applications' proliferation of database
+access. The study aims to compare various packages, assessing their flexibility and performance overhead to facilitate an informed decision-making process for developers.} 
+
+\abstractCS{Tato práce se porovnává frameworky objektově relačního mapování (ORM), respektive pro tvorbu SQL dotazů v jazyce JavaScript. Práce se zaměřuje na podporu jazyka TypeScript. Používání ORM je běžně využito pro úsporu času při vývoji pomocí abstrakce, kterou balíčky poskytují. Cílem studie je porovnat různé balíčky, posoudit jejich flexibilitu a výkonnostní režii a usnadnit tak vývojářům informované rozhodování a použití a případném výběru.}
+
+\placeForDeclarationOfAuthenticity{Prague} 
+\keywordsEN{SQL, ORM, Object-relational mapping, Query builder, JavaScript, TypeScript}
+\keywordsCS{SQL, ORM, Objektově-relační mapování, Query builder, JavaScript, TypeScript}
+\declarationOfAuthenticityOption{5}
+%select as appropriate, according to the desired license (integer 1-6)
 % \website{http://site.example/thesis} %optional thesis URL
 
 \linespread{1.3}

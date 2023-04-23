@@ -185,7 +185,7 @@
 \newif\if@declarationOptionSelected
 \DeclareRobustCommand{\declarationOfAuthenticityOption}[1]{
 	\ifx1#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
-		\input{prohlaseni1.tex.txt}
+		\input{assets/prohlaseni1.tex.txt}
 		}\else\if\@lang2{%
 		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
@@ -197,7 +197,7 @@
 		}\fi\fi
 	}\@declarationOptionSelectedtrue\fi
 	\ifx2#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
-		\input{prohlaseni2.tex.txt}
+		\input{assets/prohlaseni2.tex.txt}
 		}\else\if\@lang2{%
 		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
@@ -210,7 +210,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela, ale len pre~nez\'arobkov\'e \'u
 		}\fi\fi
 	}\@declarationOptionSelectedtrue\fi
 	\ifx3#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
-		\input{prohlaseni3.tex.txt}
+		\input{assets/prohlaseni3.tex.txt}
 		}\else\if\@lang2{%
 		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
@@ -222,7 +222,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela, ale len pre~nez\'arobkov\'e \'u
 		}\fi\fi
 	}\@declarationOptionSelectedtrue\fi
 	\ifx4#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
-		\input{prohlaseni4.tex.txt}
+		\input{assets/prohlaseni4.tex.txt}
 		}\else\if\@lang2{%
 		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
@@ -240,7 +240,7 @@ a~z\'arove\v n sa zav\"azuje spr\'\i stupni\v t zdrojov\'y k\'od tak\'eho diela 
 		}\fi\fi
 	}\@declarationOptionSelectedtrue\fi
 	\ifx5#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
-		\input{prohlaseni5.tex.txt}
+		\input{assets/prohlaseni5.tex.txt}
 		}\else\if\@lang2{%
 		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
@@ -253,7 +253,7 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 		}\fi\fi
 	}\@declarationOptionSelectedtrue\fi
 	\ifx6#1 \DeclareRobustCommand{\thedeclarationofauthenticity}{\if\@lang1{%
-		\input{prohlaseni6.tex.txt}
+		\input{assets/prohlaseni6.tex.txt}
 		}\else\if\@lang2{%
 		Prehlasujem, \v ze som predlo\v zen\'u pr\'acu vypracoval(a) samostatne a \v ze som uviedol(uviedla) v\v setky informa\v cn\'e zdroje v~s\'ulade s~Metodick\'ym pokynom o~etickej pr\'iprave vysoko\v skolsk\'ych z\'avere\v cn\'ych pr\'ac.
 
@@ -475,8 +475,23 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 }
 
 \DeclareRobustCommand{\abstractpage}{
-	\chapter*{Abstrakt}
+	\chapter*{Abstract}
+	\if@abstractendefined
+	\theabstracten
+	\else
+	\ClassError{FITthesis}{Abstract in English unspecified}{Specify abstract in English using the \abstractEN command.}
+	\fi
+
+	\if@keywordsendefined
+	\paragraph*{Keywords} \thekeywordsen{}
+	\else
+	\ClassError{FITthesis}{English keywords unspecified}{Specify the keywords in English of your thesis using \keywordsEN command.}
+	\fi
+
+	\newpage
+
 	\if@abstractcsdefined
+	\chapterstyletitle{Abstrakt}
 		\theabstractcs
 	\else
 		\ClassError{FITthesis}{Abstract in Czech unspecified}{Specify abstract in Czech language using the \abstractCS command.}
@@ -486,20 +501,6 @@ sp\^ osobom, ktor\'y nezni\v zuje hodnotu Diela (vr\'atane komer\v cn\'eho vyu\v
 		\paragraph*{Kl{\' i}{\v c}ov{\' a} slova} \thekeywordscs{}
 	\else
 		\ClassError{FITthesis}{Czech keywords unspecified}{Specify the keywords in Czech of your thesis using \keywordsCS command.}
-	\fi
-
-	\vfil
-
-	\if@abstractendefined
-		\chapterstyletitle{Abstract}\theabstracten
-	\else
-		\ClassError{FITthesis}{Abstract in English unspecified}{Specify abstract in English using the \abstractEN command.}
-	\fi
-
-	\if@keywordsendefined
-		\paragraph*{Keywords} \thekeywordsen{}
-	\else
-		\ClassError{FITthesis}{English keywords unspecified}{Specify the keywords in English of your thesis using \keywordsEN command.}
 	\fi
 }
 

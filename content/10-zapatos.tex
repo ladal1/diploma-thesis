@@ -4,7 +4,7 @@ safety for database querying in TypeScript, specifically for PostgreSQL through
 the \texttt{pg} driver. It generates a TypeScript schema of the database via
 introspection, offering methods for basic CRUD operations that are instantly
 typed and function as shortcuts for generic queries. Additionally, it features
-tagged templates for writing arbitrary SQL.
+tagged templates for writing arbitrary SQL \cite{zapatos}.
 
 Unlike pgTyped, which analyses queries and generates types, Zapatos disallows
 the inclusion of any data not specified in the manually typed query. This
@@ -13,19 +13,7 @@ potentially resulting in an unreliable type and is less explicit way to cast the
 result. Despite this limitation, the package supports lateral joins, enabling
 the return of nested objects, a feature typically not found in packages with
 such low abstraction levels. However, as with other TypeScript-dependent
-packages, Zapatos can generate compilation errors that are difficult to parse. Example of such error is shown in 
-
-\begin{minted}{shell}
-\caption{Zapatos compile error}
-\label{zapatos:error}
-error TS2345: 
-Argument of type '{ id: db.ParentColumn<"id">; is: string; }' 
-is not assignable to parameter of type 
-'unique symbol | Whereable | SQLFragment<any, never>'.
-Object literal may only specify known properties, 
-and 'is' does not exist in type 
-'Whereable | SQLFragment<any, never>'.
-\end{minted}
+packages, Zapatos can generate compilation errors that are difficult to parse.
 
 Released under the MIT license, the package uses ESModule dependencies and has
 14,933 weekly downloads and 980 GitHub stars, ranking it third least downloaded
@@ -41,11 +29,10 @@ insufficient for guiding development on their own.
 In summary, Zapatos is a package that provides type safety for database querying
 with PostgreSQL, offering typed CRUD operations and tagged templates for SQL.
 Although it takes a different approach to type generation than \texttt{pgTyped},
-it supports lateral joins and nested objects. However, the package's limitations
-include possible type inaccuracies and challenging compilation errors. With
-moderate popularity and concise documentation, Zapatos is suitable for
-developers working with PostgreSQL who prioritize type safety and can navigate
-its potential issues.
+it supports lateral joins and nested objects. The package concise but sufficient
+documentation for most users \cite{zapatosDocs}. However, the package's
+limitations include possible type inaccuracies due to developer error and
+challenging compilation errors. 
 
 \subsection*{Performance in benchmarks}
 
@@ -57,19 +44,42 @@ written queries and shortcut functions, typically only surpassed by
 \textit{pgTyped} or \textit{@database/pg}, which both employ a more rudimentary
 representation of the SQL language.
 
-However, a significant challenge was encountered during the Big Integer
-precision test, as the identifier's value was altered due to its conversion to a
-number before being returned. This issue was eventually resolved by employing an
-explicit SQL query instead of the shortcut function
-\texttt{db.selectExactlyOne}. This unexpected result is particularly striking,
-given that the framework conducts introspection over the database, correctly
-identifying the schema as \texttt{int8}. Nevertheless, the shortcut function
-converts the column value into a JavaScript number runtime type, which,
-according to the specification, is represented by \texttt{C++} double
-(\texttt{float64}) or equivalent. Although both PostgreSQL and JavaScript use
-the same number of bytes to represent the value, the PostgreSQL type can
-accommodate a significantly more extensive range of integer values, as it
-utilizes decimal precision.
+However, a significant challenge was encountered during the Big Integer data
+type test, as the identifier's value was altered due to its conversion to a
+number before being returned. This issue was resolved by employing an explicit
+SQL query instead of the shortcut function \texttt{db.selectExactlyOne}. This
+unexpected result is particularly striking, given that the framework conducts
+introspection over the database, correctly identifying the schema as
+\texttt{int8}. Nevertheless, the shortcut function converts the column value
+into a JavaScript number runtime type, which, according to the specification, is
+represented by \texttt{C++} double (\texttt{float64}) or equivalent
+\cite{MDNNumber}. Although both PostgreSQL and JavaScript use the same number of
+bytes to represent the value, the PostgreSQL type can accommodate a
+significantly more extensive range of integer values, as it utilizes decimal
+precision \cite{PostgresNumeric}.
+
+\begin{listing}
+\caption{Zapatos number precision loss}
+
+\begin{minted}{ts}
+// Value incorrectly converted into a number
+db
+  .selectExactlyOne('cat', 
+    { cat_name: name }, 
+    { columns: ['id'] })
+  .run(pgPool)
+  .then(data => BigInt(data?.id ?? 0))
+
+// Correct value returned as string
+db.sql<
+  schema.cat.SQL,
+  schema.cat.Selectable[]
+>`SELECT * FROM ${'cat'} 
+  WHERE ${'cat_name'} = ${db.param(name)}`
+  .run(pgPool)
+  .then(rows => BigInt(rows[0].id ?? 0))
+\end{minted}
+\end{listing}
 
 It was necessary to compose numerous queries using explicit SQL (as depicted in
 the final comparison table), including transaction rollbacks. The framework only

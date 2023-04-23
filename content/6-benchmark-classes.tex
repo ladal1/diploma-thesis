@@ -5,12 +5,12 @@ benchmark functionality, written in TypeScript, involves two main components:
 the \texttt{BenchmarkRunner} and \texttt{BenchmarkSuite} classes. The classes
 work together to manage the ordering of tests, database administration, and
 execution of test suites, as well as handling packages, test suites, and
-reporters.
+reporters. The simplified class schema is shown in \autoref{fig:benchmark-classes}.
 
-
-\begin{figure}[h]
+\begin{figure}[hp]
     \caption{Simplified schema of the Benchmark class architecture}
     \centering
+    \label{fig:benchmark-classes}
     \includegraphics[width=\textwidth]{BenchmarkClasses}
 \end{figure}
 
@@ -24,7 +24,7 @@ their respective database schemas.
 
 Database administration tasks include setting up and tearing down example
 databases used in testing. Tests are currently written only for the database
-examined in chapter \ref{ch:database}, therefore this functionality is only used
+examined in \autoref{ch:database}, therefore this functionality is only used
 to initialize the database to preserve a consistent state. In order to perform
 these tasks, \texttt{BenchmarkRunner} maintains its database connection using
 the default \texttt{pg} module.

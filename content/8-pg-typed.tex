@@ -1,11 +1,12 @@
 \section{pgTyped}
-PgTyped, primarily developed by Adel Salakh \cite{pgTyped}, is an open-source package that,
-while not technically an ORM or query builder, offers unique functionality for
-TypeScript developers. It analyzes SQL queries written by developers and,
-through database introspection, creates typed helper methods for executing those
-queries. This package is designed specifically for TypeScript, resulting in
-excellent typing but occasionally leading to complex errors, a common issue with
-other highly typed language-based packages like Kysely.
+PgTyped, primarily developed by Adel Salakh \cite{pgTyped}, is an open-source
+package that, while not technically an ORM or query builder, offers unique
+functionality for TypeScript developers. It analyzes SQL queries written by
+developers and, through database introspection, creates typed helper methods for
+executing those queries. The final usage is shown in \autoref{lst:pgTyped}. This
+package is designed specifically for TypeScript, resulting in excellent typing
+but occasionally leading to complex errors, a common issue with other highly
+typed language-based packages like Kysely.
 
 The package is compatible only with PostgreSQL, as each database requires its
 own parser and introspection process. PgTyped uses the 'pg' connection package,
@@ -38,6 +39,32 @@ unique and flexible package for TypeScript developers working with PostgreSQL.
 However, it may provide a different abstraction level for those seeking a
 traditional ORM or query builder solution.
 
+\begin{listing}
+\caption{Usage of pgTyped}
+\label{lst:pgTyped}
+\begin{minted}{typescript}
+// -- File: EntityTraversal.sql
+/* @name countCatsByColor */
+SELECT
+  COUNT(*)
+FROM
+    cat
+    JOIN cat_color ON cat_color.id = cat.cat_color_id
+    JOIN color_hex ON color_hex.id = cat_color.id
+WHERE
+    color_hex.hex_code = :hexCode;
+
+// -- File: EntityTraversal.ts 
+import {
+  countCatsByColor,
+} from './EntityTraversal.queries'
+
+return countCatsByColor
+  .run({ hexCode }, getClient())
+  .then(result => Number(result[0].count))
+
+\end{minted}
+\end{listing}
 \subsection*{Performance in benchmarks}
 In line with expectations, the pgTyped package outperformed all other packages
 examined in the study. Most pgTyped operations are executed before or during
