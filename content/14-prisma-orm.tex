@@ -3,10 +3,11 @@
 PrismaORM has rapidly gained popularity in the development community due to its
 innovative and modern approach to creating database clients and
 object-relational mapping. Adopting a unique method for defining database
-schemas, PrismaORM utilizes its schema language, which aims to represent the
-database structure using concepts more closely aligned with relational syntax
-rather than complex objects found in traditional object-oriented programming
-paradigms.
+schemas, PrismaORM utilizes its schema language \cite{prismaDocsSchema}, which
+aims to represent the database structure using concepts more closely aligned
+with relational syntax rather than complex objects found in traditional
+object-oriented programming paradigms. An example definition of model in the
+schema language is shown in \autoref{lst:prismaSchema}.
 
 The schema in PrismaORM comprises three main components: the data source
 definition, the output specification for the schema (such as the Prisma database
@@ -20,17 +21,33 @@ MB, which may lead to cold start issues in serverless environments. To address
 this concern, PrismaORM provides specific instructions for each cloud platform
 to optimize the binary result and configuration as much as possible.
 
+\begin{listing}
+\caption{Example of Prisma schema language model definition}
+\label{lst:prismaSchema}
+    \begin{minted}[breaklines]{text}
+model cat {
+  id            BigInt      @id(map: "pk_cat") @default(autoincrement())
+  cat_color_id  Int?
+  cat_name      String?     @db.VarChar(256)
+  date_of_birth DateTime?   @db.Date
+  cat_color     cat_color?  @relation(fields: [cat_color_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_cats_cat_color")
+  house_cat     house_cat[]
+}
+    \end{minted}
+\end{listing}
+
 The Prisma suite also includes a migration platform that automatically
 transforms schema changes into corresponding database updates. PrismaORM boasts
 impressive adoption rates, with 1,057,351 weekly downloads and 30,431 GitHub
-stars, making it the second most popular package by this metric. The package
-supports both Node.js and Deno as runtime environments, catering to various
-developers and project requirements.
+stars, making it the second most popular package by the GitHub metric
+\cite{prismaNpm} \cite{prismaGitHub}. The package supports both Node.js and Deno
+as runtime environments, catering to various developers and project
+requirements.
 
 However, it should be noted that Prisma supports CommonJS imports by default and
 does not offer an official method for generating ECMAScript module-compatible
-code. This limitation may challenge developers who prefer using ECMAScript
-modules in their projects.
+code \cite{prismaES6}. This limitation may challenge developers who prefer using
+ECMAScript modules in their projects.
 
 \subsection*{Performance in benchmarks}
 
@@ -55,5 +72,5 @@ where SQL queries are already opaque, as opposed to a query builder such as
 Kysely, which employs a similar methodology.
 
 Furthermore, PrismaORM can accurately convert and type unconventional runtime
-types, including BigInteger and JSON values. This capability enhances the
+types, including Big Integer and JSON values. This capability enhances the
 versatility and applicability of the package for various use cases.

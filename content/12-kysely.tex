@@ -9,28 +9,29 @@ possible breaking changes.
 Compared to Knex.js, Kysely supports fewer database engines and SQL dialects
 out-of-the-box, with native support for MySQL, PostgreSQL, and SQLite. However,
 third-party drivers are available for several other (albeit more exotic)
-databases. One of the driving forces behind Kysely's creation was Knex.js's
-excessive permissiveness, which limited its type support capabilities. Kysely
-addresses this issue while retaining the strengths of query composition. Though
-the order of operations in Kysely may sometimes differ from SQL, this does not
-pose a significant problem.
+databases \cite{kyselyWeb}. One of the driving forces behind Kysely's creation
+was Knex.js's excessive permissiveness, which limited its type support
+capabilities \cite{kyselyGithub}. Kysely addresses this issue while retaining
+the strengths of query composition. Though the order of operations in Kysely may
+sometimes differ from SQL, this does not pose a significant problem.
 
 Its excellent type guarantees make it an attractive choice, especially compared
 to more expressive packages. Kysely can also be further enhanced with Model
 classes through the third-party package kysely-orm. However, due to its limited
 usage and lack of updates reflecting the latest Kysely API changes, it was not
 considered for comparison here. To generate type definitions, developers can use
-introspection with the \textit{kysely-codegen} package or an alternative schema
-specification via \textit{prisma-kysely}. Kysely also provides in built support
-for database migrations, although it lacks the CLI that other packages, such as
-Knex.js provide.
+introspection with the \textit{kysely-codegen} package \cite{kyselyCodegen} or
+an alternative schema specification via \textit{prisma-kysely}
+\cite{kyselyPrisma}. Kysely also provides in built support for database
+migrations, although it lacks the CLI that other packages, like Knex.js
+provide.
 
 Distributed with both CommonJS and EcmaScript dependency specifications, Kysely
-is compatible with both dialects and is licensed under the MIT License. Despite
+is compatible with both dialects and is licensed under the MIT Licence. Despite
 its youth, the package has already amassed over 53,000 weekly downloads on npm
-and over 4,600 stars on GitHub. Most issues reported are enhancement
-suggestions, however due to the package's young age, there obviously can't be
-any issues open for as long as some in older repositories.
+and over 4,600 stars on GitHub \cite{kyselyGithub}. Most issues reported are
+enhancement suggestions, however due to the package's young age, there obviously
+can't be any issues open for as long as some in older repositories.
 
 Kysely's active development has led to frequent updates and enhancements, such
 as improved documentation published during the writing of this thesis. While the
@@ -51,16 +52,16 @@ growing appeal within the TypeScript community.
 
 \subsection*{Performance in benchmarks}
 
-Regarding performance, the Kysely package consistently outperformed or matched
-Knex, which boasts a comparatively rich set of features. While Kysely does not
-offer parsing for types such as Big Integer, its handling remains consistent
-with that of the pg driver. Like many other packages, Kysely lacks support for
-explicit transaction control, above encapsulation into one. However, this is at
-least supplemented with raw SQL queries inside the encapsulation. This will
-however result in additional call of COMMIT or ROLLBACK at the end of the
-encapsulation, even though the transaction was finished manually, and such
-behaviour is usually reserved for ORMs which abstract the database access
-further than common query builders.
+Regarding performance, the Kysely package consistently outperformed or at least
+matched Knex, which is boasts a comparatively rich set of features for a query
+builder. While Kysely does not offer parsing for types such as Big Integer, its
+handling remains consistent with that of the pg driver. Like many other
+packages, Kysely lacks support for explicit transaction control, above
+encapsulation into one. However, this is at least supplemented with raw SQL
+queries inside the encapsulation. This will however result in additional call of
+COMMIT or ROLLBACK at the end of the encapsulation, even though the transaction
+was finished manually, and such behaviour is usually reserved for ORMs which
+abstract the database access further than common query builders.
 
 Another advantage of Kysely is its utilization of tagged strings, akin to the
 approach employed by @databases/pg when composing raw SQL queries. This method

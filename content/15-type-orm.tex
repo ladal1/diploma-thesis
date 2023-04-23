@@ -16,23 +16,26 @@ included as migrations if executed through its CLI.
 
 TypeORM is highly popular, boasting the second-highest download number and the
 highest amount of stars among those compared, with 1,192,427 weekly downloads
-and 30,947 stars on GitHub. Released under the MIT License, TypeORM is the ORM
-with the highest number of downloads and full support for TypeScript, as
-Sequelize only outperforms it when considering the \textit{sequelize} package's
-download numbers, not the \textit{sequelize-typescript} package used for comparison.
+\cite{typeORMNpm} and 30,947 stars on GitHub \cite{typeORMGitHub}. Released
+under the MIT License, TypeORM is the ORM with the highest number of downloads
+and full support for TypeScript, as Sequelize only outperforms it when
+considering the \textit{sequelize} package's download numbers
+\cite{sequelizeNpm}, not the \textit{sequelize-typescript} package
+\cite{sequelizeTypescriptNpm} used for comparison.
 
 Despite its stable support, TypeORM's development has shifted towards
 maintaining existing features in 2018 due to the amount of work for purely
-volunteer supported development. This maintenance mode has led to 1,873 open
-issues as of now. Although the project has now resumed development due to receiving
-financial support, it primarily focuses on more minor updates every few weeks.
-It is not as actively developed as other "active" projects in this analysis.
+volunteer supported development \cite{typeORMGitHubFuture}. This maintenance
+mode has led to 1,873 open issues as of now \cite{typeORMGitHub}. Although the
+project has now resumed development due to receiving financial support, it
+primarily focuses on more minor updates every few weeks. It is not as actively
+developed as other "active" projects in this analysis.
 
 The documentation for TypeORM is of good quality, providing all the necessary
 information for development. However, it needs more formatting and chapters,
 making it easier to follow even if the developer does not know what precisely
-they are looking for. The model methods include brief descriptions but are
-mostly limited to a single-sentence short explanation.
+they are looking for \cite{typeORMDocs}. The model methods include brief
+descriptions but are mostly limited to a single-sentence short explanation.
 
 TypeORM has the highest number of dependencies among the packages compared, with
 many dependencies like "buffer" being necessary to support various runtimes,
@@ -80,9 +83,9 @@ lightly typed, they offer sufficient guidance for developers navigating the
 available filtering options.
 
 \begin{listing}
+  \caption{TypeORM Query generated for getToysAvailableToCat benchmark}
   \label{lst:typeorm-query}
-  \caption{}
-\begin{minted}{sql}
+\begin{minted}[breaklines]{sql}
 SELECT 
   "Toy"."id"               AS "Toy_id",
   "Toy"."toy_name"         AS "Toy_toy_name",
@@ -97,12 +100,12 @@ FROM "toy" "Toy"
     ON "Toy__Toy_toyHouses"."toy_id" = "Toy"."id"
   LEFT JOIN "house" "Toy__Toy_toyHouses__Toy__Toy_toyHouses_house"
     ON "Toy__Toy_toyHouses__Toy__Toy_toyHouses_house"."id" = "Toy__Toy_toyHouses"."house_id"
-  LEFT JOIN "house_cat" "859f7912a2d4ce14675c955dc00d5e1101503c58e113dba9c125d65aab7b94c"
-    ON "859f7912a2d4ce14675c955dc00d5e1101503c58e113dba9c125d65aab7b94c"."house_id" =
+  LEFT JOIN "house_cat" "859f7912[...]aab7b94c"
+    ON "859f7912[...]aab7b94c"."house_id" =
       "Toy__Toy_toyHouses__Toy__Toy_toyHouses_house"."id"
-  LEFT JOIN "cat" "521c7a07a3cd212cc1564d159554f82ebf641a8398676fa24cabb9988acfd85"
-    ON "521c7a07a3cd212cc1564d159554f82ebf641a8398676fa24cabb9988acfd85"."id" =
-      "859f7912a2d4ce14675c955dc00d5e1101503c58e113dba9c125d65aab7b94c"."cat_id"
-WHERE ("521c7a07a3cd212cc1564d159554f82ebf641a8398676fa24cabb9988acfd85"."id" = 1)
+  LEFT JOIN "cat" "521c7a07[...]88acfd85"
+    ON "521c7a07[...]88acfd85"."id" =
+      "859f7912[...]aab7b94c"."cat_id"
+WHERE ("521c7a07[...]88acfd85"."id" = 1)
 \end{minted}
 \end{listing}

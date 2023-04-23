@@ -24,7 +24,25 @@ database logic.
 The framework also lacks typings for search method attributes and resulting
 object types, further limiting its usefulness in TypeScript-based projects. Due
 to these issues, as well as the file separation requirements of the benchmark,
-RDB was ultimately disqualified from the comparison.
+RDB was ultimately disqualified from the comparison. The full interface is shown
+in \autoref{lst:rdbModel} and as shown does not contain any methods for
+referencing the model attributes.
+
+\begin{listing}
+\caption{RDB entity model type definition}
+\label{lst:rdbModel}
+\begin{minted}{typescript}
+export interface Table {
+    primaryColumn(column: string): ColumnDef;
+    column(column: string): ColumnDef;
+    join(table: Table): Join;
+    hasMany(join: JoinRelation): HasMany;
+    hasOne(join: JoinRelation): HasOne;
+    formulaDiscriminators(...discriminators: string[]) : Table;
+    columnDiscriminators(...discriminators: string[]) : Table;
+}
+\end{minted}
+\end{listing}
 
 In conclusion, while RDB presents an interesting alternative approach to model
 definition, its limitations in typing support and handling of multi-file
