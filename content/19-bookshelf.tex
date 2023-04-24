@@ -1,20 +1,21 @@
 \subsection{Bookshelf.js}
 
-Despite its last update occurring in July 2020, Bookshelf.js remains a popular
-database access package on npm, with 103,607 weekly downloads at the time of
-writing this thesis. Started by Tim Grissier, who also initiated the development
-of the query builder Knex, Bookshelf.js is an ORM which is based on Knex and
-implements the Data Mapper pattern for entities in the database. Designed to
-work with PostgreSQL, MySQL, and SQLite3, Bookshelf.js has not been actively
-developed for an extended period, resulting in compatibility issues with more
-recent versions of Knex.
+Despite its last update occurring in July 2020 \cite{bookshelfNpm}, Bookshelf.js
+remains a popular database access package on npm, with 103,607 weekly downloads
+at the time of writing this thesis. Started by Tim Grissier, who also initiated
+the development of the query builder Knex, Bookshelf.js is an ORM which is based
+on Knex and implements the Data Mapper pattern for entities in the database.
+Designed to work with PostgreSQL, MySQL, and SQLite3, Bookshelf.js has not been
+actively developed for an extended period, resulting in compatibility issues
+with more recent versions of Knex \cite{bookshelfGitHub}.
 
 The last officially supported Knex version for Bookshelf.js was 0.21.17, whereas
 the current Knex version is 2.4.2. This discrepancy has led to several type
 errors and incompatibilities as the Knex API has evolved over time. While there
 are forks of the repository that address significant issues, the package still
 suffers from limited type support, primarily because the entire project is
-developed in pure JavaScript, with types generated as an afterthought.
+developed in pure JavaScript, with types generated as an afterthought
+\cite{bookshelfDocs}.
 
 The primary reason for disqualifying Bookshelf.js from the comparison was the
 numerous dependencies with unmaintained and outdated versions, which pose

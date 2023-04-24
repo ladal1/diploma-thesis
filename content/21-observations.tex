@@ -34,9 +34,18 @@ solution for their projects.
 
 \section{Package Information}
 
-While evaluating the ORM frameworks, the latest stable branch version was used for testing at the time of writing. It is important to note that a new version 3.0.2 of Objection.js was released after the testing was completed; however, this update does not introduce any new features, only addressing issues with types and ESM support.
+While evaluating the ORM frameworks, the latest stable branch version was used
+for testing at the time of writing. It is important to note that a new version
+3.0.2 of Objection.js was released after the testing was completed; however,
+this update does not introduce any new features, only addressing issues with
+types and ESM support.
 
-Table \ref{table:PackageInfo} provides the exact versions used for each package, along with the number of runtime dependencies required (excluding optional packages and database drivers). To assess the availability and popularity of these packages, Table \ref{table:Popularity} lists each package with popularity metrics such as weekly downloads from the npm repository and GitHub stars given to the project. The data was collected on the 10th of April, 2023.
+Table \ref{table:PackageInfo} provides the exact versions used for each package,
+along with the number of runtime dependencies required (excluding optional
+packages and database drivers). To assess the availability and popularity of
+these packages, Table \ref{table:Popularity} lists each package with popularity
+metrics such as weekly downloads from the npm repository and GitHub stars given
+to the project. The data was collected on the 10th of April, 2023.
 
 \begin{table}[htb]
   \centering
@@ -64,42 +73,70 @@ Table \ref{table:PackageInfo} provides the exact versions used for each package,
   \begin{tabular}{lrrl}
   \hline
   \thead{Package} & \thead{npm \\ weekly \\ downloads} & \thead{GitHub \\ Stars} & \thead{Homepage} \\ \hline
-  PgTyped & 9937 & 2348 & \url{https://github.com/adelsz/pgtyped} \\ 
-  @databases/pg & 26613 & 517 & \url{https://www.atdatabases.org/docs/pg} \\ 
-  Zapatos & 14933 & 980 & \url{https://jawj.github.io/zapatos/} \\ 
-  Knex.js & 1346100 & 17419 & \url{https://knexjs.org/} \\ 
-  Kysely & 53635 & 4683 & \url{https://kysely.dev/} \\ 
-  MikroORM & 189128 & 5777 & \url{https://mikro-orm.io/} \\ 
-  PrismaORM & 1057351 & 30431 & \url{https://www.prisma.io/} \\ 
-  TypeORM & 1192427 & 30947 & \url{https://typeorm.io/} \\ 
-  Objection.js & 128872 & 6972 & \url{https://vincit.github.io/objection.js/} \\ 
-  Sequelize & 1505485 & 27729 & \url{https://sequelize.org/} \\ \hline
-  RDB & 284 & 291 & \url{https://github.com/alfateam/rdb} \\ 
-  Bookshelf.js & 103607 & 6315 & \url{https://bookshelfjs.org/} \\ 
-  Waterline & 29086 & 5387 & \url{https://waterlinejs.org/} \\ 
+  PgTyped & 9937 & 2348 & {\footnotesize \url{https://github.com/adelsz/pgtyped}} \\ 
+  @databases/pg & 26613 & 517 & {\footnotesize \url{https://atdatabases.org/docs/pg}} \\ 
+  Zapatos & 14933 & 980 & {\footnotesize \url{https://jawj.github.io/zapatos/}} \\ 
+  Knex.js & 1346100 & 17419 & {\footnotesize \url{https://knexjs.org/}} \\ 
+  Kysely & 53635 & 4683 & {\footnotesize \url{https://kysely.dev/}} \\ 
+  MikroORM & 189128 & 5777 & {\footnotesize \url{https://mikro-orm.io/}} \\ 
+  PrismaORM & 1057351 & 30431 & {\footnotesize \url{https://prisma.io/}} \\ 
+  TypeORM & 1192427 & 30947 & {\footnotesize \url{https://typeorm.io/}} \\ 
+  Objection.js & 128872 & 6972 & {\footnotesize \url{https://vincit.github.io/objection.js/}} \\ 
+  Sequelize & 1505485 & 27729 & {\footnotesize \url{https://sequelize.org/}} \\ \hline
+  RDB & 284 & 291 & {\footnotesize \url{https://github.com/alfateam/rdb}} \\ 
+  Bookshelf.js & 103607 & 6315 & {\footnotesize \url{https://bookshelfjs.org/}} \\ 
+  Waterline & 29086 & 5387 & {\footnotesize \url{https://waterlinejs.org/}} \\ 
   \end{tabular}
 \end{table}
 
 \newpage
 \section{Flexibility Assessment}
 
-The primary aspect of the comparison between individual ORM packages is their ability to implement advanced SQL constructs using a more unified API for the programming language. Although abstraction introduces additional logic that requires processing power, it should offer functionality that approaches the capabilities of direct SQL usage. A framework requiring developers to introduce abstraction but still necessitates writing SQL queries, as the request cannot be expressed through the API, is considered less effective as an abstraction layer than one that can perform such requests.
+The primary aspect of the comparison between individual ORM packages is their
+ability to implement advanced SQL constructs using a more unified API for the
+programming language. Although abstraction introduces additional logic that
+requires processing power, it should offer functionality that approaches the
+capabilities of direct SQL usage. A framework requiring developers to introduce
+abstraction but still necessitates writing SQL queries, as the request cannot be
+expressed through the API, is considered less effective as an abstraction layer
+than one that can perform such requests.
 
-Tables \ref{table:EntityTraversal}, \ref{table:SpecialSQLActions}, and \ref{table:EdgeCases} showcase the layers used to perform the required functionality for the benchmark. A requirement for each implementation was that the logic had to be consistently implemented on the database, with the framework only composing the query and parsing the result. For example, it was not allowed to check for an existing object in an upsert operation by querying the database independently.
+Tables \ref{table:EntityTraversal}, \ref{table:SpecialSQLActions}, and
+\ref{table:EdgeCases} showcase the layers used to perform the required
+functionality for the benchmark. A requirement for each implementation was that
+the logic had to be consistently implemented on the database, with the framework
+only composing the query and parsing the result. For example, it was not allowed
+to check for an existing object in an upsert operation by querying the database
+independently.
 
 The order for implementation was as follows:
+\newpage
 \begin{enumerate}
   \item Native methods that abstract the database logic (Native)
   \item The integrated query builder (QB)
   \item Manually written queries in SQL (SQL)
 \end{enumerate}
-If the operation was impossible to perform or resulted in problems, the lower level was attempted, and the first successful one is listed in the tables.
+If the operation was impossible to perform or resulted in problems, the lower
+level was attempted, and the first successful one is listed in the tables.
 
-Several notable observations can be made from the flexibility comparison. PrismaORM stands out as the only ORM capable of natively implementing the entire logic for each test, thanks to its unique support for increment and decrement logic over upsert operations. The other full-fledged ORM packages in the comparison, such as Sequelize, TypeORM, and MikroORM, performed similarly but could not express upsert incrementation natively.
+Several notable observations can be made from the flexibility comparison.
+PrismaORM stands out as the only ORM capable of natively implementing the entire
+logic for each test, thanks to its unique support for increment and decrement
+logic over upsert operations. The other full-fledged ORM packages in the
+comparison, such as Sequelize, TypeORM, and MikroORM, performed similarly but
+could not express upsert incrementation natively.
 
-MikroORM held an advantage over TypeORM, using Knex.js as its query builder, which could express the operation. In contrast, TypeORM's internal query builder could not. On the other hand, Zapatos was the only package that partially failed in any test. It could not correctly parse bigint values from PostgreSQL as strings or BigInt primitives in JavaScript when using native methods, casting the result into a number instead. However, this issue was resolved when a manually written query was used.
+MikroORM held an advantage over TypeORM, using Knex.js as its query builder,
+which could express the operation. In contrast, TypeORM's internal query builder
+could not. On the other hand, Zapatos was the only package that partially failed
+in any test. It could not correctly parse bigint values from PostgreSQL as
+strings or BigInt primitives in JavaScript when using native methods, casting
+the result into a number instead. However, this issue was resolved when a
+manually written query was used.
 
-Lastly, it is worth noting that only @databases/pg parsed bigint values into JavaScript BigInt primitives. All other packages returned character representations of the value. 
+Lastly, it is worth noting that only @databases/pg parsed bigint values into
+JavaScript BigInt primitives. All other packages returned character
+representations of the value. 
 
 
 \begin{table}[htbp]
