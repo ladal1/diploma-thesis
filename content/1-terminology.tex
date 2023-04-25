@@ -36,8 +36,8 @@ every author prioritises different patterns and functionalities
 \cite{fowler-patterns-2003}.
 
 The Builder pattern is one such pattern, providing API for the complex creation
-process of objects. This pattern is one of the 23 defined in "Design Patterns"
-by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides
+process of objects. This pattern is one of the 23 defined in \enquote{Design
+Patterns} by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides
 \cite{gamma-design-1995}, which has been highly influential in software
 engineering. Its purpose is to separate the creation of an object from its
 representation, allowing for the separation of parts that initially were parts
@@ -74,7 +74,7 @@ and releases and source code are provided under an open-source BSD-style licence
 free of charge \cite{postgres-licence}.
 
 PostgreSQL is, at the time of writing, one of the most popular SQL databases
-available, owing to its widespread adoption to reliability and high scalability
+available, owing its widespread adoption to its reliability and high scalability
 while supporting most of the SQL standard and being fully ACID compliant
 \cite{postgres-transaction}. ACID is an acronym for Atomicity, Consistency,
 Isolation, and Durability, which are four fundamental tenets specifying
@@ -95,7 +95,7 @@ popularity.
 
 \section*{Lazy loading}
 Lazy loading is a technique for optimizing data retrieval to increase
-application performance \cite{webPerformanceMDN}. It is a strategy consisting of
+application performance \cite[p.~200]{fowler-patterns-2003}. It is a strategy consisting of
 only loading data when it is needed rather than all at once, therefore reducing
 the initial load in exchange for the need to do additional loading later. Lazy
 loading is usually achieved by breaking down larger datasets into smaller ones
@@ -107,7 +107,7 @@ Some of the most common implementations of Lazy Loading come in the way of only
 loading low-quality images unless the user is focused on them or splitting code
 into multiple files, which are fetched when necessary, providing quick first
 page-load time at the cost of adding additional requests
-\cite[p.~200]{fowler-patterns-2003}.
+\cite{webPerformanceMDN}.
 
 When talking about ORMs and database access, lazy loading usually takes place as
 replacing data retrieval from an object with a call to retrieve the data from
@@ -204,19 +204,19 @@ spawned it.
 \section*{Read replica}
 A read replica is a special kind of database instance, a read-only instance of
 the database presenting additional query points for the applications accessing
-the database without having to resolve consistency between instances. With usual
-databases supporting multiple instances, concurrent writes to alternative
-machines could produce an inconsistent state in the database. With a read-only
-replica, consistency is not threatened; the only negative is the possibility
-that the connections will receive a state that is delayed when the replica is
-not synced to the latest consistent state of the primary instance
+the database without having to resolve consistency between instances. Some
+databases support multiple fully functional instances, however concurrent writes
+to alternative machines could produce an inconsistent state in the database.
+With a read-only replica, consistency is not threatened; the only negative is
+the possibility that the connections will receive a state that is delayed when
+the replica is not synced to the latest consistent state of the primary instance
 \cite{postgres-availability}.
 
-Creation and usage of read replicas can significantly speed up database
-performance as queries are no longer constrained by single hardware, which
-usually bottlenecks query speed. Duplicating the data over two instances can
-double disk read speeds; if different physical devices are used, slow sequential
-scans over data can run independently and finish faster.
+Creation and usage of read replicas can significantly speed up application
+performance as database queries are no longer constrained by single hardware
+instance, which usually bottlenecks query speed. Duplicating the data over two
+instances can double disk read speeds; if different physical devices are used,
+slow scans over data can run independently and finish faster.
 
 
 \section*{JavaScript}
@@ -234,7 +234,7 @@ be more interactive and dynamic. While initially designed to be used when
 writing HTML documents and executed by web browsers, it outgrew its client-side
 roots and conquered large parts of the server-side development and even mobile
 app and desktop application environments. The advantage of JavaScript is that it
-can be a completely full-stack language that provides exact parity of logic
+can be a completely full-stack language which provides exact parity of logic
 between client and server and allows for significant code portability.
 
 Until the last few years, JavaScript had an exclusive reign over interactive web
@@ -251,16 +251,16 @@ and functionality that are not easily or at all possible in pure JavaScript.
 \section*{ECMAScript}
 Soon after the introduction of JavaScript, it became apparent that establishing
 standards would be a necessary step for compatibility between implementations in
-different web browsers. Following this consensus, Ecma (originally an acronym
+different web browsers. Following this consensus, ECMA (originally an acronym
 for European Computer Manufacturers until 1994 \cite{ecma-mission})
 International standards association meeting was held, and the first edition of
 the document specifying the new standard specification was adopted in June 1997.
 
-The document, coded under the name ECMA-262 \cite{ecma-262}, is a comprehensive
-document that has gone over several versions over the years and specifies the
-syntax, semantics, and behaviour of the language. There is also an extensive
-description of data types, operators, flow control structures, built-in objects,
-and API.
+The specification, coded under the name ECMA-262 \cite{ecma-262}, is a
+comprehensive document that has gone over several versions over the years and
+specifies the syntax, semantics, and behaviour of the language. There is also an
+extensive description of data types, operators, flow control structures,
+built-in objects, and API.
 
 ECMAScript is currently used primarily for client-side scripting, with primary
 implementations being those used in web browsers, such as SpiderMonkey (Firefox)
@@ -273,9 +273,9 @@ many constructs are not directly compatible or translatable.
 
 \section*{CommonJS}
 One of the alternative specifications which reflected missing functionality in
-ECMAScript is CommonJS. Created to establish conventions on modularisation for
-JavaScript outside the web browser, it has also standardised several APIs and
-internal features \cite{commonjs-spec}. 
+ECMAScript for server use is CommonJS. Created to establish conventions on
+modularization for JavaScript outside the web browser, it has also standardized
+several APIs and internal features \cite{commonjs-spec}. 
 
 Started in 2009 by an engineer at Mozilla, the project was initially called
 ServerJS, with its flagship feature being the synchronous loading of modules.
@@ -308,7 +308,7 @@ surface area for errors and mistakes.
 Today, TypeScript is widely used for web development and JavaScript server-side
 development. Most popular frameworks provide at least partial support for
 TypeScript, and some (such as Angular and React) have even switched to it as the
-preferred language. TypeScript has support in many JavaScript-integrated
+recommended language. TypeScript has support in many JavaScript-integrated
 development environments, such as Microsoft's Visual Studio Code
 \cite{typescript-vscode} or JetBrains WebStorm \cite{typescript-webstorm}. With
 solid typing comes the ability for more substantial and consistent code
@@ -316,10 +316,10 @@ completion, guaranteed automated refactoring, and error checking.
 
 Other projects have tried to fix the same issues as TypeScript fixes. For
 example, Dart \cite{dart-homepage}, which is developed by Google, works in the
-same way, although further from the traditional syntax. It is also compiled into
-standard ECMAScript syntax. However, it never gained the same traction, and its
-focus was changed from alternative to JavaScript to the primary language for
-development in the multi-platform framework Flutter.
+same way, although it abstracts further from the traditional JavaScript syntax.
+It is also compiled into standard ECMAScript syntax. However, it never gained
+the same traction, and its focus was changed from alternative to JavaScript to
+the primary language for development in the multi-platform framework Flutter.
 
 
 \section*{Node.js}
@@ -350,10 +350,10 @@ checked or awaited by using the async/await constructs
 
 While Node.js is currently the most dominant, there are other alternatives
 available with their own approaches and focuses. The most popular one is Deno,
-also developed by Ryan Dahl, intending to address some of the security and
-design issues of Node.js. Deno \cite{Deno}, for example, contains extensive
-tools and utilities within its standard library or uses better sandboxing
-between modules as supported by V8, the engine on which both it and Node.js run.
+also developed by Ryan Dahl, with the intention to address some of the security
+and design issues of Node.js. Deno, for example, contains extensive tools and
+utilities within its standard library or uses better sandboxing between modules
+as supported by V8, the engine on which both it and Node.js run \cite{Deno}.
 
 \section*{npm}
 One of the key benefits of the Node.js ecosystem is the large number of
@@ -370,7 +370,8 @@ client, which is also called npm, and an online database of packages called the
 npm registry, which is hosted at \url{www.npmjs.com}. 
 
 Although npm is the default package manager, alternatives that were created with
-different focuses and compromises exist, for example, yarn \cite{Yarn}.
+different focuses and compromises exist, for example, yarn \cite{Yarn}, although
+they usually don't provide their own registry.
 
 \section*{JSON}
 JavaScript object notation (JSON) is a lightweight data-interchange format that

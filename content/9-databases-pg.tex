@@ -9,6 +9,25 @@ joining, making it suitable only for basic queries. Complex queries require a
 combination of templated SQL and conditions written using module functions with
 types.
 
+\begin{listing}
+    \caption{countCatsByColor solution in @databases/pg showing where condition composition}
+    \label{lst:atdatabases/examples}
+    \begin{minted}{typescript}
+return db
+  .query(
+    sql`SELECT
+      COUNT(*) as count
+      FROM
+        cat
+      JOIN cat_color ON cat_color.id = cat.cat_color_id
+      JOIN color_hex ON color_hex.id = cat_color.id
+      WHERE ${dbTables
+        .color_hex(db)
+        .conditionToSql({ hex_code: hexCode }, 'color_hex')}`
+      ).then(r => Number(r[0].count))
+    \end{minted}
+\end{listing}
+
 Though not as feature-rich as a typical ORM, the package simplifies basic
 querying more than a standard query builder. It is exported as an ES module and
 was initially licensed under GPLv3 but is now published under the MIT License.
@@ -47,8 +66,9 @@ the few capable of automatically converting Big Integer values to their
 corresponding JavaScript type.
 
 The benchmarks depended a lot on queries which were at least majorly manually
-written, only providing shortcut methods for basic operations and helpers for
-parameter insertion.
+written as shown in \autoref{lst:atdatabases/example}, only providing shortcut
+methods for basic operations, helpers for parameter insertion and parsers for
+basic where binary comparisons.
 
 Nevertheless, the \texttt{insertOrUpdate} method \cite{databases/pg}, meant for
 upsert operations, has a limitation, as it cannot differentiate between objects

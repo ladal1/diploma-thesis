@@ -7,10 +7,11 @@ themselves. To achieve this, the framework was implemented in TypeScript, the
 same language used by the packages being tested.
 
 The benchmarking framework had to be designed to accommodate errors that could
-occur during development and testing of the packages. Additionally, it had to
-support testing of multiple database schemas and allow results to be exported in
-a variety of formats for further analysis. The resulting benchmarking framework
-provides a robust and comprehensive means of comparing database access packages.
+occur during development and testing of the packages. Additionally, it has to
+support testing of multiple database schemas and allow for results to be
+exported in a variety of formats for further analysis. The resulting
+benchmarking framework provides a robust and comprehensive means of comparing
+database access packages.
 
 \section{Test Suite and Schema Separation}
 
@@ -27,21 +28,24 @@ schema and should not interfere with data used by another test suite. As a
 deliberate choice, this limits the scope of each test's modifications over the
 database and data. However, it eliminates the need to reset the database to the
 original state after each test suite, reducing the time it takes to run the
-benchmark.
+benchmark. However, such functionality should still be supported, as the
+framework should allow for wider range of tests than is expected for
+implementation.
 
 \section{Test type and Error Handling}
 
 The framework needs to support multiple tests to ensure the validity of any
 results it produces. If performance is measured, multiple runs can reduce the
-impact of statistical anomalies, which can occur due to the innumerable number
-of external events.
+impact of statistical anomalies, which can occur due to the innumerable possible
+external events.
 
 Along with performance, the correctness of both query types, resulting runtime
 types, and the result value are essential. As types are only visible before
 compilation, and with typed test suite definitions TypeScript compiler would not
-compile the code, as it would raise type inconsistency. Even incorrect types
-will be necessary to be cast into their expected value. However, even just the
-need for such modification means the package must allow more type definitions.
+compile the code. Due to this restriction, even incorrect types from the
+packages will need to be cast into their expected value. However, even just the
+need for such modification means the package is insufficiently supporting type
+definitions.
 
 Resulting runtime types and values are validated using the node module
 \texttt{node:assert} \cite{NodeAssert}, which provides assertion functions. It
@@ -55,7 +59,9 @@ failed; the package can return an unexpected error, or the test is impossible to
 perform. Both are fail-states, which the benchmark suite must account for with
 error handling. One choice during the design process was that a single failure
 would mark the real test as failed, even though other iterations succeeded. If
-the package caused the issue, that means the package is not reliable enough.
+the package caused the issue, that means the package is not reliable enough and
+such problem needs to be marked. If the failure is caused by external issue, for
+example database error, the test run can be repeated after triage.
 
 \section{Multi-Framework support}
 

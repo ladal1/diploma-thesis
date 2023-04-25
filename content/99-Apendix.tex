@@ -1,0 +1,149 @@
+\chapter{Appendix}
+
+
+\begin{table}[htbp]
+    \centering
+    \caption{Popularity and homepage of packages}
+    \label{table:Popularity}
+    \begin{tabular}{lrrl}
+    \hline
+    \thead{Package} & \thead{npm \\ weekly \\ downloads} & \thead{GitHub \\ Stars} & \thead{Homepage} \\ \hline
+    PgTyped & 9937 & 2348 & {\footnotesize \url{https://github.com/adelsz/pgtyped}} \\ 
+    @databases/pg & 26613 & 517 & {\footnotesize \url{https://atdatabases.org/docs/pg}} \\ 
+    Zapatos & 14933 & 980 & {\footnotesize \url{https://jawj.github.io/zapatos/}} \\ 
+    Knex.js & 1346100 & 17419 & {\footnotesize \url{https://knexjs.org/}} \\ 
+    Kysely & 53635 & 4683 & {\footnotesize \url{https://kysely.dev/}} \\ 
+    MikroORM & 189128 & 5777 & {\footnotesize \url{https://mikro-orm.io/}} \\ 
+    PrismaORM & 1057351 & 30431 & {\footnotesize \url{https://prisma.io/}} \\ 
+    TypeORM & 1192427 & 30947 & {\footnotesize \url{https://typeorm.io/}} \\ 
+    Objection.js & 128872 & 6972 & {\footnotesize \url{https://vincit.github.io/objection.js/}} \\ 
+    Sequelize & 1505485 & 27729 & {\footnotesize \url{https://sequelize.org/}} \\ \hline
+    RDB & 284 & 291 & {\footnotesize \url{https://github.com/alfateam/rdb}} \\ 
+    Bookshelf.js & 103607 & 6315 & {\footnotesize \url{https://bookshelfjs.org/}} \\ 
+    Waterline & 29086 & 5387 & {\footnotesize \url{https://waterlinejs.org/}} \\ 
+    \end{tabular}
+\end{table}
+
+\begin{figure}
+\caption{JSON Where query Results}
+\label{fig:JSONWhere}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    ylabel={Time (ms)},
+    width=0.9*\textwidth,
+    symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+    xtick=data,
+    xticklabel style={rotate=45, anchor=east},
+    enlarge x limits=0.1,
+    ybar=0.6pt,
+    ymin=0,
+    bar width=20pt,
+    nodes near coords,
+    point meta=explicit,
+    ymax=3000,
+    every node near coord/.append style={
+        anchor=west,
+        rotate=70,
+        color=black,
+        font=\small
+    }
+]
+\addplot coordinates {
+    (@Databases/Pg,938.6467380523682) [938.6]
+    (Knex,1677.5254430174828) [1677.5]
+    (Kysely,1022.6663910150528) [1022.7]
+    (MikroORM,1788.2177580595016) [1788.2]
+    (Objection.js,2434.4704369157553) [2434.5]
+    (PgTyped,641.6513191312551) [641.7]
+    (PrismaORM,1140.7300049364567) [1140.7]
+    (Sequelize,1409.4027180820704) [1409.4]
+    (TypeORM,2343.5552767068148) [2343.6]
+    (Zapatos,959.9138299077749) [959.9]
+};
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}
+\caption{Transactional operations Results}
+\label{fig:transactions}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    ylabel={Time (ms)},
+    width=0.9*\textwidth,
+    symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+    xtick=data,
+    xticklabel style={rotate=45, anchor=east},
+    enlarge x limits=0.1,
+    ybar=0.6pt,
+    ymin=0,
+    bar width=20pt,
+    nodes near coords,
+    point meta=explicit,
+    ymax=1500,
+    every node near coord/.append style={
+        anchor=west,
+        rotate=70,
+        color=black,
+        font=\small
+    }
+]
+\addplot coordinates {
+    (@Databases/Pg,418.13021102547646) [418.1]
+    (Knex,472.48128002882004) [472.5]
+    (Kysely,383.8935029953718) [383.9]
+    (MikroORM,585.9660839885473) [586.0]
+    (Objection.js,812.7917858809233) [812.8]
+    (PgTyped,268.92769607901573) [268.9]
+    (PrismaORM,800.1963120251894) [800.2]
+    (Sequelize,790.0877420902252) [790.1]
+    (TypeORM,960.9890259206295) [961.0]
+    (Zapatos,377.6004299968481) [377.6]
+};
+
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}
+\caption{Pattern Matching (likeQuery) Results}
+\label{fig:likeQuery}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    ylabel={Time (ms)},
+    width=0.9*\textwidth,
+    symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+    xtick=data,
+    xticklabel style={rotate=45, anchor=east},
+    enlarge x limits=0.1,
+    ybar=0.6pt,
+    ymin=0,
+    bar width=20pt,
+    nodes near coords,
+    point meta=explicit,
+    ymax=3000,
+    every node near coord/.append style={
+        anchor=west,
+        rotate=70,
+        color=black,
+        font=\small
+    }
+]
+\addplot coordinates {
+    (@Databases/Pg,972.4867187291384) [972.5]
+    (Knex,1270.0347282290459) [1270.0]
+    (Kysely,975.9961798787117) [976.0]
+    (MikroORM,1644.3684897869825) [1644.4]
+    (Objection.js,2159.6866039782763) [2159.7]
+    (PgTyped,721.4043719321489) [721.4]
+    (PrismaORM,1226.5285051465034) [1226.5]
+    (Sequelize,2050.706241041422) [2050.7]
+    (TypeORM,1719.258779078722) [1719.3]
+    (Zapatos,1105.396657988429) [1105.4]
+};
+\end{axis}
+\end{tikzpicture}
+\end{figure}

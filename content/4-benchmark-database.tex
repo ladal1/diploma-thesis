@@ -25,17 +25,17 @@ uses big integer data type, and handling numbers beyond the standard range
 allocated in JavaScript is tested. The \texttt{cat colour} and \texttt{colour
 hex code} are two entities that represent the cat colour by its name and by its
 hex code. The entities are intentionally split in this way to use identifying
-relation \cite{Karwin_2010} - the primary key of the hex colour entity is also a foreign key
-referencing the id of the cat colour entity.
+relation \cite{Karwin_2010} - the primary key of the hex colour entity is also a
+foreign key referencing the id of the cat colour entity.
 
-\section{House and Toy Entities}
-The \texttt{house} entity represents domiciles where the cats spend their time
-at their behest. The relation must also account for ambitious cats using several
-houses as their homes. The main aim is to test the difficulty of implementing
-and using simple many-to-many relations. The only attribute that provides new
-data type or behaviour is the simple \verb|has_dog| attribute, specified as a
-Boolean. It is one of several attributes that test the frameworks' ability to
-correctly type and convert the data recovered from the database.
+\section{House and Toy House Entities}
+The \texttt{house} entity represents domiciles where the cats spend time at
+their behest. The relation must account for ambitious cats using several houses
+as their homes. The main aim is to test the difficulty of implementing and using
+simple many-to-many relations. The only attribute that provides new data type or
+behaviour is the simple \verb|has_dog| attribute, specified as a Boolean. It is
+one of several attributes that test the frameworks' ability to correctly type
+and convert the data recovered from the database.
 
 The houses can be equipped with many toys for the cats to use. The relation
 between houses and toys is modelled through a decomposition table which contains
@@ -52,7 +52,7 @@ PostgreSQL achieves it using the \texttt{ON CONFLICT} statement in
 \texttt{INSERT} query \cite{INSERT_postgres_2023}. It also tests the handling of
 composite primary keys, a standard paradigm in many databases.
 
-\section{Toy Entity}
+\section{Toy and Toys Producer Entity}
 The \texttt{toy} entity purpose in testing is in numeric data type used in
 \texttt{price} attribute and usage of additional column attributes such as
 \texttt{CHECK} constraints or \texttt{DEFAULT} values in the column

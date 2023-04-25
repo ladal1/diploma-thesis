@@ -17,15 +17,15 @@ reporters. The simplified class schema is shown in \autoref{fig:benchmark-classe
 \section{BenchmarkRunner}
 
 The \texttt{BenchmarkRunner} class is responsible for managing the benchmark’s
-overall execution. It holds information about the test suites, ORM and query
+overall execution. It holds information about the test suites, ORMs and query
 builder packages being tested, and the reporters. The class has responsibility
 for database administration while also ordering and executing the test suites on
 their respective database schemas.
 
 Database administration tasks include setting up and tearing down example
 databases used in testing. Tests are currently written only for the database
-examined in \autoref{ch:database}, therefore this functionality is only used
-to initialize the database to preserve a consistent state. In order to perform
+examined in \autoref{ch:database}, therefore this functionality is only used to
+initialize the database and to preserve a consistent state. In order to perform
 these tasks, \texttt{BenchmarkRunner} maintains its database connection using
 the default \texttt{pg} module.
 
@@ -33,7 +33,7 @@ The benchmark runner is also responsible for ordering, initialization and
 execution of individual packages and tests. Each package is declared using a
 unified interface, which defines initialization and destruction methods for
 efficient memory usage, implemented test suites and package name. The order of
-executions is guided by the database schema selected, the package, and
+execution is guided by the database schema selected, the package, and
 individual test suites. If any suites are not implemented in the individual
 package declaration, the reporters are notified, and the tests can be marked as
 not implemented in the report.
@@ -51,9 +51,9 @@ each test run.
 
 Two implemented test workflows, validity test and latency test; validity test
 runs each implementation once, tests if the value is equal to reference in both
-value and the runtime type and returns test result. The latency test executes
+value and the runtime type, and returns test result. The latency test executes
 the tests in a loop, intending to show if the framework can create well-crafted
-queries without adding significant overhead.
+queries while not adding significant overhead.
 
 \section{Reporters}
 As the output of the benchmarks is meant to be interpreted by humans, the
@@ -87,7 +87,7 @@ needed.
 This section will list and describe all the benchmarks developed to compare
 individual packages. In addition to comparing performance, the requirements for
 implementation are comparison, as an easily implemented framework is better than
-one that's difficult to, provided they both perform similarly.
+one that's difficult to, provided they otherwise have feature parity.
 
 \subsection{MVP Benchmark}
 This test suite was only implemented under the \textit{Knex.js} package as its
@@ -126,9 +126,9 @@ specific situations that may not be commonly encountered but can potentially
 cause problems. The two tests in this benchmark focus on data type conversion
 and parameter handling.
 
-BigIntColumn test examines the data type conversion for the BigInteger type in
-PostgreSQL. JavaScript's Number type can lose precision when handling large
-integers since the maximum safe integer for Number is \(2^{53} - 1\)
+\textit{BigIntColumn} test examines the data type conversion for the BigInteger
+type in PostgreSQL. JavaScript's Number type can lose precision when handling
+large integers since the maximum safe integer for Number is \(2^{53} - 1\)
 \cite{MDNNumber}, while PostgreSQL's \texttt{bigint} type can store numbers up
 to \(2^{63} - 1\) \cite{PostgresNumeric}. Although the BigInt primitive
 \cite{MDNBigInt}, which can store integers with arbitrary precision, was
@@ -138,15 +138,16 @@ correctly. The frameworks can either cast the value to Number, losing precision
 and failing the test, or return the value as a string or, ideally, as a BigInt
 primitive.
 
-SQL Injection test assesses the framework's basic handling of parameters. One of
-the main reasons for using a database access package over a basic driver is to
-improve security against SQL injection attacks. The code will return all records
-if the parameter is sent as part of the SQL query. If the package incorrectly
-escapes the query, it will result in no results returned. Only the correct
-handling of arguments will return the specific Cat with the fascinating name a
-\enquote{\texttt{' or true --}}. It is important to note that this test does not
-evaluate whether the package is entirely vulnerable to SQL injection attacks but
-rather if the basic handling of arguments is not vulnerable.
+\textit{SQLInjection} test assesses the framework's basic handling of
+parameters. One of the main reasons for using a database access package over a
+basic driver is to improve security against SQL injection attacks. The code will
+return all records if the parameter is sent as part of the SQL query. If the
+package incorrectly escapes the query, it will result in no results returned.
+Only the correct handling of arguments will return the specific Cat with the
+fascinating name a \enquote{\texttt{' or true --}}. It is important to note that
+this test does not evaluate whether the package is entirely vulnerable to SQL
+injection attacks but rather if the basic handling of arguments is not
+vulnerable.
 
 \subsection{Special SQL Actions Benchmark}
 

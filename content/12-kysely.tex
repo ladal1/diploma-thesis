@@ -13,7 +13,34 @@ databases \cite{kyselyWeb}. One of the driving forces behind Kysely's creation
 was Knex.js's excessive permissiveness, which limited its type support
 capabilities \cite{kyselyGithub}. Kysely addresses this issue while retaining
 the strengths of query composition. Though the order of operations in Kysely may
-sometimes differ from SQL, this does not pose a significant problem.
+sometimes differ from SQL, this does not pose a significant problem. The syntax
+is shown in \autoref{lst:kyselyExample}.
+
+\begin{listing}[ht]
+    \caption{Example of Kysely syntax}
+    \label{lst:kyselyExample}
+    \begin{minted}{typescript}
+// Query for selecting toy id and the producer id, 
+// for toys with price over 10000 
+// and not produced by producer with id = 1
+
+// Note the order of methods, 
+// leftJoin has to come before select and where, 
+// if values are selected or queried from the table joined
+await kyselyInstance
+    .selectFrom('toy')
+    .leftJoin('toys_producer', 
+        'toy.toys_producer_id', 
+        'toys_producer.id')
+    .select(['toy.id', 'toys_producer.id'])
+    .where(({ or, not, cmpr }) =>
+      or([
+        not(cmpr('toys_producer.id', '=', 1)),
+        cmpr('toy.price', '>', 10000),
+      ])
+    ).executeTakeFirstOrThrow()
+\end{minted}
+\end{listing}
 
 Its excellent type guarantees make it an attractive choice, especially compared
 to more expressive packages. Kysely can also be further enhanced with Model

@@ -22,6 +22,33 @@ relatively low, with its main package, "\texttt{@pgtyped/cli}" receiving only
 about 10,000 downloads weekly \cite{pgtyped/cli}. On GitHub, it has more stars
 but still falls within the lowest third of the packages compared.
 
+\begin{listing}[ht]
+  \caption{Usage of pgTyped}
+  \label{lst:pgTyped}
+  \begin{minted}{typescript}
+  // -- File: EntityTraversal.sql
+  /* @name countCatsByColor */
+  SELECT
+    COUNT(*)
+  FROM
+      cat
+      JOIN cat_color ON cat_color.id = cat.cat_color_id
+      JOIN color_hex ON color_hex.id = cat_color.id
+  WHERE
+      color_hex.hex_code = :hexCode;
+  
+  // -- File: EntityTraversal.ts 
+  import {
+    countCatsByColor,
+  } from './EntityTraversal.queries'
+  
+  return countCatsByColor
+    .run({ hexCode }, getClient())
+    .then(result => Number(result[0].count))
+  
+  \end{minted}
+\end{listing}
+
 The package is well-supported, with regular version releases and active issue
 resolution. Most long-lasting issues are feature requests rather than bug
 reports. As the package is divided into development and runtime components, the
@@ -39,32 +66,6 @@ unique and flexible package for TypeScript developers working with PostgreSQL.
 However, it may provide a different abstraction level for those seeking a
 traditional ORM or query builder solution.
 
-\begin{listing}
-\caption{Usage of pgTyped}
-\label{lst:pgTyped}
-\begin{minted}{typescript}
-// -- File: EntityTraversal.sql
-/* @name countCatsByColor */
-SELECT
-  COUNT(*)
-FROM
-    cat
-    JOIN cat_color ON cat_color.id = cat.cat_color_id
-    JOIN color_hex ON color_hex.id = cat_color.id
-WHERE
-    color_hex.hex_code = :hexCode;
-
-// -- File: EntityTraversal.ts 
-import {
-  countCatsByColor,
-} from './EntityTraversal.queries'
-
-return countCatsByColor
-  .run({ hexCode }, getClient())
-  .then(result => Number(result[0].count))
-
-\end{minted}
-\end{listing}
 \subsection*{Performance in benchmarks}
 In line with expectations, the pgTyped package outperformed all other packages
 examined in the study. Most pgTyped operations are executed before or during
