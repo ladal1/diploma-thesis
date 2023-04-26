@@ -22,10 +22,10 @@ Full TypeScript support for the main project is still in progress
 TypeScript native definitions, using decorators for Model and property
 specifications. One of the original features of Sequelize is its support for the
 automatic creation and update of timestamp fields on database tables and the
-option for "paranoid" tables \cite{sequelizeParanoid}. In this mode, calling a
-deletion method sets the \texttt{deletedAt} attribute instead of removing the
-record. The framework behaves like the deleted records do not exist unless
-previously restored.
+option for \enquote{paranoid} tables \cite{sequelizeParanoid}. In this mode,
+calling a deletion method sets the \texttt{deletedAt} attribute instead of
+removing the record. The framework behaves like the deleted records do not exist
+unless previously restored.
 
 Both Sequelize and sequelize-typescript are provided under the MIT Licence and
 actively supported. Due to its extensive user base, the framework has over 750
@@ -55,7 +55,7 @@ reference solution execution time.
 
 While query execution remained relatively fast, the increased complexity due to
 unnecessary LEFT JOINs may lead to performance issues that necessitate manual
-optimization in some instances. As the LEFT JOINs are some of the more complex
+optimization in some instances. As LEFT JOINs are some of the more complex
 operations databases perform, and their complexity grows rapidly with the amount
 of data joined, this approach can quickly impact the application's overall
 performance.
@@ -85,7 +85,7 @@ unchecked fields to define such filters.
 
 While defining models is documented, the example code provided was found to
 throw errors related to shadowing attribute names. Although the solution to this
-issue can be quickly addressed using the TypeScript "declare" keyword, it is
+issue can be quickly addressed using the TypeScript \texttt{declare} keyword, it is
 essential to mention such features in the introductory documentation for models
 to minimize confusion for developers.
 

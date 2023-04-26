@@ -56,6 +56,7 @@ to the project. The data was collected on the 10th of April, 2023.
   \thead{Package} & \thead{Runtime dependencies} & \thead{Tested Version} \\ \hline
   PgTyped & 3 & 2.0.1 \\ 
   Zapatos & 0 & 6.1.4 \\ 
+  Kysely & 0 & 0.24.2 \\
   @Databases/pg & 15 & 5.4.1 \\ 
   Objection.js & 2 & 3.0.1 \\
   MikroORM & 7 & 5.6.16 \\ 
@@ -101,12 +102,12 @@ comparison, such as Sequelize, TypeORM, and MikroORM, performed similarly but
 could not express upsert incrementation natively.
 
 MikroORM held an advantage over TypeORM, using Knex.js as its query builder,
-which could express the operation. In contrast, TypeORM's internal query builder
-could not. On the other hand, Zapatos was the only package that partially failed
-in any test. It could not correctly parse bigint values from PostgreSQL as
-strings or BigInt primitives in JavaScript when using native methods, casting
-the result into a number instead. However, this issue was resolved when a
-manually written query was used.
+which could express the upsert operation while TypeORM's custom internal query
+builder could not. On the other hand, Zapatos was the only package that
+partially failed in any test. It could not correctly parse bigint values from
+PostgreSQL as strings or BigInt primitives in JavaScript when using native
+methods, casting the result into a number instead. However, this issue was
+resolved when a manually written query was used.
 
 Lastly, it is worth noting that only @databases/pg parsed bigint values into
 JavaScript BigInt primitives. All other packages returned character

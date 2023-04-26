@@ -58,20 +58,21 @@ ToysProducer.query()
 
 \subsection*{Performance in benchmarks}
 
-Objection.js was included in the performance benchmarks only after its typings
-were updated to be compatible with TypeScript 4.8 and later while maintaining
-\texttt{strictNullChecks}, a requirement for the proper functioning of other
-packages like Zapatos. Once the compatibility issues were resolved, Objection.js
-demonstrated performance largely on par with other ORM packages such as MikroORM
-and TypeORM. However, a notable exception was observed in the getCatColor test,
-where Objection.js was significantly slower than its counterparts.
+Objection.js could only be included in the performance benchmarks only after its
+typings were updated to be compatible with TypeScript 4.8 and later while
+maintaining \texttt{strictNullChecks}, a requirement for the proper functioning
+of other packages like Zapatos. Once the compatibility issues were resolved with
+manually edited types, Objection.js demonstrated performance largely on par with
+other ORM packages such as MikroORM and TypeORM. However, a notable exception
+was observed in the getCatColor test, where Objection.js was significantly
+slower than its counterparts.
 
 This performance discrepancy was traced back to the method that was used for
 fetching related entities: \texttt{withGraphFetched}, the only type-supported
 way to fetch relations beyond a single relationship in Objection.js without
 resorting to plain Knex query builder calls \cite{objectionDocs}. This method
-was selected for type support, but it also caused the speed issue encountered.
-The method retrieves data through three separate, dependent database calls,
+was selected for type support, but it caused the speed issue encountered. The
+method retrieves data through three separate, dependent database calls,
 resulting in considerably longer query execution times even with minimal
 latency. While this approach may offer some benefits in specific scenarios, such
 as applying limits to individual queries to alleviate the load on massive
