@@ -32,6 +32,13 @@ benchmark. However, such functionality should still be supported, as the
 framework should allow for wider range of tests than is expected for
 implementation.
 
+\section{Database management}
+As the framework operates strictly over a database instance, the framework must
+be able to perform maintenance operations. These include initializing the
+database with its schema, seeding the database with test data and later tearing
+down the schema and replacing it with a different one, depending on which the
+test suite requires.
+
 \section{Test type and Error Handling}
 
 The framework needs to support multiple tests to ensure the validity of any
@@ -73,6 +80,17 @@ required, npm workspaces \cite{npmWorkspaces} were selected as a project
 structure. That way, top-level dependencies of the framework can be separated
 from the individual implementations.
 
+As each framework is initialized through its initialization method, abstraction
+over the package itself must be created. The initialization also has to account
+for delayed connection pool creation. Some packages only start the connection
+once the first request is sent to limit the number of open connections for the
+database. The database has a limited amount of connections it can support, which
+is one way to optimize its usage. The benchmark database can easily handle the
+limited connections between the benchmarking framework and the individual
+connections; however, it should still contain a method for closing the
+connection and destroying the context so subsequent frameworks can access the
+same amount of resources.
+
 \section{Reporters - Output options}
 
 An integral part of the design was the inclusion of reporters. Reporters provide
@@ -80,5 +98,6 @@ an interface and implementation of multiple output options, enabling the results
 to be saved and shown in various formats. Standard test frameworks utilize
 reporters to make code coverage or detailed error stack inspectable. The
 reporters can interpret the data in different formats with a benchmarking
-framework. The reporter interface is designed to be extensible, allowing for the
-easy addition of other output options or data interpretations in the future.
+framework. The reporter interface has to be designed to be extensible, in order
+to allow for the easy addition of other output options or data interpretations
+in the future.
