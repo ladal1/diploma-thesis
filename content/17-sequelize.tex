@@ -60,6 +60,21 @@ operations databases perform, and their complexity grows rapidly with the amount
 of data joined, this approach can quickly impact the application's overall
 performance.
 
+\begin{listing}
+    \caption{Example of nested where condition in Sequelize - countCatsByColor test}
+    \label{lst:SequelizeWhereType}
+\begin{minted}{typescript}
+return Cat.count({
+// Nested objects are not supported for filtering
+// The key is not typed either
+  where: {
+    '$catColor.colorHex.hex_code$': hexColor,
+  },
+  include: [{ model: CatColor, include: [ColorHex] }],
+})
+    \end{minted}
+\end{listing}
+
 Sequelize's filter types were limited, as even essential attribute matching for
 search by attribute equality is not typed. This lack of typing support increases
 the likelihood of developers making errors that may only become apparent during

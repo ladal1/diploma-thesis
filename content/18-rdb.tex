@@ -33,7 +33,13 @@ Markdown and consisting of mostly plain examples \cite{rdbDocs}.
 \caption{RDB entity model type definition}
 \label{lst:rdbModel}
 \begin{minted}{typescript}
-export interface Table {
+const ToyHouse = rdb.table('toy_house')
+ToyHouse.primaryColumn('toy_id').numeric()
+ToyHouse.primaryColumn('house_id').numeric()
+ToyHouse.column('amount').numeric()
+
+// ToyHouse type => rbd.table
+interface Table {
     primaryColumn(column: string): ColumnDef;
     column(column: string): ColumnDef;
     join(table: Table): Join;
