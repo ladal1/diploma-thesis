@@ -63,12 +63,12 @@ such objects; therefore, they must be converted into valuable data. Two
 reporters were implemented for this benchmarking framework, with an interface
 for further reporters.
 
-\subsection{Console Reporter}
+\subsection*{Console Reporter}
 The primary reporter for use in development intends to provide simple benchmark
 results in table form. While running the benchmark, it allows for quick
 assessment of any errors and monitors the progress of the run.
 
-\subsection{HTML Reporter}
+\subsection*{HTML Reporter}
 The HTML reporter is the primary source for any data analysis of the benchmark
 run. It consists of a template file and the reporter. The reporter receives data
 from the benchmark using the unified API, parses it, and inserts it into the
@@ -89,7 +89,7 @@ individual packages. In addition to comparing performance, the requirements for
 implementation are comparison, as an easily implemented framework is better than
 one that's difficult to, provided they otherwise have feature parity.
 
-\subsection{MVP Benchmark}
+\subsection*{MVP Benchmark}
 This test suite was only implemented under the \textit{Knex.js} package as its
 purpose is to test the functionality of the benchmarking framework and does not
 test any database functionality. It is proof of concept for correct validation
@@ -101,7 +101,7 @@ and a test that throws generic error on execution. Additionally, MVPBench
 examines if test configurations are working as they should be, testing both
 validity and latency settings.
 
-\subsection{Entity Traversal Benchmark}
+\subsection*{Entity Traversal Benchmark}
 One of the generally provided functionalities of ORMs is the ability to define
 entities and their relations. This benchmark aims to test the ability to use
 these defined relations to find objects using these connections. The first test
@@ -119,7 +119,7 @@ how well the decomposition table can be accessed or avoided. The decomposition
 table exists because of the M:N relation between toys and houses, but the
 additional amount attribute is not used.
 
-\subsection{Edge Cases Benchmark}
+\subsection*{Edge Cases Benchmark}
 
 The edge cases benchmark aims to evaluate database adapter performance in
 specific situations that may not be commonly encountered but can potentially
@@ -149,7 +149,7 @@ this test does not evaluate whether the package is entirely vulnerable to SQL
 injection attacks but rather if the basic handling of arguments is not
 vulnerable.
 
-\subsection{Special SQL Actions Benchmark}
+\subsection*{Special SQL Actions Benchmark}
 
 The Special SQL Actions benchmark evaluates the performance of frameworks in
 scenarios that go beyond basic querying, focusing on unique ways of interacting

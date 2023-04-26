@@ -76,8 +76,9 @@ return Cat.count({
 \end{listing}
 
 Sequelize's filter types were limited, as even essential attribute matching for
-search by attribute equality is not typed. This lack of typing support increases
-the likelihood of developers making errors that may only become apparent during
+search by attribute equality is not typed as illustrated by example
+\autoref{lst:SequelizeWhereType}. This lack of typing support increases the
+likelihood of developers making errors that may only become apparent during
 runtime. Furthermore, Sequelize does not provide a dedicated API for WHERE
 clauses on joined tables, requiring developers to rely on dot notation and
 unchecked fields to define such filters.

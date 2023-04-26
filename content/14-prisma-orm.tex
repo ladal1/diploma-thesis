@@ -18,8 +18,9 @@ robust and reliable database interaction experience. However, one potential
 drawback of this approach is the increased binary size of the generated client.
 For example, the resulting binary size in a test database was approximately 15
 MB, which may lead to cold start issues in serverless environments. To address
-this concern, PrismaORM provides specific instructions for each cloud platform
-to optimize the binary result and configuration as much as possible.
+this concern, PrismaORM provides specific instructions for many cloud platforms
+to optimize the binary result and configuration as much as possible
+\cite{prismaDocsDeploy}.
 
 \begin{listing}
 \caption{Example of Prisma schema language model definition}
@@ -44,10 +45,10 @@ stars, making it the second most popular package by the GitHub metric
 as runtime environments, catering to various developers and project
 requirements.
 
-However, it should be noted that Prisma supports CommonJS imports by default and
-does not offer an official method for generating ECMAScript module-compatible
-code \cite{prismaES6}. This limitation may challenge developers who prefer using
-ECMAScript modules in their projects.
+However, it should be noted that Prisma supports only CommonJS imports by
+default and does not offer an official method for generating ECMAScript
+module-compatible code \cite{prismaES6}. This limitation may be a challenge for
+developers who prefer or have to use ECMAScript modules in their projects.
 
 \subsection*{Performance in benchmarks}
 

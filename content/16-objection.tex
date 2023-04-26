@@ -1,24 +1,25 @@
 \section{Objection.js}
 Objection.js is an ORM based on the Knex.js query builder and is closely
-connected to the Knex ecosystem. Developed partially by the same team, it
-supports SQLite3, Postgres, and MySQL while also being compatible with many
-other database engines supported by Knex \cite{objectionGitHub}. Unlike
-Sequelize or TypeORM, Objection.js does not provide extensive abstraction; it
-only offers Models that assist with query composition, types, and relation
-fetching. The Models primarily serve as a starting point for SQL queries rather
-than offering the complex functionality of ActiveDirectory or DataMapper
-patterns. This results in syntax which is quite similar to Knex que 
+connected to the Knex ecosystem. It supports SQLite3, Postgres, and MySQL while
+also being compatible with many other database engines supported by Knex
+\cite{objectionGitHub}. Unlike Sequelize or TypeORM, Objection.js does not
+provide extensive abstraction; it only offers Models that assist with query
+composition, types, and relation fetching. The Models primarily serve as a
+starting point for SQL queries rather than offering the complex functionality of
+ActiveDirectory or DataMapper patterns. This results in syntax which is quite
+similar to Knex as shown in \autoref{lst:knexObjection}.
 
 The package has 128,872 weekly downloads \cite{objectionNpm} and 6,972 stars on
 GitHub \cite{objectionGitHub}. Objection.js predates the popularization of
-TypeScript. Its leading developer admits that the package requires a significant
-rewrite of types to compete in TypeScript support, which is not feasible due to
-the workload required \cite{objectionFuture}. Objection.js was not maintained
-for over a year, accumulating technical debt and leading to incompatibility with
-TypeScript 4.8 and newer due to enhancements to the \texttt{strictNullChecks}
-option. A new version has since been published \cite{objection302}, fixing some
-issues that arose during that time. New developers have started working on
-maintaining the project as of writing this thesis.
+TypeScript and is therefore developed fully in JavaScript. Its former lead
+developer admits that the package requires a significant rewrite of types to
+compete in TypeScript support, which is not feasible due to the workload
+required \cite{objectionFuture}. Objection.js was not maintained for over a
+year, accumulating technical debt and leading to incompatibility with TypeScript
+4.8 and newer due to enhancements to the \texttt{strictNullChecks} option. A new
+version has since been published \cite{objection302}, fixing some issues that
+arose during that time. New developers have started working on maintaining the
+project as of writing this thesis.
 
 The package is released under the MIT Licence and offers high-quality web
 documentation, including extensive usage guides and a detailed API Reference

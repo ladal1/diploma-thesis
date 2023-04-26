@@ -8,17 +8,33 @@ PostgreSQL, SQLite, Oracle DB, and SAP Hana, and even has experimental support
 for the NoSQL database MongoDB.
 
 The framework employs its own query builder and uses Model classes with property
-decorators to describe its methods. TypeORM supports Lazy Loading and Eager
-loading when working with models and is compatible with CommonJS and ECMAScript.
-It offers automatic migrations based on its models and manually written
-migrations. However, it lacks support for seed files, requiring them to be
-included as migrations if executed through its CLI.
+decorators to describe its methods. TypeORM supports both Lazy Loading and Eager
+loading (\autoref{lst:typeORMEagerLoad}) when working with models and is compatible
+with CommonJS and ECMAScript. It offers automatic migrations based on its models
+and manually written migrations. However, it lacks support for seed files,
+requiring them to be included as migrations if executed through its CLI.
+
+\begin{listing}[h]
+  \caption{TypeORM Eager Loading example, implementation for getCatColor benchmark test}
+  \label{lst:typeORMEagerLoad}
+  \begin{minted}{typescript}
+await BenchDataSource.getRepository(Cat)
+  .findOne({
+    where: { id: id.toString() },
+    relations: {
+      catColor: {
+        colorHex: true,
+      },
+    },
+  })
+  \end{minted}
+\end{listing}
 
 TypeORM is highly popular, boasting the second-highest download number and the
 highest amount of stars among those compared, with 1,192,427 weekly downloads
 \cite{typeORMNpm} and 30,947 stars on GitHub \cite{typeORMGitHub}. Released
 under the MIT License, TypeORM is the ORM with the highest number of downloads
-and full support for TypeScript, as Sequelize only outperforms it when
+and native support for TypeScript, as Sequelize only outperforms it when
 considering the \textit{sequelize} package's download numbers
 \cite{sequelizeNpm}, not the \textit{sequelize-typescript} package
 \cite{sequelizeTypescriptNpm} used for comparison.
@@ -33,18 +49,18 @@ developed as other "active" projects in this analysis.
 
 The documentation for TypeORM is of good quality, providing all the necessary
 information for development. However, it needs more formatting and chapters,
-making it easier to follow even if the developer does not know what precisely
+to make it easier to follow, even if the developer does not know what precisely
 they are looking for \cite{typeORMDocs}. The model methods include brief
 descriptions but are mostly limited to a single-sentence short explanation.
 
 TypeORM has the highest number of dependencies among the packages compared, with
-many dependencies like "buffer" being necessary to support various runtimes,
-including browser or React Native environments that lack the same standard
-library support as Node.js. These dependencies are actively developed and have
-high download numbers, posing no additional risk to the toolchain. However,
-TypeORM's early adoption of the TypeScript ecosystem has largely overlooked its
-JavaScript functionality, as evidenced by the documentation and example
-projects.
+many dependencies like \textit{buffer} being necessary to support various
+runtimes, including browser or React Native environments that lack the same
+standard library support as Node.js. These dependencies are actively developed
+and have high download numbers, posing no additional risk to the toolchain.
+However, TypeORM's early adoption of the TypeScript ecosystem has largely
+overlooked its JavaScript functionality, as evidenced by the documentation and
+example projects.
 
 \subsection*{Performance in benchmarks}
 
@@ -64,25 +80,7 @@ effectively understand and work with these queries, one such query is shown in
 are computationally more demanding than INNER JOINs and, in this case, will
 yield the same output thanks to the database schema.
 
-Another issue encountered with TypeORM relates to its handling of automatically
-generated primary keys. The ORM disregards user input for these columns if they
-can be generated automatically, limiting developers' flexibility when working
-with databases. For instance, this constraint poses challenges when inserting
-seed data with hard-coded IDs.
-
-In terms of upsert functionality, TypeORM, like Sequelize, does not provide
-support for increment operations. Additionally, it is impossible to formulate an
-equivalent query using the included query builder, as the syntax does not allow
-for custom update SQL and only supports ignoring specific data that would be
-otherwise inserted.
-
-When handling transactions, TypeORM lets developers create an explicit
-transaction handler that includes entity manager methods and functions for
-starting, managing, and ending transactions. While the filter types are only
-lightly typed, they offer sufficient guidance for developers navigating the
-available filtering options.
-
-\begin{listing}
+\begin{listing}[hb]
   \caption{TypeORM Query generated for getToysAvailableToCat benchmark (hashes were shortened)}
   \label{lst:typeorm-query}
 \begin{minted}[breaklines]{sql}
@@ -109,3 +107,23 @@ FROM "toy" "Toy"
 WHERE ("521c7a07[...]88acfd85"."id" = 1)
 \end{minted}
 \end{listing}
+
+\newpage
+
+Another issue encountered with TypeORM relates to its handling of automatically
+generated primary keys. The ORM disregards user input for these columns if they
+can be generated automatically, limiting developers' flexibility when working
+with databases. For instance, this constraint poses challenges when inserting
+seed data with hard-coded IDs.
+
+In terms of upsert functionality, TypeORM, like Sequelize, does not provide
+support for increment operations. Additionally, it is impossible to formulate an
+equivalent query using the included query builder, as the syntax does not allow
+for custom update SQL and only supports ignoring specific data that would be
+otherwise inserted.
+
+When handling transactions, TypeORM lets developers create an explicit
+transaction handler that includes entity manager methods and functions for
+starting, managing, and ending transactions. While the filter types are only
+lightly typed, they offer sufficient guidance for developers navigating the
+available filtering options.

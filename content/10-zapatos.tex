@@ -7,7 +7,7 @@ typed and function as shortcuts for generic queries. Additionally, it features
 tagged templates for writing arbitrary SQL \cite{zapatos}.
 
 Unlike pgTyped, which analyses queries and generates types, Zapatos disallows
-the inclusion of any data not specified in the manually typed query. This
+the inclusion of any value which was not specified in the manually types. This
 approach can lead to issues if the type is not defined correctly initially,
 potentially resulting in an unreliable type and is less explicit way to cast the
 result. Despite this limitation, the package supports lateral joins, enabling
@@ -29,7 +29,8 @@ insufficient for guiding development on their own.
 In summary, Zapatos is a package that provides type safety for database querying
 with PostgreSQL, offering typed CRUD operations and tagged templates for SQL.
 Although it takes a different approach to type generation than \texttt{pgTyped},
-it supports lateral joins and nested objects. The package concise but sufficient
+it supports lateral joins which result in nested objects which are natural way
+of representing data in OOP. The package has concise but sufficient
 documentation for most users \cite{zapatosDocs}. However, the package's
 limitations include possible type inaccuracies due to developer error and
 challenging compilation errors. 
@@ -63,6 +64,8 @@ precision \cite{PostgresNumeric}.
 
 \begin{minted}{ts}
 // Value incorrectly converted into a number
+// Also see the specification of accessible 
+// and selected values as template types for the sql
 db
   .selectExactlyOne('cat', 
     { cat_name: name }, 
