@@ -11,7 +11,7 @@ types.
 
 \begin{listing}
     \caption{countCatsByColor solution in @databases/pg showing where condition composition}
-    \label{lst:atdatabases/examples}
+    \label{lst:atdatabases/example}
     \begin{minted}{typescript}
 return db
   .query(
@@ -80,3 +80,7 @@ API for managing these transactions. Instead, it only provides the functionality
 to encapsulate operations within a transactional context. This aspect should be
 considered when evaluating the suitability of this package for particular
 applications.
+
+The package does not support integrated pagination, which is nothing unusual.
+However, it also does not support OFFSET in its primary query interface, which
+forced the usage of plain SQL for the composition of the query.

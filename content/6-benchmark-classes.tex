@@ -185,3 +185,41 @@ developers can make informed decisions when selecting a database adapter that
 aligns with their project's unique requirements. The benchmark ensures that
 developers are aware of each package's various capabilities and limitations,
 enabling them to choose the most suitable solution for their specific use cases.
+
+\subsection*{Bulk Operations Benchmark}
+The benchmark for bulk operation focuses on the usage limitations for more
+extensive operations and large amounts of data. With ORM abstracting through the
+Active Record pattern, more extensive scale analytics and data manipulation
+operations can be obscured and inefficient. The limitations might come from
+something other than the abstraction but also from interaction with the driver
+and optimization of large-scale operations.
+
+The \textit{BulkInsert} test observes the existence of bulk insert, its
+realization and the handling of PostgreSQL query limits. The SQL dialect uses
+\texttt{Int16} type to represent parameters, meaning that, at most, each query
+can contain 32767 binding parameters \cite{postgresMessageFormats}. The test
+tries to create 30000 instances of a House entity, where each instance would, in
+a primitive insert, result in 3 bindings (id, house address and dog values). As
+this would breach the limits, the \texttt{node-postgres} (pg) driver for Node.js
+would throw the error \textit{bind message has 90000 parameter formats but 0
+parameters} \cite{nodePostgresParameterLimit}. Two popular solutions to this
+problem exist: chunking the creation into multiple requests or using the array
+\texttt{UNNEST} function, which supplies each type of parameter in an array,
+resulting in only as many parameters as columns are inserted. The packages are
+ranked based on the existence of the function to create explicit bulk insertion.
+Only if the native function does not exist do we resort to chunking the data
+before using the insertion method. Out of all the options, the \texttt{UNNEST}
+method is the fastest way to execute such a request, so packages relying on it
+will have a significant speed advantage.
+
+The \textit{BulkDelete} test questions the ability to access data representation
+through abstraction, as the operation consists of deleting all values in the
+database and filling in the condition. Poorly executed implementation of ORM
+could obscure access, leaving the developers to query and delete the fitting
+objects. \textit{BulkUpdate} tests the same paradigm but with updates, where
+only records meeting specific criteria are to be updated, while other values are
+untouched. Finally, the pagination test is focused on repeated querying and the
+feature richness of the framework. The test imagines a list of entities users
+want to browse by pages. If the package has an integrated pagination function,
+it should be used; if the feature is missing resorting to function calls to use
+SQL terms of LIMIT and OFFSET is chosen.

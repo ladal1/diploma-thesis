@@ -147,3 +147,126 @@
 \end{axis}
 \end{tikzpicture}
 \end{figure}
+
+\begin{figure}
+    \caption{BulkDelete Results}
+    \label{fig:bulkDelete}
+    \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        ylabel={Time (ms)},
+        width=0.9*\textwidth,
+        symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+        xtick=data,
+        xticklabel style={rotate=45, anchor=east},
+        enlarge x limits=0.1,
+        ybar=0.6pt,
+        ymin=0,
+        bar width=20pt,
+        nodes near coords,
+        point meta=explicit,
+        ymax=6000,
+        every node near coord/.append style={
+            anchor=west,
+            rotate=70,
+            color=black,
+            font=\small
+        }
+    ]
+    \addplot coordinates {
+        (@Databases/Pg,2206.0684349536896) [2206.07]
+        (Knex,2999.510708078742) [2999.51]
+        (Kysely,2621.2386750541627) [2621.24]
+        (MikroORM,3804.449369959533) [3804.45]
+        (Objection.js,4015.9128830470145) [4015.91]
+        (PgTyped,1859.124758105725) [1859.12]
+        (PrismaORM,4754.510421033949) [4754.51]
+        (Sequelize,2615.357354018837) [2615.36]
+        (TypeORM,2553.976347025484) [2553.98]
+        (Zapatos,2128.23350000754) [2128.23]
+    };    
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}
+    \caption{BulkUpdate Results}
+    \label{fig:bulkUpdate}
+    \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        ylabel={Time (ms)},
+        width=0.9*\textwidth,
+        symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+        xtick=data,
+        xticklabel style={rotate=45, anchor=east},
+        enlarge x limits=0.1,
+        ybar=0.6pt,
+        ymin=0,
+        bar width=20pt,
+        nodes near coords,
+        point meta=explicit,
+        ymax=2800,
+        every node near coord/.append style={
+            anchor=west,
+            rotate=70,
+            color=black,
+            font=\small
+        }
+    ]
+    \addplot coordinates {
+        (@Databases/Pg,1058.5423049815) [1058.5]
+        (Knex,1540.9533459953964) [1540.95]
+        (Kysely,1276.722527012229) [1276.72]
+        (MikroORM,1840.6894389167428) [1840.69]
+        (Objection.js,2070.500715006143) [2070.5]
+        (PgTyped,910.42658399418) [910.43]
+        (PrismaORM,1816.9997510313988) [1817.0]
+        (Sequelize,1500.9832270368934) [1500.98]
+        (TypeORM,1247.1666650362313) [1247.17]
+        (Zapatos,990.0691410563886) [990.07]
+    };    
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}
+    \caption{Pagination Results}
+    \label{fig:pagination}
+    \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        ylabel={Time (ms)},
+        width=0.9*\textwidth,
+        symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+        xtick=data,
+        xticklabel style={rotate=45, anchor=east},
+        enlarge x limits=0.1,
+        ybar=0.6pt,
+        ymin=0,
+        bar width=20pt,
+        nodes near coords,
+        point meta=explicit,
+        ymax=47000,
+        every node near coord/.append style={
+            anchor=west,
+            rotate=70,
+            color=black,
+            font=\small
+        }
+    ]
+    \addplot coordinates {
+        (@Databases/Pg,18520.428950995207) [18520.4]
+        (Knex,21442.464210003614) [21442.5]
+        (Kysely,20220.366932000965) [20220.4]
+        (MikroORM,12915.351298008114) [12915.4]
+        (Objection.js,20287.288757983595) [20287.3]
+        (PgTyped,13365.975259002298) [13366.0]
+        (PrismaORM,9392.820375993848) [9392.8]
+        (Sequelize,34787.59399498999) [34787.6]
+        (TypeORM,7703.449012026191) [7703.4]
+        (Zapatos,19830.21347399801) [19830.2]
+    };         
+\end{axis}
+\end{tikzpicture}
+\end{figure}

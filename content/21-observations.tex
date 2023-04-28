@@ -77,13 +77,13 @@ abstraction but still necessitates writing SQL queries, as the request cannot be
 expressed through the API, is considered less effective as an abstraction layer
 than one that can perform such requests.
 
-Tables \ref{table:EntityTraversal}, \ref{table:SpecialSQLActions}, and
-\ref{table:EdgeCases} showcase the layers used to perform the required
-functionality for the benchmark. A requirement for each implementation was that
-the logic had to be consistently implemented on the database, with the framework
-only composing the query and parsing the result. For example, it was not allowed
-to check for an existing object in an upsert operation by querying the database
-independently.
+Tables \ref{table:EntityTraversal}, \ref{table:SpecialSQLActions},
+\ref{table:EdgeCases}, and \ref{table:BulkOperations} showcase the layers used
+to perform the required functionality for the benchmark. A requirement for each
+implementation was that the logic had to be consistently implemented on the
+database, with the framework only composing the query and parsing the result.
+For example, it was not allowed to check for an existing object in an upsert
+operation by querying the database independently.
 
 The order for implementation was as follows:
 \begin{enumerate}
@@ -195,8 +195,34 @@ representations of the value.
    \end{threeparttable}
 \end{table}
 
-\newpage
+\begin{table}[htbp]
+\centering
+    \begin{threeparttable}[b]
+
+    \caption{BulkOperations Benchmark implementation methods}
+    \label{table:BulkOperations}
+    \begin{tabular}{lcccc}
+    \hline
+    \thead{Package}    & \thead{bulkInsert} & \thead{bulkDelete} & \thead{bulkUpdate} & \thead{Pagination} \\ \hline
+    @Databases/pg & Native & Native & Native & SQL \\ 
+    Knex & QB & QB & QB & QB \\
+    Kysely & QB\tnote{1} & QB & QB & QB \\ 
+    MikroORM & Native & Native & Native & Native \\
+    Objection.js & Native & Native & Native & Native\tnote{2} \\ 
+    PgTyped & SQL & SQL & SQL & SQL \\ 
+    PrismaORM & Native & Native & Native & Native \\ 
+    Sequelize & Native & Native & Native & Native \\ 
+    TypeORM & Native\tnote{1} & Native & Native & Native\tnote{2} \\ 
+    Zapatos & Native & Native & Native & Native \\ \hline
+    \end{tabular}
+    \begin{tablenotes}
+        \item [1] Bulk/Batch operations not supported, data chunked manually
+        \item [2] Native pagination without offset calculation
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
 \section{Latency benchmark results}
+\input{content/more/observationGraphs.tex}
 
 The second aspect of the benchmarking process involved evaluating the
 performance of the various packages. This evaluation focused on the optimality
@@ -224,12 +250,28 @@ yielding faster results than the reference. This feature can be highly
 beneficial for a skilled developer, but can also cause problems, if the
 developer does not know about it.
 
+On the contrary, MikroORM struggled with the BulkInsertion test when using the
+native entity creation function and unit of work paradigm over the entity
+manager, losing out to all other packages by a significant margin, as seen in
+\autoref{fig:BulkInsert} in MikroORM UoW bar. The issue stems from the batching
+method, which resolves the flushing of the Unit of Work entity, which batches
+the method by 300 entities by default \cite{MikroORMBatching}. However, the
+framework also includes the native insertMany method, which handles the
+insertion at a comparable efficiency with other packages, as seen in the same
+figure under MikroORM native value.
+
 Kysely demonstrated comparable capabilities to Knex while offering an enhanced
 developer experience through type safety. Both Sequelize and TypeORM exhibited
 similar performance levels; however, TypeORM provided superior types for methods
 and filters. MikroORM, though smaller in scale, proved to be functionally rich
 and benefited from access to the well-established and thoroughly tested Knex.js
 query builder when model methods were insufficient.
+
+The performance of Sequlize in the pagination test was investigated to ensure
+the error was not in the wrong usage of the package. However, the resulting
+query performs precisely as it should, and its handling is equivalent to other
+packages. The result has to be caused by the overhead of the package rather than
+the database of the usage.
 
 Most ORMs lost out to query builders mainly because they prefer left joins over
 stricter inner joins for many select operations. This behaviour is primarily
@@ -248,181 +290,13 @@ data path resolution, as shown by Objection.js results in
 the drawback is only prominent when dealing with complex queries involving
 multiple joins. It is preferable to use ORMs where the amount of data in the
 database will not result in suboptimal computation time, as the overhead of the
-package itself is negligible. Figures \ref{fig:countCatsByColor} and
-\ref{fig:JSONColumn}, \ref{fig:JSONWhere}, \ref{fig:transactions},
-\ref{fig:likeQuery} (included in the appendix) show that while the relative
+package itself is negligible. Figures \ref{fig:countCatsByColor},
+\ref{fig:JSONColumn}, and \ref{fig:JSONWhere}, \ref{fig:transactions},
+\ref{fig:likeQuery}, \ref{fig:bulkDelete}, \ref{fig:bulkUpdate},
+\ref{fig:pagination} (included in the appendix), show that while the relative
 performance of the queries is almost double that of reference, it is still minor
 for the amount of data usually considered for most smaller projects. When
 considering enterprise-level databases, the toll in which the suboptimal queries
 can result will accumulate. It can result in redundant work as the application
 must be repeatedly optimized while the ORM obfuscates which application
 operation is causing the slowdown. 
-
-
-\begin{figure}[htbp]
-  \caption{getColorLatency Results}
-  \label{fig:getColorLatency}
-\begin{tikzpicture}
-\begin{axis}[
-    ybar,
-    ylabel={Time (ms)},
-    width=0.9\textwidth,
-    height=0.5\textwidth,
-    symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
-    xtick=data,
-    xticklabel style={rotate=45, anchor=east},
-    enlarge x limits=0.1,
-    ybar=0.6pt,
-    ymin=0,
-    bar width=20pt,
-    nodes near coords,
-    point meta=explicit,
-    ymax=8000,
-    every node near coord/.append style={
-        anchor=west,
-        rotate=70,
-        color=black,
-        font=\small
-    }
-]
-\addplot coordinates {
-    (@Databases/Pg,1535.097840756178) [1535.1]
-    (Knex,1736.573092713952) [1736.6]
-    (Kysely,1179.5744509845972) [1179.6]
-    (MikroORM,2023.4176180809736) [2023.4]
-    (Objection.js,5836.859560698271) [5836.9]
-    (PgTyped,926.7410168200731) [926.7]
-    (PrismaORM,2116.3281450271606) [2116.3]
-    (Sequelize,2265.8307730853558) [2265.8]
-    (TypeORM,3505.274578973651) [3505.3]
-    (Zapatos,1218.4777629077435) [1218.5]
-};
-\end{axis}
-\end{tikzpicture}
-\end{figure}
-
-\begin{figure}[htbp]
-    \caption{countCatsByColor Results}
-    \label{fig:countCatsByColor}
-    \begin{tikzpicture}
-    \begin{axis}[
-        ybar,
-        ylabel={Time (ms)},
-        width=0.9\textwidth,
-        height=0.5\textwidth,
-        symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
-        xtick=data,
-        xticklabel style={rotate=45, anchor=east},
-        enlarge x limits=0.1,
-        ybar=0.6pt,
-        ymin=0,
-        bar width=20pt,
-        nodes near coords,
-        point meta=explicit,
-        ymax=3600,
-        every node near coord/.append style={
-            anchor=west,
-            rotate=70,
-            color=black,
-            font=\small
-        }
-    ]
-    \addplot coordinates {
-        (@Databases/Pg,1309.4879860281944) [1309.5]
-        (Knex,2602.347664758563) [2602.3]
-        (Kysely,1502.2189705818892) [1502.2]
-        (MikroORM,2306.355122476816) [2306.4]
-        (Objection.js,2484.835059866309) [2484.8]
-        (PgTyped,1207.1816981732845) [1207.2]
-        (PrismaORM,1635.5703312009573) [1635.6]
-        (Sequelize,2006.3121870160103) [2006.3]
-        (TypeORM,2044.3862129747868) [2044.4]
-        (Zapatos,1434.3911019712687) [1434.4]
-    };
-    \end{axis}
-    \end{tikzpicture}
-\end{figure}
-
-\begin{figure}[htbp]
-  \caption{getToysAvailableToCat Results}
-  \label{fig:getToysAvailableToCat}
-\begin{tikzpicture}
-\begin{axis}[
-    ybar,
-    ylabel={Time (ms)},
-    width=0.9\textwidth,
-    height=0.55\textwidth,
-    symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
-    xtick=data,
-    xticklabel style={rotate=45, anchor=east},
-    enlarge x limits=0.1,
-    ybar=0.6pt,
-    ymin=0,
-    bar width=20pt,
-    nodes near coords,
-    point meta=explicit,
-    ymax=5000,
-    every node near coord/.append style={
-        anchor=west,
-        rotate=70,
-        color=black,
-        font=\small
-    }
-]
-\addplot coordinates {
-    (@Databases/Pg,1488.6116498708725) [1488.6]
-    (Knex,1798.4078266173601) [1798.4]
-    (Kysely,1359.543210029602) [1359.5]
-    (MikroORM,2758.642989948392) [2758.6]
-    (Objection.js,3271.0765001922846) [3271.1]
-    (PgTyped,1402.466100037098) [1402.5]
-    (PrismaORM,1816.036514788866) [1816.0]
-    (Sequelize,3744.591591015458) [3744.6]
-    (TypeORM,3430.901762366295) [3430.9]
-    (Zapatos,1688.8580559790134) [1688.9]
-};
-\end{axis}
-\end{tikzpicture}
-\end{figure}
-
-\begin{figure}[htbp]
-    \caption{JSON Column handling Results}
-    \label{fig:JSONColumn}
-    \begin{tikzpicture}
-    \begin{axis}[
-        ybar,
-        ylabel={Time (ms)},
-        width=0.9\textwidth,
-        height=0.55\textwidth,
-        symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
-        xtick=data,
-        xticklabel style={rotate=45, anchor=east},
-        enlarge x limits=0.1,
-        ybar=0.6pt,
-        ymin=0,
-        bar width=20pt,
-        nodes near coords,
-        point meta=explicit,
-        ymax=3300,
-        every node near coord/.append style={
-            anchor=west,
-            rotate=70,
-            color=black,
-            font=\small
-        }
-    ]
-    \addplot coordinates {
-        (@Databases/Pg,977.3479951769114) [977.3]
-        (Knex,1638.17793110013) [1638.2]
-        (Kysely,911.4529178589582) [911.5]
-        (MikroORM,189.65802410244942) [189.7]
-        (Objection.js,2187.0198785811663) [2187.0]
-        (PgTyped,650.7294137179852) [650.7]
-        (PrismaORM,1118.9338391423225) [1118.9]
-        (Sequelize,1835.5736832916737) [1835.6]
-        (TypeORM,2446.3783992379904) [2446.4]
-        (Zapatos,1024.0263592153788) [1024.0]
-    };
-    \end{axis}
-    \end{tikzpicture}
-\end{figure}

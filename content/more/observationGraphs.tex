@@ -1,0 +1,210 @@
+\begin{figure}[htb]
+    \caption{getColorLatency Results}
+    \label{fig:getColorLatency}
+  \begin{tikzpicture}
+  \begin{axis}[
+      ybar,
+      ylabel={Time (ms)},
+      width=0.9\textwidth,
+      height=0.5\textwidth,
+      symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+      xtick=data,
+      xticklabel style={rotate=45, anchor=east},
+      enlarge x limits=0.1,
+      ybar=0.6pt,
+      ymin=0,
+      bar width=20pt,
+      nodes near coords,
+      point meta=explicit,
+      ymax=8000,
+      every node near coord/.append style={
+          anchor=west,
+          rotate=70,
+          color=black,
+          font=\small
+      }
+  ]
+  \addplot coordinates {
+      (@Databases/Pg,1535.097840756178) [1535.1]
+      (Knex,1736.573092713952) [1736.6]
+      (Kysely,1179.5744509845972) [1179.6]
+      (MikroORM,2023.4176180809736) [2023.4]
+      (Objection.js,5836.859560698271) [5836.9]
+      (PgTyped,926.7410168200731) [926.7]
+      (PrismaORM,2116.3281450271606) [2116.3]
+      (Sequelize,2265.8307730853558) [2265.8]
+      (TypeORM,3505.274578973651) [3505.3]
+      (Zapatos,1218.4777629077435) [1218.5]
+  };
+  \end{axis}
+  \end{tikzpicture}
+  \end{figure}
+  
+  \begin{figure}[htb]
+      \caption{countCatsByColor Results}
+      \label{fig:countCatsByColor}
+      \begin{tikzpicture}
+      \begin{axis}[
+          ybar,
+          ylabel={Time (ms)},
+          width=0.9\textwidth,
+          height=0.5\textwidth,
+          symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+          xtick=data,
+          xticklabel style={rotate=45, anchor=east},
+          enlarge x limits=0.1,
+          ybar=0.6pt,
+          ymin=0,
+          bar width=20pt,
+          nodes near coords,
+          point meta=explicit,
+          ymax=3600,
+          every node near coord/.append style={
+              anchor=west,
+              rotate=70,
+              color=black,
+              font=\small
+          }
+      ]
+      \addplot coordinates {
+          (@Databases/Pg,1309.4879860281944) [1309.5]
+          (Knex,2602.347664758563) [2602.3]
+          (Kysely,1502.2189705818892) [1502.2]
+          (MikroORM,2306.355122476816) [2306.4]
+          (Objection.js,2484.835059866309) [2484.8]
+          (PgTyped,1207.1816981732845) [1207.2]
+          (PrismaORM,1635.5703312009573) [1635.6]
+          (Sequelize,2006.3121870160103) [2006.3]
+          (TypeORM,2044.3862129747868) [2044.4]
+          (Zapatos,1434.3911019712687) [1434.4]
+      };
+      \end{axis}
+      \end{tikzpicture}
+  \end{figure}
+  
+  \begin{figure}[htb]
+    \caption{getToysAvailableToCat Results}
+    \label{fig:getToysAvailableToCat}
+  \begin{tikzpicture}
+  \begin{axis}[
+      ybar,
+      ylabel={Time (ms)},
+      width=0.9\textwidth,
+      height=0.55\textwidth,
+      symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+      xtick=data,
+      xticklabel style={rotate=45, anchor=east},
+      enlarge x limits=0.1,
+      ybar=0.6pt,
+      ymin=0,
+      bar width=20pt,
+      nodes near coords,
+      point meta=explicit,
+      ymax=5000,
+      every node near coord/.append style={
+          anchor=west,
+          rotate=70,
+          color=black,
+          font=\small
+      }
+  ]
+  \addplot coordinates {
+      (@Databases/Pg,1488.6116498708725) [1488.6]
+      (Knex,1798.4078266173601) [1798.4]
+      (Kysely,1359.543210029602) [1359.5]
+      (MikroORM,2758.642989948392) [2758.6]
+      (Objection.js,3271.0765001922846) [3271.1]
+      (PgTyped,1402.466100037098) [1402.5]
+      (PrismaORM,1816.036514788866) [1816.0]
+      (Sequelize,3744.591591015458) [3744.6]
+      (TypeORM,3430.901762366295) [3430.9]
+      (Zapatos,1688.8580559790134) [1688.9]
+  };
+  \end{axis}
+  \end{tikzpicture}
+  \end{figure}
+  
+  \begin{figure}[htb]
+      \caption{JSON Column handling Results}
+      \label{fig:JSONColumn}
+      \begin{tikzpicture}
+      \begin{axis}[
+          ybar,
+          ylabel={Time (ms)},
+          width=0.9\textwidth,
+          height=0.55\textwidth,
+          symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+          xtick=data,
+          xticklabel style={rotate=45, anchor=east},
+          enlarge x limits=0.1,
+          ybar=0.6pt,
+          ymin=0,
+          bar width=20pt,
+          nodes near coords,
+          point meta=explicit,
+          ymax=3300,
+          every node near coord/.append style={
+              anchor=west,
+              rotate=70,
+              color=black,
+              font=\small
+          }
+      ]
+      \addplot coordinates {
+          (@Databases/Pg,977.3479951769114) [977.3]
+          (Knex,1638.17793110013) [1638.2]
+          (Kysely,911.4529178589582) [911.5]
+          (MikroORM,189.65802410244942) [189.7]
+          (Objection.js,2187.0198785811663) [2187.0]
+          (PgTyped,650.7294137179852) [650.7]
+          (PrismaORM,1118.9338391423225) [1118.9]
+          (Sequelize,1835.5736832916737) [1835.6]
+          (TypeORM,2446.3783992379904) [2446.4]
+          (Zapatos,1024.0263592153788) [1024.0]
+      };
+      \end{axis}
+      \end{tikzpicture}
+  \end{figure}
+  
+  \begin{figure}[htb]
+      \caption{BulkInsert Results}
+      \label{fig:BulkInsert}
+      \begin{tikzpicture}
+      \begin{axis}[
+          ybar,
+          ylabel={Time (ms)},
+          width=0.9\textwidth,
+          height=0.55\textwidth,
+          symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM UoW, MikroORM Native, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+          xtick=data,
+          xticklabel style={rotate=45, anchor=east},
+          enlarge x limits=0.1,
+          ybar=0.6pt,
+          ymin=0,
+          bar width=20pt,
+          nodes near coords,
+          point meta=explicit,
+          ymax=16000,
+          every node near coord/.append style={
+              anchor=west,
+              rotate=70,
+              color=black,
+              font=\small
+          }
+      ]
+      \addplot coordinates {
+        (@Databases/Pg,1014.3832830041647) [1014.4]
+        (Knex,1961.9702470041811) [1962.0]
+        (Kysely,2345.9388349950314) [2345.9]
+        (MikroORM UoW,11680.47894199565) [11680.5]
+        (MikroORM Native, 5113.47894199565) [5113.5]
+        (Objection.js,3046.292179994285) [3046.3]
+        (PgTyped,941.2618020065129) [941.3]
+        (PrismaORM,6144.304852001369) [6144.3]
+        (Sequelize,2427.7921420037746) [2427.8]
+        (TypeORM,3466.2649269998074) [3466.3]
+        (Zapatos,2735.8657519966364) [2735.9]
+    };    
+      \end{axis}
+      \end{tikzpicture}
+  \end{figure}
