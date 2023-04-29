@@ -149,6 +149,8 @@ this test does not evaluate whether the package is entirely vulnerable to SQL
 injection attacks but rather if the basic handling of arguments is not
 vulnerable.
 
+\todo{MaxQuery Test}
+
 \subsection*{Special SQL Actions Benchmark}
 
 The Special SQL Actions benchmark evaluates the performance of frameworks in
@@ -178,7 +180,12 @@ reverting changes to the data.
 
 Lastly, the \textit{likeQuery} test examines the methods each framework uses for
 pattern-matching queries, evaluating basic search functionality in the database
-by searching for a part of a house address.
+by searching for a part of a house address. As case insensitivity differs in
+implementation between database engines and the \texttt{ILIKE} term support is
+not universal, test \textit{ilikeQuery} also tests the ability of packages to
+use the functionality provided by database engines. The query can use either
+PostgreSQL native \texttt{ILIKE} term, parsing the request and creating
+\texttt{SIMILAR TO} condition, or a different pattern matching function. 
 
 By understanding how different frameworks handle these particular SQL actions,
 developers can make informed decisions when selecting a database adapter that

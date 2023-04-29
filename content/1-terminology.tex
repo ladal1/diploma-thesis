@@ -1,6 +1,10 @@
-\chapter{Terminology Used}
+\chapter{Preliminaries}
+
+In this chapter, we will establish a~solid foundation for the rest of the thesis
+by introducing the key concepts and definitions used later in the work.
+
 \section*{Object-Relational Mapping}
-Object-relational mapping is a way to access relational data in an
+Object-relational mapping is a~way to access relational data in an
 object-centred programming language \cite{agile-mapping-objects}. The primary
 purpose is manipulating data without switching concepts from object-oriented
 paradigms to the relational representation of data in which most databases
@@ -11,9 +15,9 @@ functionality \cite{artima-abstractions}.
 At its base level, ORM provides an intermediary layer between applications' OOP
 model and database which is usually relational (but can be graph or document
 focused). The layer allows the developer to work with objects in the code, while
-the package translates it into a relational structure when saved to the
+the package translates it into a~relational structure when saved to the
 database. These packages are often used on projects that are heavily connected
-to a database model, as ORMs are most beneficial when using a database is
+to a~database model, as ORMs are most beneficial when using a~database is
 commonplace. When used only occasionally, it usually brings too expansive a
 setup to translate into gains in code readability and maintenance costs compared
 to executing premade SQL queries \cite{Torres_Galante_Pimenta_Martins_2017}.
@@ -31,7 +35,7 @@ pattern, which it implements, called \enquote{builder}. Object-oriented
 programming design patterns are reusable solutions commonly encountered during
 software development in OOP languages. These patterns propose interactions
 between objects and their internal structure. There is no single authority on
-how these patterns are defined, nor a comprehensive list of these patterns, as
+how these patterns are defined, nor a~comprehensive list of these patterns, as
 every author prioritises different patterns and functionalities
 \cite{fowler-patterns-2003}.
 
@@ -48,24 +52,24 @@ For example, the \texttt{SELECT} clause specifies which columns are to be
 retrieved, and the \texttt{FROM} clause specifies which table or tables the
 columns should be \cite{postgres-lexer}. Once the builder pattern is applied to
 the SQL query, each of these clauses (or even smaller fragments) can be created
-by calling the Builder's methods, creating a programmatic way to create SQL
+by calling the Builder's methods, creating a~programmatic way to create SQL
 queries. The Builder also allows developers to abstract minor differences
 between different SQL implementations.
 
 As the ability to create queries based on multiple criteria is one of the basic
-functionalities of ORMs, they are almost always built on some query builder.
+functionalities of ORMs, they are almost always built on top of a~query builder.
 These can be available standalone or fully integrated into the ORM package.
 Often, query builders are sufficient for the purposes of database access in most
 applications, so they were included in the comparison. While they certainly lack
 feature sets and, compared to ORMs, query builders usually require SQL
 knowledge, they can be easier to set up and maintain while also being faster and
-allowing fine-tuned adjustments to a query.
+allowing fine-tuned adjustments to a~query.
 
 \section*{PostgreSQL}
 One of the most popular database engines today, PostgreSQL, is an open-source
 object-relational database management system. Originally developed under the
-name Postgres \cite{postres-about} (short for Post-Ingres) as a new generation
-after a successful relational database called Ingress, it was first released
+name Postgres \cite{postres-about} (short for Post-Ingres) as a~new generation
+after a~successful relational database called Ingress, it was first released
 under this name in 1989. After several years of development at the University of
 California at Berkeley, the name was changed to focus on SQL compliance. The
 whole project moved to open-source, community-focused development in 1996.
@@ -84,7 +88,7 @@ Some of the features that often make PostgreSQL stand out amongst other RDBMS
 are its support for many different and advanced data types
 \cite{postgres-datatypes} out of the box, such as the ability to natively store
 JSON objects and arrays, XML data or geometric types. With extensibility being a
-significant focus, a lot of functionality can be installed or optionally
+significant focus, a~lot of functionality can be installed or optionally
 enabled, further improving the reach and applicability.
 
 There are extensive implementations of the API for many programming languages,
@@ -94,8 +98,8 @@ of both its API and internal functionality, which supports its growth and
 popularity.
 
 \section*{Lazy loading}
-Lazy loading is a technique for optimizing data retrieval to increase
-application performance \cite[p.~200]{fowler-patterns-2003}. It is a strategy consisting of
+Lazy loading is a~technique for optimizing data retrieval to increase
+application performance \cite[p.~200]{fowler-patterns-2003}. It is a~strategy consisting of
 only loading data when it is needed rather than all at once, therefore reducing
 the initial load in exchange for the need to do additional loading later. Lazy
 loading is usually achieved by breaking down larger datasets into smaller ones
@@ -110,7 +114,7 @@ page-load time at the cost of adding additional requests
 \cite{webPerformanceMDN}.
 
 When talking about ORMs and database access, lazy loading usually takes place as
-replacing data retrieval from an object with a call to retrieve the data from
+replacing data retrieval from an object with a~call to retrieve the data from
 the database. In other words, the data of the database object does not need to
 be loaded when the object representation or its part is created in the program.
 This technique is often used for loading relations so that only one table needs
@@ -126,12 +130,12 @@ expensive request will minimize the amount of additional data that would need to
 be sent between the two parties. This can lead to faster load times and improved
 application performance.
 
-It is usually achieved by sending a singular request and caching the data in
+It is usually achieved by sending a~singular request and caching the data in
 memory, even though it might only be needed later. There are obvious downsides
 to this, such as higher memory usage or often loading more data than is
 necessary. The concept of eager loading is antithetical to the lazy loading
-approach, and that is on purpose. Each approach prefers a different focus, and
-thus each is fit for different usage; lazy loading is practical when a first
+approach, and that is on purpose. Each approach prefers a~different focus, and
+thus each is fit for different usage; lazy loading is practical when a~first
 look or first results matter the most, and eager loading is when the focus is on
 one large result, which would be slowed down by too many small requests, which
 would need to be made for the total result.
@@ -146,10 +150,10 @@ requested later.
 \section*{Circular dependence}
 A common problem in software development, circular dependency occurs when two or
 more parts of code depend on each other, making it impossible to resolve their
-dependence onto a dependency graph. Such a graph must conform to limits set out
-for tree graphs and, therefore, cannot contain a loop. Due to the way how
-modules are loaded in Node.js \cite{commonjsModulesNode}, such a problem would
-lead to a deadlock and is therefore resolved by trying to run the modules in a
+dependence onto a~dependency graph. Such a~graph must conform to limits set out
+for tree graphs and, therefore, cannot contain a~loop. Due to the way how
+modules are loaded in Node.js \cite{commonjsModulesNode}, such a~problem would
+lead to a~deadlock and is therefore resolved by trying to run the modules in a
 specific order. However, such an approach is only sometimes feasible, so other
 solutions must be used. The issue of circular dependency is also present in the
 compilation because, while TypeScript does allow asynchronous references of
@@ -163,18 +167,18 @@ In ORMs and database representation in OOP languages, this problem is generally
 connected to the bidirectional nature of relations, as its explicit
 representation will inevitably create circular dependency
 \cite{melton-empirical-2007}. Therefore, for most schema definitions, there
-needs to be a functionality built in that allows users to define bidirectional
-relations without sacrificing type safety or encountering a deadlock with
+needs to be a~functionality built in that allows users to define bidirectional
+relations without sacrificing type safety or encountering a~deadlock with
 importing modules. 
 
 
 \section*{Database transaction}
-Transaction isolation is a concept used in database management to represent a
-unit of work. The transaction is typically a series of one or more database
+Transaction isolation is a~concept used in database management to represent a
+unit of work. The transaction is typically a~series of one or more database
 operations that are supposed to be completed on the all-or-nothing principle. In
 addition to performing database queries atomically, the transaction also needs
 to provide additional functionality, such as coordination of reads and handling
-operations in a reliable and recoverable manner. 
+operations in a~reliable and recoverable manner. 
 
 As database transactions are the base for the basic functionalities of modern
 RDBMS \cite{haerder-principles-1983}, their handling is essential when
@@ -186,29 +190,29 @@ necessary for many use cases.
 
 
 \section*{Database connection pool}
-A database connection pool is a component that collects and manages several
+A database connection pool is a~component that collects and manages several
 database connections and allocates them to individual requests to the database.
-It works by creating either a fixed number of connections at the beginning or
+It works by creating either a~fixed number of connections at the beginning or
 scaling up the number of connections based on usage. In this way, querying the
 database does not have to wait for the connection to be established, and the
 request can be routed through the database connection pool to the currently
 unused connection \cite{gupta-improving-2017}. Additionally, due to having
 multiple connections, multithreaded and asynchronous applications can coordinate
 connections to the database. Single connection applications can be stalled while
-waiting for a single otherwise non-blocking request, while others could be
+waiting for a~single otherwise non-blocking request, while others could be
 served by the database. Such connections must be coordinated with transaction
 management, as the transaction is inherently connected with the connection that
 spawned it. 
 
 
 \section*{Read replica}
-A read replica is a special kind of database instance, a read-only instance of
+A read replica is a~special kind of database instance, a~read-only instance of
 the database presenting additional query points for the applications accessing
 the database without having to resolve consistency between instances. Some
 databases support multiple fully functional instances, however concurrent writes
 to alternative machines could produce an inconsistent state in the database.
-With a read-only replica, consistency is not threatened; the only negative is
-the possibility that the connections will receive a state that is delayed when
+With a~read-only replica, consistency is not threatened; the only negative is
+the possibility that the connections will receive a~state that is delayed when
 the replica is not synced to the latest consistent state of the primary instance
 \cite{postgres-availability}.
 
@@ -234,7 +238,7 @@ be more interactive and dynamic. While initially designed to be used when
 writing HTML documents and executed by web browsers, it outgrew its client-side
 roots and conquered large parts of the server-side development and even mobile
 app and desktop application environments. The advantage of JavaScript is that it
-can be a completely full-stack language which provides exact parity of logic
+can be a~completely full-stack language which provides exact parity of logic
 between client and server and allows for significant code portability.
 
 Until the last few years, JavaScript had an exclusive reign over interactive web
@@ -250,7 +254,7 @@ and functionality that are not easily or at all possible in pure JavaScript.
 
 \section*{ECMAScript}
 Soon after the introduction of JavaScript, it became apparent that establishing
-standards would be a necessary step for compatibility between implementations in
+standards would be a~necessary step for compatibility between implementations in
 different web browsers. Following this consensus, ECMA (originally an acronym
 for European Computer Manufacturers until 1994 \cite{ecma-mission})
 International standards association meeting was held, and the first edition of
@@ -279,7 +283,7 @@ several APIs and internal features \cite{commonjs-spec}.
 
 Started in 2009 by an engineer at Mozilla, the project was initially called
 ServerJS, with its flagship feature being the synchronous loading of modules.
-This means that once a module is imported, its exported components are
+This means that once a~module is imported, its exported components are
 immediately available to be used \cite{commonjs-introduction}. This simplifies
 working with modules and was necessary for the expansion of JS code into
 server-side development and is used widely today. 
@@ -300,9 +304,9 @@ several standards supported, including CommonJS and ECMAScript
 \cite{typescript-modules}.
 
 TypeScript was designed to address several shortcomings that have been present
-in the ecosystem for a lost time, especially when creating large-scale
+in the ecosystem for a~lost time, especially when creating large-scale
 applications. JavaScript applications are very flexible with their dynamic and
-loosely typed nature and prototype usage, but with flexibility comes a large
+loosely typed nature and prototype usage, but with flexibility comes a~large
 surface area for errors and mistakes. 
 
 Today, TypeScript is widely used for web development and JavaScript server-side
@@ -332,17 +336,17 @@ applications. The framework has gained popularity thanks to its alternative
 execution model, which separates it from traditional server-side languages.
 Instead of spawning different threads or workers for connections, it works with
 a non-blocking asynchronous I/O model, where many concurrent connections can be
-handled with only a small overhead \cite{orsini_2013}.
+handled with only a~small overhead \cite{orsini_2013}.
 
 This is achieved through asynchronous programming, where multiple tasks can be
 executed concurrently without blocking the main execution. Node.js supports
 asynchronous programming through the concepts of callbacks and promises.
 Callbacks are functions passed as arguments that are executed in finished or
 failed states, ensuring that logic can be applied sequentially after the
-asynchronous operation is finished. Promises provide a more structured and
+asynchronous operation is finished. Promises provide a~more structured and
 object-focused way to handle asynchronous operations and have become the
-preferred way. A promise is a representation of value which might not be
-available yet, containing a status variable and reference for the result once
+preferred way. a~promise is a~representation of value which might not be
+available yet, containing a~status variable and reference for the result once
 achieved, allowing for code execution while the operation status is updated in
 the background. When the value of the promise is necessary, the promise can be
 checked or awaited by using the async/await constructs
@@ -359,13 +363,13 @@ as supported by V8, the engine on which both it and Node.js run \cite{Deno}.
 One of the key benefits of the Node.js ecosystem is the large number of
 third-party packages that can be incorporated into projects. For example, many
 popular web frameworks, such as Koa or Express.js, are built for Node. Database
-drivers are also provided in module form, and therefore there needs to be a tool
+drivers are also provided in module form, and therefore there needs to be a~tool
 which allows users to incorporate such modules into their projects efficiently. 
 
 Originally an acronym for Node Package Manager \cite{npm-old-readme}, the
 three-letter name has been retroactively stripped of such meaning
 \cite{npm-usage}. The first release was published in 2010, and it has since
-become the default Node.js package manager. Npm consists of a command line
+become the default Node.js package manager. Npm consists of a~command line
 client, which is also called npm, and an online database of packages called the
 npm registry, which is hosted at \url{www.npmjs.com}. 
 
@@ -374,9 +378,9 @@ different focuses and compromises exist, for example, yarn \cite{Yarn}, although
 they usually don't provide their own registry.
 
 \section*{JSON}
-JavaScript object notation (JSON) is a lightweight data-interchange format that
+JavaScript object notation (JSON) is a~lightweight data-interchange format that
 is widely used in web development. Introduced as an alternative to the complex
-XML format that was previously used, it is based on a subset of JavaScript
+XML format that was previously used, it is based on a~subset of JavaScript
 representation of values. It consists of key-value pairs in objects, arrays, and
 primitive types. One of the main benefits is its simplicity and readability for
 humans, which makes it useful for places where data could need to be interpreted
@@ -387,7 +391,7 @@ International. The document specifies syntax and semantics, ensuring its
 reliability, consistency, and portability throughout systems and applications.
 
 \section*{Unit of Work}
-Unit of Work is a software design pattern used most commonly in ORMs and similar
+Unit of Work is a~software design pattern used most commonly in ORMs and similar
 frameworks to manage persistence and consistency between application and
 database state. The pattern is used to group all database operations relating to
 a single transaction or process and only execute the final state, ensuring they
@@ -402,7 +406,7 @@ across whole swathes of objects. While atomicity is undoubtedly necessary on
 many occasions, and unit of work on the ORM side can significantly reduce the
 number of requests to the database, it can also lead to inconsistency when
 multiple applications access the database and data which are currently loaded in
-memory on one machine are modified by a different one.
+memory on one machine are modified by a~different one.
 
 \section*{Active record}
 
@@ -412,28 +416,28 @@ memory on one machine are modified by a different one.
     \includegraphics[width=0.6\textwidth]{ActiveRecord}
 \end{figure}
 
-The Active Record pattern is a design pattern defined by Martin Fowler in his
+The Active Record pattern is a~design pattern defined by Martin Fowler in his
 book "Patterns of Enterprise Application Architecture"
 \cite[p. 160]{fowler-patterns-2003} and is commonly used to represent database
 records in an application.
 
 The goal of the pattern is to encapsulate logic for interacting with the
-database table into a single object. Each instance of the object represents a
+database table into a~single object. Each instance of the object represents a
 single record, and modifications made on it are then usually flushed with a
 method call into the database. The base class also provides static methods for
 CRUD (create, read, update, delete) operations and possibly additional business
 logic.  
 
-The main benefit of the Active Record pattern is a simple and intuitive
+The main benefit of the Active Record pattern is a~simple and intuitive
 interface for objects and tables. Modifications of the object can be made right
 on the data in languages, which allow setters and getters on attributes, and
-static methods provide a simple gateway to work with the table. 
+static methods provide a~simple gateway to work with the table. 
 
 Limitations of the pattern come in the tight coupling between the application
 and database logic, as the object instance is inherently tied to the database
 representation. This makes it harder to test the implementation and often
 requires additional abstraction or mocking. Additionally, the pattern does not
-easily allow for the management of relations, so a database schema with complex
+easily allow for the management of relations, so a~database schema with complex
 relations might not be able to represent the data easily. 
 
 \section*{Data mapper}
@@ -445,73 +449,33 @@ relations might not be able to represent the data easily.
 \end{figure}
 
 The Data Mapper pattern, as described by Martin Fowler in his seminal work on
-enterprise application architectures, provides a clear separation between domain
+enterprise application architectures, provides a~clear separation between domain
 models and their underlying data storage. This approach enables developers to
 create complex and expressive domain models without being constrained by the
 relational database schema or various storage options. By decoupling in-memory
 representations from the data storage mechanisms, the Data Mapper pattern
-promotes a clean separation of concerns and enhanced flexibility in application
+promotes a~clean separation of concerns and enhanced flexibility in application
 design \cite[p. 165]{fowler-patterns-2003}.
 
 Distinguished from the Active Record pattern, the Data Mapper pattern ensures
 that business logic and data access responsibilities remain separate. In this
-approach, a single entity represents the table or collection, while distinct
-entities represent individual records. The Data Mapper serves as a data access
+approach, a~single entity represents the table or collection, while distinct
+entities represent individual records. The Data Mapper serves as a~data access
 layer that performs operations on the data storage representation without
 creating any direct bindings between in-memory objects and the database. This
 responsibility is solely managed by the Data Mapper, which takes care of any
 objects that utilize it.
 
-This separation enables applications that employ the Data Mapper pattern to
-adhere to the Single Responsibility Principle, one of the SOLID principles of
-software design popularized by software engineer Robert C. Martin
-\cite{PrinciplesOfOod}. By limiting the responsibilities class must service and
-ensure that it is not accountable for multiple unrelated tasks, the single
-responsibility principle aims to create more straightforward and more
-maintainable classes. Consequently, the Data Mapper pattern contributes to a
-more robust and modular software architecture that is easier to develop,
-maintain, and extend.
+By limiting the responsibilities class must service and ensure that it is not
+accountable for multiple unrelated tasks, the single responsibility principle
+aims to create more straightforward and more maintainable classes. Consequently,
+the Data Mapper pattern contributes to a~more robust and modular software
+architecture that is easier to develop, maintain, and extend.
 
 However, the Data Mapper pattern has drawbacks. One notable downside is the
 increased complexity introduced by the additional layer of abstraction. This
-added complexity could lead to a steeper learning curve for developers
+added complexity could lead to a~steeper learning curve for developers
 unfamiliar with the pattern, as well as the potential for increased development
 time. Moreover, the mapping process between domain objects and the persistence
-layer may introduce performance overhead, which can be a concern for
-applications with stringent performance requirements. Additionally, implementing
-the Data Mapper pattern often necessitates extensive configuration and mapping
-code, which can be time-consuming to write and prone to errors.
-
-\section*{MVC architecture}
-The Model-View-Controller (MVC) architecture is a prevalent design pattern in
-software development, emphasizing the separation of concerns by organizing
-application components into three distinct roles. This architectural pattern,
-originating from the work of Trygve Reenskaug in the 1970s, has found widespread
-use in modern web development across various programming languages and
-frameworks \cite{TheDCIArchitecture_2009}.
-
-The three components of the MVC architecture, Model, View, and Controller, each
-serve specific purposes. The model represents the application's underlying data
-structure and business logic, encapsulating core functionality, ensuring data
-consistency and handling the data storage and representation. In contrast, the
-view is tasked with rendering data and presenting them to users in an
-intelligible format. The controller functions as an intermediary between the
-model and the view, processing user input, manipulating the model, and updating
-the view as needed \cite[p. 330]{fowler-patterns-2003}.
-
-Separation of these components from the MVC architecture facilitates modularity,
-maintainability, and testability in software design. Each component can be
-developed, tested, and updated without interaction with the other layers,
-simplifying the development process and making it more manageable to identify
-and resolve issues. Furthermore, the separation of concerns allows developers to
-concentrate on a single aspect of the application at a time, resulting in more
-organized and efficient code.
-
-However, the MVC architecture has drawbacks. One notable disadvantage is the
-added complexity resulting from the additional layers of abstraction, which
-might be challenging for inexperienced developers and could prolong the
-development process. Additionally, some critics contend that the strict
-separation of concerns can create a rigid structure that might need to be better
-suited for applications with rapidly changing requirements or unconventional
-designs. Such structure may be too complex for many projects, which would
-benefit from more concise and flexible architecture.
+layer may introduce performance overhead, which can be a~concern for
+applications with stringent performance requirements.

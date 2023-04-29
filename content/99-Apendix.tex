@@ -148,6 +148,48 @@
 \end{tikzpicture}
 \end{figure}
 
+
+\begin{figure}
+    \caption{Case insensitive pattern (ilikeQuery) Results}
+    \label{fig:ilikeQuery}
+    \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        ylabel={Time (ms)},
+        width=0.9*\textwidth,
+        symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+        xtick=data,
+        xticklabel style={rotate=45, anchor=east},
+        enlarge x limits=0.1,
+        ybar=0.6pt,
+        ymin=0,
+        bar width=20pt,
+        nodes near coords,
+        point meta=explicit,
+        ymax=5000,
+        every node near coord/.append style={
+            anchor=west,
+            rotate=70,
+            color=black,
+            font=\small
+        }
+    ]
+    \addplot coordinates {
+        (@Databases/Pg,1183.936791994609) [1183.9]
+        (Knex,2468.4686490083113) [2468.5]
+        (Kysely,1503.6159000019543) [1503.6]
+        (MikroORM,2787.2151470119134) [2787.2]
+        (Objection.js,4025.112294003833) [4025.1]
+        (PgTyped,1451.0418069930747) [1451.0]
+        (PrismaORM,2566.3222450027242) [2566.3]
+        (Sequelize,1687.6608400037512) [1687.7]
+        (TypeORM,2008.0603819889948) [2008.1]
+        (Zapatos,2353.669042979367) [2353.6]
+    };     
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
 \begin{figure}
     \caption{BulkDelete Results}
     \label{fig:bulkDelete}
@@ -267,6 +309,48 @@
         (TypeORM,7703.449012026191) [7703.4]
         (Zapatos,19830.21347399801) [19830.2]
     };         
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}
+    \caption{Maximum value query Results}
+    \label{fig:maxQuery}
+    \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        ylabel={Time (ms)},
+        width=0.9*\textwidth,
+        symbolic x coords={@Databases/Pg, Knex, Kysely, MikroORM, Objection.js, PgTyped, PrismaORM, Sequelize, TypeORM, Zapatos},
+        xtick=data,
+        xticklabel style={rotate=45, anchor=east},
+        enlarge x limits=0.1,
+        ybar=0.6pt,
+        ymin=0,
+        bar width=20pt,
+        nodes near coords,
+        point meta=explicit,
+        ymax=2000,
+        every node near coord/.append style={
+            anchor=west,
+            rotate=70,
+            color=black,
+            font=\small
+        }
+    ]
+    \addplot coordinates {
+        (@Databases/Pg, 690.4659369178116)[690.5]
+        (Knex, 1355.8135379850864)[1355.8]
+        (Kysely, 840.1355499736965)[840.1]
+        (MikroORM, 1030.9561109766364)[1031.0]
+        (Objection.js, 1498.9568349830806)[1499.0]
+        (PgTyped, 547.8961579725146)[547.9]
+        (PrismaORM, 1041.2470909953117)[1041.2]
+        (Sequelize, 981.2853820733726)[981.3]
+        (TypeORM, 834.7038939222693)[834.7]
+        (Zapatos, 656.8966010399163)[656.9]
+    };
+           
 \end{axis}
 \end{tikzpicture}
 \end{figure}

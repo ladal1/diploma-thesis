@@ -1,4 +1,4 @@
-\chapter{Observations}
+\chapter{Observations}\label{ch:observations}
 
 In this final chapter, we will discuss the performance of various ORM packages
 based on the benchmarks conducted. The chapter is divided into three main
@@ -110,7 +110,9 @@ methods, casting the result into a number instead. However, this issue was
 resolved when a manually written query was used.
 
 Lastly, it is worth noting that only @databases/pg parsed bigint values into
-JavaScript BigInt primitives. All other packages returned character
+JavaScript BigInt primitives with typing. PrismaORM also returned the value
+correctly, however the result itself was untyped, which made its usage
+significantly more complicated. All other packages returned character
 representations of the value. 
 
 
@@ -144,19 +146,19 @@ representations of the value.
     \begin{threeparttable}[b]
     \caption{Special SQL Actions Benchmark implementation methods}
     \label{table:SpecialSQLActions}
-    \begin{tabular}{lccccc}
+    \begin{tabular}{lcccccc}
     \hline
-    \thead{Package} & \thead{Upsert} & \thead{JSON \\ type} & \thead{JSON \\ Where} & \thead{Transaction} & \thead{Like \\ Query} \\ \hline
-    @Databases/pg & SQL\tnote{1} & Native & Native & Native & SQL\tnote{1} \\ 
-    Knex & QB\tnote{2} & QB & QB & QB & QB \\ 
-    Kysely & QB\tnote{2} & QB & QB & QB & QB \\ 
-    MikroORM & QB\tnote{2} & Native & Native & Native & Native \\ 
-    Objection.js & QB\tnote{2} & QB & QB & Native & QB \\ 
-    PgTyped & SQL & SQL & SQL & SQL & SQL \\ 
-    PrismaORM & Native & Native & Native & Native & Native \\ 
-    Sequelize & SQL & Native & Native\tnote{3} & Native & Native \\ 
-    TypeORM & SQL & Native & Native & Native & Native \\ 
-    Zapatos & Native\tnote{2} & Native & SQL\tnote{1} & Native & SQL\tnote{1} \\ \hline
+    \thead{Package} & \thead{Upsert} & \thead{JSON \\ type} & \thead{JSON \\ Where} & \thead{Transaction} & \thead{Like \\ Query} & \thead{ILike \\ Query} \\ \hline
+    @Databases/pg & SQL\tnote{1} & Native & Native & Native & SQL\tnote{1} & SQL\tnote{1} \\ 
+    Knex & QB\tnote{2} & QB & QB & QB & QB & QB \\ 
+    Kysely & QB\tnote{2} & QB & QB & QB & QB & QB \\ 
+    MikroORM & QB\tnote{2} & Native & Native & Native & Native & Native \\ 
+    Objection.js & QB\tnote{2} & QB & QB & Native & QB & QB \\ 
+    PgTyped & SQL & SQL & SQL & SQL & SQL & SQL  \\ 
+    PrismaORM & Native & Native & Native & Native & Native & Native \\ 
+    Sequelize & SQL & Native & Native\tnote{3} & Native & Native & Native \\ 
+    TypeORM & SQL & Native & Native & Native & Native & Native \\ 
+    Zapatos & Native\tnote{2} & Native & SQL\tnote{1} & Native & SQL\tnote{1} & SQL\tnote{1} \\ \hline
     \end{tabular}
     \begin{tablenotes}
         \item [1] With type support in template fields
@@ -171,26 +173,27 @@ representations of the value.
     \begin{threeparttable}[b]
     \caption{Edge Cases Benchmark implementation methods}
     \label{table:EdgeCases}
-    \begin{tabular}{lcc}
+    \begin{tabular}{lccc}
     \hline
-    \thead{Package} & \thead{SQL Injection} & \thead{BigInt handling} \\ \hline
-    @Databases/pg & SQL\tnote{1} & Native\tnote{4} \\ 
-    Knex & QB & QB\tnote{3} \\ 
-    Kysely & QB & QB\tnote{3} \\ 
-    MikroORM & Native & Native\tnote{3} \\ 
-    Objection.js & QB\tnote{2} & QB\tnote{2} \tnote{,} \tnote{3} \\
-    PgTyped & SQL & SQL\tnote{3} \\ 
-    PrismaORM & Native & Native\tnote{3} \\
-    Sequelize & Native & Native\tnote{3} \\
-    TypeORM & Native & Native\tnote{3} \\ 
-    Zapatos & SQL\tnote{1} & SQL\tnote{3} \tnote{,} \tnote{5} \\ \hline
+    \thead{Package} & \thead{SQL Injection} & \thead{BigInt handling} & \thead{Maximum value query} \\ \hline
+    @Databases/pg & SQL\tnote{1} & Native\tnote{4} & SQL\tnote{1} \\ 
+    Knex & QB & QB\tnote{3} & QB\tnote{3} \\ 
+    Kysely & QB & QB\tnote{3} & QB\tnote{3} \\ 
+    MikroORM & Native & Native\tnote{4} & QB\tnote{3}  \\ 
+    Objection.js & QB\tnote{2} & QB\tnote{2} \tnote{,} \tnote{3} & QB\tnote{2} \tnote{,} \tnote{6} \\
+    PgTyped & SQL & SQL\tnote{3} & SQL\tnote{3} \\ 
+    PrismaORM & Native & Native\tnote{4} & Native\tnote{4} \\
+    Sequelize & Native & Native\tnote{3} & Native\tnote{3} \\
+    TypeORM & Native & Native\tnote{3} & QB\tnote{4} \\ 
+    Zapatos & SQL\tnote{1} & SQL\tnote{3} \tnote{,} \tnote{5} & SQL\tnote{3} \\ \hline
     \end{tabular}
     \begin{tablenotes}
         \item [1] With type support in template fields
         \item [2] Query builder attached to model
         \item [3] Value returned as string
-        \item [4] Value returned as BigInt
+        \item [4] Value returned as Native type (BigInt or Number)
         \item [5] Native method converted value to Number, losing precision
+        \item [6] Invalid typing requiring full cast
       \end{tablenotes}
    \end{threeparttable}
 \end{table}
@@ -256,7 +259,7 @@ manager, losing out to all other packages by a significant margin, as seen in
 \autoref{fig:BulkInsert} in MikroORM UoW bar. The issue stems from the batching
 method, which resolves the flushing of the Unit of Work entity, which batches
 the method by 300 entities by default \cite{MikroORMBatching}. However, the
-framework also includes the native insertMany method, which handles the
+framework also includes the native \texttt{insertMany} method, which handles the
 insertion at a comparable efficiency with other packages, as seen in the same
 figure under MikroORM native value.
 

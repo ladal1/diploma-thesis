@@ -91,4 +91,8 @@ to minimize confusion for developers.
 
 Like most other ORMs, Sequelize does not support abstracting upsert operations
 with increments or decrementation on updates. As a result, developers must
-resort to implementing such operations using raw queries.
+resort to implementing such operations using raw queries. It also performed the
+worst among all tested packages during pagination test, as the query used by the
+package was identical to the one used by other packages and no discrepancy was
+detected in connection handling, it seems to have been caused by the frameworks
+overhead.
