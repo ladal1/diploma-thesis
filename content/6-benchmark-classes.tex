@@ -25,7 +25,7 @@ their respective database schemas.
 Database administration tasks include setting up and tearing down example
 databases used in testing. Tests are currently written only for the database
 examined in \autoref{ch:database}, therefore this functionality is only used to
-initialize the database and to preserve a consistent state. In order to perform
+initialize the database and to preserve a~consistent state. In order to perform
 these tasks, \texttt{BenchmarkRunner} maintains its database connection using
 the default \texttt{pg} module.
 
@@ -52,12 +52,12 @@ each test run.
 Two implemented test workflows, validity test and latency test; validity test
 runs each implementation once, tests if the value is equal to reference in both
 value and the runtime type, and returns test result. The latency test executes
-the tests in a loop, intending to show if the framework can create well-crafted
+the tests in a~loop, intending to show if the framework can create well-crafted
 queries while not adding significant overhead.
 
 \section{Reporters}
 As the output of the benchmarks is meant to be interpreted by humans, the
-measured data needs to be transformed into a human-readable format. Test objects
+measured data needs to be transformed into a~human-readable format. Test objects
 contain vital information, but the benchmark output consists of thousands of
 such objects; therefore, they must be converted into valuable data. Two
 reporters were implemented for this benchmarking framework, with an interface
@@ -70,9 +70,9 @@ assessment of any errors and monitors the progress of the run.
 
 \subsection*{HTML Reporter}
 The HTML reporter is the primary source for any data analysis of the benchmark
-run. It consists of a template file and the reporter. The reporter receives data
+run. It consists of a~template file and the reporter. The reporter receives data
 from the benchmark using the unified API, parses it, and inserts it into the
-template file as a JSON string once the benchmark is finished. Along with the
+template file as a~JSON string once the benchmark is finished. Along with the
 data, cascading style sheets are also inserted, as they are written in
 \texttt{Sass} language \cite{Sass}, which must be compiled before the HTML file
 viewer uses them. After the template is completed, the file is saved separately,
@@ -94,10 +94,10 @@ This test suite was only implemented under the \textit{Knex.js} package as its
 purpose is to test the functionality of the benchmarking framework and does not
 test any database functionality. It is proof of concept for correct validation
 and exception handling tests for the benchmark suite and runner implementation.
-It consists of a small number of tests, including a fully passing test, a test
+It consists of a~small number of tests, including a~fully passing test, a~test
 expecting \texttt{Skipped} exception, which is used for marking tests which are
 not implemented, tests whose results are mismatched in value or runtime type,
-and a test that throws generic error on execution. Additionally, MVPBench
+and a~test that throws generic error on execution. Additionally, MVPBench
 examines if test configurations are working as they should be, testing both
 validity and latency settings.
 
@@ -105,7 +105,7 @@ validity and latency settings.
 One of the generally provided functionalities of ORMs is the ability to define
 entities and their relations. This benchmark aims to test the ability to use
 these defined relations to find objects using these connections. The first test
-of the suit focuses on finding a cat's colour in hex by traversing two
+of the suit focuses on finding a~cat's colour in hex by traversing two
 relations, one of which is identifying. The framework starts with the cat's ID
 and needs to fetch the \texttt{color\_hex} instance through its connection to
 the \texttt{cat\_color} instance. Thanks to the relation design, there is a
@@ -114,7 +114,7 @@ counts cats by their colour hex code, traversing the relations from the first
 test in the opposite direction. Instead of selecting, the test counts the cats,
 testing if the query difficulty changes if we use aggregate functions instead of
 basic \texttt{SELECT} query. The third test in this benchmark selects all toys
-available to a cat, primarily focusing on the format of the returned data and
+available to a~cat, primarily focusing on the format of the returned data and
 how well the decomposition table can be accessed or avoided. The decomposition
 table exists because of the M:N relation between toys and houses, but the
 additional amount attribute is not used.
@@ -135,16 +135,16 @@ to \(2^{63} - 1\) \cite{PostgresNumeric}. Although the BigInt primitive
 introduced in ECMAScript 2020 (ES11) \cite{ecma-262} and has been implemented in
 Node.js since 2018 \cite{MDNBigInt}, not all frameworks handle this type
 correctly. The frameworks can either cast the value to Number, losing precision
-and failing the test, or return the value as a string or, ideally, as a BigInt
+and failing the test, or return the value as a~string or, ideally, as a~BigInt
 primitive.
 
 \textit{SQLInjection} test assesses the framework's basic handling of
-parameters. One of the main reasons for using a database access package over a
+parameters. One of the main reasons for using a~database access package over a
 basic driver is to improve security against SQL injection attacks. The code will
 return all records if the parameter is sent as part of the SQL query. If the
 package incorrectly escapes the query, it will result in no results returned.
 Only the correct handling of arguments will return the specific Cat with the
-fascinating name a \enquote{\texttt{' or true --}}. It is important to note that
+fascinating name a~\enquote{\texttt{' or true --}}. It is important to note that
 this test does not evaluate whether the package is entirely vulnerable to SQL
 injection attacks but rather if the basic handling of arguments is not
 vulnerable.
@@ -161,7 +161,7 @@ different aspects of database interactions.
 The \textit{upsertToysToHouse} test examines whether the package contains an
 upsert operation method and assesses its flexibility, such as the ability to
 differentiate between the insertion and update objects, as well as the capacity
-to reference the updated value. The test uses a CatDatabase schema that includes
+to reference the updated value. The test uses a~CatDatabase schema that includes
 a decomposition table called ToysHouse, which stores references between houses
 and toys and the quantity of each toy type in the house.
 
@@ -180,15 +180,15 @@ reverting changes to the data.
 
 Lastly, the \textit{likeQuery} test examines the methods each framework uses for
 pattern-matching queries, evaluating basic search functionality in the database
-by searching for a part of a house address. As case insensitivity differs in
+by searching for a~part of a~house address. As case insensitivity differs in
 implementation between database engines and the \texttt{ILIKE} term support is
 not universal, test \textit{ilikeQuery} also tests the ability of packages to
 use the functionality provided by database engines. The query can use either
 PostgreSQL native \texttt{ILIKE} term, parsing the request and creating
-\texttt{SIMILAR TO} condition, or a different pattern matching function. 
+\texttt{SIMILAR TO} condition, or a~different pattern matching function. 
 
 By understanding how different frameworks handle these particular SQL actions,
-developers can make informed decisions when selecting a database adapter that
+developers can make informed decisions when selecting a~database adapter that
 aligns with their project's unique requirements. The benchmark ensures that
 developers are aware of each package's various capabilities and limitations,
 enabling them to choose the most suitable solution for their specific use cases.
@@ -205,7 +205,7 @@ The \textit{BulkInsert} test observes the existence of bulk insert, its
 realization and the handling of PostgreSQL query limits. The SQL dialect uses
 \texttt{Int16} type to represent parameters, meaning that, at most, each query
 can contain 32767 binding parameters \cite{postgresMessageFormats}. The test
-tries to create 30000 instances of a House entity, where each instance would, in
+tries to create 30000 instances of a~House entity, where each instance would, in
 a primitive insert, result in 3 bindings (id, house address and dog values). As
 this would breach the limits, the \texttt{node-postgres} (pg) driver for Node.js
 would throw the error \textit{bind message has 90000 parameter formats but 0
@@ -216,8 +216,8 @@ resulting in only as many parameters as columns are inserted. The packages are
 ranked based on the existence of the function to create explicit bulk insertion.
 Only if the native function does not exist do we resort to chunking the data
 before using the insertion method. Out of all the options, the \texttt{UNNEST}
-method is the fastest way to execute such a request, so packages relying on it
-will have a significant speed advantage.
+method is the fastest way to execute such a~request, so packages relying on it
+will have a~significant speed advantage.
 
 The \textit{BulkDelete} test questions the ability to access data representation
 through abstraction, as the operation consists of deleting all values in the
@@ -226,7 +226,7 @@ could obscure access, leaving the developers to query and delete the fitting
 objects. \textit{BulkUpdate} tests the same paradigm but with updates, where
 only records meeting specific criteria are to be updated, while other values are
 untouched. Finally, the pagination test is focused on repeated querying and the
-feature richness of the framework. The test imagines a list of entities users
+feature richness of the framework. The test imagines a~list of entities users
 want to browse by pages. If the package has an integrated pagination function,
 it should be used; if the feature is missing resorting to function calls to use
-SQL terms of LIMIT and OFFSET is chosen.
+SQL terms of \texttt{LIMIT} and \texttt{OFFSET} is chosen.

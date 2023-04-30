@@ -21,9 +21,9 @@ constraints.
 
 Finally, the Performance Test Results section presents the outcomes of each
 test, focusing on cases where query composition, operator selection, or
-introduced overhead could play a measurable role in the package's performance.
+introduced overhead could play a~measurable role in the package's performance.
 These tests were conducted using the BenchmarkRunner, the frameworks connected
-to a PostgreSQL instance in Docker, on an AMD Ryzen 6850U processor @ 2.7GHz,
+to a~PostgreSQL instance in Docker, on an AMD Ryzen 6850U processor @ 2.7GHz,
 Debian GNU/Linux 11 (bullseye) operating system, 32GB of LPDDR5-6400 RAM, and
 SSD storage.
 
@@ -35,7 +35,7 @@ solution for their projects.
 \section{Package Information}
 
 While evaluating the ORM frameworks, the latest stable branch version was used
-for testing at the time of writing. It is important to note that a new version
+for testing at the time of writing. It is important to note that a~new version
 3.0.2 of Objection.js was released after the testing was completed; however,
 this update does not introduce any new features, only addressing issues with
 types and ESM support.
@@ -69,17 +69,17 @@ to the project. The data was collected on the 10th of April, 2023.
 \section{Flexibility Assessment}
 
 The primary aspect of the comparison between individual ORM packages is their
-ability to implement advanced SQL constructs using a more unified API for the
+ability to implement advanced SQL constructs using a~more unified API for the
 programming language. Although abstraction introduces additional logic that
 requires processing power, it should offer functionality that approaches the
-capabilities of direct SQL usage. A framework requiring developers to introduce
+capabilities of direct SQL usage. A~framework requiring developers to introduce
 abstraction but still necessitates writing SQL queries, as the request cannot be
 expressed through the API, is considered less effective as an abstraction layer
 than one that can perform such requests.
 
 Tables \ref{table:EntityTraversal}, \ref{table:SpecialSQLActions},
 \ref{table:EdgeCases}, and \ref{table:BulkOperations} showcase the layers used
-to perform the required functionality for the benchmark. A requirement for each
+to perform the required functionality for the benchmark. A~requirement for each
 implementation was that the logic had to be consistently implemented on the
 database, with the framework only composing the query and parsing the result.
 For example, it was not allowed to check for an existing object in an upsert
@@ -106,8 +106,8 @@ which could express the upsert operation while TypeORM's custom internal query
 builder could not. On the other hand, Zapatos was the only package that
 partially failed in any test. It could not correctly parse bigint values from
 PostgreSQL as strings or BigInt primitives in JavaScript when using native
-methods, casting the result into a number instead. However, this issue was
-resolved when a manually written query was used.
+methods, casting the result into a~number instead. However, this issue was
+resolved when a~manually written query was used.
 
 Lastly, it is worth noting that only @databases/pg parsed bigint values into
 JavaScript BigInt primitives with typing. PrismaORM also returned the value
@@ -232,13 +232,13 @@ performance of the various packages. This evaluation focused on the optimality
 of the queries formulated by each package and the overhead introduced by the
 composition of the queries and result parsing. Through code analysis, the
 pgTyped package was expected to exhibit minimal overhead and the most efficient
-manually written queries. Consequently, pgTyped was employed as a reference for
+manually written queries. Consequently, pgTyped was employed as a~reference for
 optimal queries and minimal performance.
 
 Several noteworthy observations emerged from the testing process. The most
 apparent performance loss occurred with Objection.js during the getColorLatency
 test shown in \autoref{fig:getColorLatency}. This performance loss resulted from
-Objection.js favouring multiple dependent queries over a single query with joins
+Objection.js favouring multiple dependent queries over a~single query with joins
 when utilizing the withGraphJoined method. While it would have been possible to
 rewrite the query using the integrated query builder and resolve the issue, this
 approach would compromise the flexibility testing and be thus considered
@@ -250,17 +250,17 @@ surpassed even the pgTyped reference. This performance advantage can be
 attributed to MikroORM's caching mechanism, which leverages primary keys within
 its entityManager to prevent repeated database queries for the same data,
 yielding faster results than the reference. This feature can be highly
-beneficial for a skilled developer, but can also cause problems, if the
+beneficial for a~skilled developer, but can also cause problems, if the
 developer does not know about it.
 
 On the contrary, MikroORM struggled with the BulkInsertion test when using the
 native entity creation function and unit of work paradigm over the entity
-manager, losing out to all other packages by a significant margin, as seen in
+manager, losing out to all other packages by a~significant margin, as seen in
 \autoref{fig:BulkInsert} in MikroORM UoW bar. The issue stems from the batching
 method, which resolves the flushing of the Unit of Work entity, which batches
 the method by 300 entities by default \cite{MikroORMBatching}. However, the
 framework also includes the native \texttt{insertMany} method, which handles the
-insertion at a comparable efficiency with other packages, as seen in the same
+insertion at a~comparable efficiency with other packages, as seen in the same
 figure under MikroORM native value.
 
 Kysely demonstrated comparable capabilities to Knex while offering an enhanced
@@ -279,7 +279,7 @@ the database of the usage.
 Most ORMs lost out to query builders mainly because they prefer left joins over
 stricter inner joins for many select operations. This behaviour is primarily
 caused by the inability to specify precisely all the details necessary for the
-realization of a query in a relational schema using the model schema these
+realization of a~query in a~relational schema using the model schema these
 packages used. PrismaORM avoided many of these mistakes thanks to its more
 expressive and purpose-built prisma schema, which can be more expressive than
 class or object definition.
@@ -287,7 +287,7 @@ class or object definition.
 Other than the few noted exceptions, the test results were as expected, with
 packages using less abstraction of the database logic being able to use optimal
 queries, which gave them an advantage over generic ORM queries.
-Object-relational mapping packages carry a drawback of possible less optimal
+Object-relational mapping packages carry a~drawback of possible less optimal
 data path resolution, as shown by Objection.js results in
 \autoref{fig:getColorLatency} or \autoref{fig:getToysAvailableToCat}. However,
 the drawback is only prominent when dealing with complex queries involving

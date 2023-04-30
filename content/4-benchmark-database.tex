@@ -15,10 +15,10 @@ and the toys' manufacturers. The database comprises six main entities -
 
 \section{Cat Entity}
 The \texttt{cat} entity instances represent individual cats which we want to
-monitor. Each has a unique identifier, name and date of birth, all of which are
+monitor. Each has a~unique identifier, name and date of birth, all of which are
 nullable except for the identifier. This entity aims to represent the basic
 database table and to verify the correct handling of the data type from
-Postgres, as JavaScript Date time represents a moment, including time
+Postgres, as JavaScript Date time represents a~moment, including time
 \cite{JavaScript-Date-MDN}. In contrast, the database entry would only contain
 the date \cite{Date/TimeTypes_Postgres}. Additionally, the \texttt{cat} entity
 uses big integer data type, and handling numbers beyond the standard range
@@ -33,16 +33,16 @@ The \texttt{house} entity represents domiciles where the cats spend time at
 their behest. The relation must account for ambitious cats using several houses
 as their homes. The main aim is to test the difficulty of implementing and using
 simple many-to-many relations. The only attribute that provides new data type or
-behaviour is the simple \verb|has_dog| attribute, specified as a Boolean. It is
+behaviour is the simple \verb|has_dog| attribute, specified as a~Boolean. It is
 one of several attributes that test the frameworks' ability to correctly type
 and convert the data recovered from the database.
 
 The houses can be equipped with many toys for the cats to use. The relation
-between houses and toys is modelled through a decomposition table which contains
+between houses and toys is modelled through a~decomposition table which contains
 attributes representing the number of the same toy in the house. While the
 primary keys are the identifiers of the house and toy, the decomposition with
 the amount, rather than several records with an additional identifier, is
-designed to test the ability to insert a record if it does not exist or update
+designed to test the ability to insert a~record if it does not exist or update
 the value referencing its previous state. If more toys are purchased, the owner
 of the house does not suddenly throw out all toys they already had; they will
 add them to their current pile. This operation is often called \textit{upsert} -
@@ -50,7 +50,7 @@ a combination of update and insert, and some database engines, such as
 CockroachDB \cite{upsertCockroachDB}, implement it explicitly under this name.
 PostgreSQL achieves it using the \texttt{ON CONFLICT} statement in
 \texttt{INSERT} query \cite{INSERT_postgres_2023}. It also tests the handling of
-composite primary keys, a standard paradigm in many databases.
+composite primary keys, a~standard paradigm in many databases.
 
 \section{Toy and Toys Producer Entity}
 The \texttt{toy} entity purpose in testing is in numeric data type used in

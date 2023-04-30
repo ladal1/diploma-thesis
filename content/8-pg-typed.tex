@@ -5,7 +5,7 @@ functionality for TypeScript developers. It analyzes SQL queries written by
 developers and, through database introspection, creates typed helper methods for
 executing those queries. The final usage is shown in \autoref{lst:pgTyped}. This
 package is designed specifically for TypeScript, resulting in excellent typing
-but occasionally leading to complex errors, a common issue with other highly
+but occasionally leading to complex errors, a~common issue with other highly
 typed language-based packages like Kysely.
 
 The package is compatible only with PostgreSQL, as each database requires its
@@ -16,8 +16,8 @@ come with pure SQL queries. However, it lacks the abstraction typically found in
 ORM or query builder packages, making direct comparisons challenging.
 
 PgTyped supports both ESM and CommonJS dependency initialization, ensuring
-excellent compatibility at the expense of a slightly larger package size. It is
-released under the MIT license, a highly permissive option. Its popularity ranks
+excellent compatibility at the expense of a~slightly larger package size. It is
+released under the MIT license, a~highly permissive option. Its popularity ranks
 relatively low, with its main package, "\texttt{@pgtyped/cli}" receiving only
 about 10,000 downloads weekly \cite{pgtyped/cli}. On GitHub, it has more stars
 but still falls within the lowest third of the packages compared.
@@ -58,12 +58,12 @@ and \texttt{debug} packages, and the parser dependency, which adds
 \texttt{antlr4ts} for ANTLR 4 (ANother Tool for Language Recognition) grammar
 functionality in TypeScript/JavaScript \cite{pgtyped/runtime}.
 
-The documentation is brief \cite{pgtyped-docs}, providing examples and a quick
+The documentation is brief \cite{pgtyped-docs}, providing examples and a~quick
 start guide that covers the essentials for using the package. While the
 generated types lack method information, the original query is included in the
 Javadoc annotation, making it easily accessible during development. PgTyped is a
 unique and flexible package for TypeScript developers working with PostgreSQL.
-However, it may provide a different abstraction level for those seeking a
+However, it may provide a~different abstraction level for those seeking a
 traditional ORM or query builder solution.
 
 \subsection*{Performance in benchmarks}
@@ -85,4 +85,4 @@ It is important to note that the pgTyped package solely supports
 single-command queries. Consequently, each query had to be separated during the
 transaction tests, with the commands for initiating and rolling back
 transactions explicitly written as SQL code. This limitation warrants
-consideration when selecting a package for implementation within a context.
+consideration when selecting a~package for implementation within a~context.

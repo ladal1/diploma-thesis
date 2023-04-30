@@ -1,5 +1,5 @@
 \section{Kysely}
-Kysely is a relatively young query builder in the TypeScript ecosystem, aiming
+Kysely is a~relatively young query builder in the TypeScript ecosystem, aiming
 to replace Knex.js by offering the same query composition power while providing
 superior type support for query composition and results. Although its
 development only began in earnest in 2021, the package has gained traction since
@@ -12,7 +12,7 @@ databases \cite{kyselyWeb}. One of the driving forces behind Kysely's creation
 was Knex.js's excessive permissiveness, which limited its type support
 capabilities \cite{kyselyGithub}. Kysely addresses this issue while retaining
 the strengths of query composition. Though the order of operations in Kysely may
-sometimes differ from SQL, this does not commonly pose a significant problem.
+sometimes differ from SQL, this does not commonly pose a~significant problem.
 The syntax is shown in \autoref{lst:kyselyExample}.
 
 \begin{listing}[ht]
@@ -66,9 +66,9 @@ covers all essential information. The package's type annotations provide
 excellent documentation, explanations, and multiple usage examples and are the
 best example of function annotation in all packages considered in this
 comparison. With zero dependencies apart from peer dependencies for database
-drivers, Kysely is a lightweight and efficient solution.
+drivers, Kysely is a~lightweight and efficient solution.
 
-In summary, Kysely is a promising query builder in the TypeScript ecosystem,
+In summary, Kysely is a~promising query builder in the TypeScript ecosystem,
 seeking to surpass Knex.js with its superior type support and powerful query
 composition capabilities. Although it currently supports fewer database engines
 and SQL dialects, its performance and type guarantees make it an attractive
@@ -79,7 +79,7 @@ growing appeal within the TypeScript community.
 \subsection*{Performance in benchmarks}
 
 Regarding performance, the Kysely package consistently outperformed or at least
-matched Knex, which is boasts a comparatively rich set of features for a query
+matched Knex, which is boasts a~comparatively rich set of features for a~query
 builder. While Kysely does not offer parsing for types such as Big Integer, its
 handling remains consistent with that of the pg driver. Like many other
 packages, Kysely lacks support for explicit transaction control, above
@@ -93,5 +93,5 @@ Another advantage of Kysely is its utilization of tagged strings, akin to the
 approach employed by @databases/pg when composing raw SQL queries. This method
 proves more comprehensible than the combination of bindings and function calls
 implemented by Knex. Consequently, the Kysely package offers an appealing
-balance of performance and usability, making it a viable option for various
+balance of performance and usability, making it a~viable option for various
 database management tasks.

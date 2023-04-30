@@ -1,7 +1,7 @@
 \section{@databases/pg}
-The \texttt{@databases/pg} package is developed by Lindsay Forbes, a prominent
+The \texttt{@databases/pg} package is developed by Lindsay Forbes, a~prominent
 contributor to the Node.js ecosystem with hundreds of published packages. The
-package offers a simple interface for CRUD operations on individual tables in
+package offers a~simple interface for CRUD operations on individual tables in
 TypeScript. The package's typed interface is derived from schema definitions in
 interfaces, which can be generated using the \texttt{@databases/pg-schema-cli}
 \cite{pg-schema-cli} package. However, the package lacks support for table
@@ -28,8 +28,8 @@ return db
     \end{minted}
 \end{listing}
 
-Though not as feature-rich as a typical ORM, the package simplifies basic
-querying more than a standard query builder. It is exported as an ES module and
+Though not as feature-rich as a~typical ORM, the package simplifies basic
+querying more than a~standard query builder. It is exported as an ES module and
 was initially licensed under GPLv3 but is now published under the MIT License.
 The \texttt{@databases} project supports multiple databases via modular drivers,
 with official support for Postgres, MySQL, SQLite, and Expo/WebSQL
@@ -42,7 +42,7 @@ the fourth least downloaded and the second least known on GitHub
 numerous subpackages, with new databases being added and bugs frequently
 addressed. The package depends solely on internal modules or widely used
 packages, for example \texttt{assert-never} and \texttt{cuid}, along with the
-\texttt{pg} driver as a dependency.
+\texttt{pg} driver as a~dependency.
 
 While the documentation quality could be better, offering basic information, a
 quick-start guide, and examples, there is no inline documentation requiring
@@ -52,9 +52,9 @@ supporting both .sql and .ts formats. However, no interface is provided for
 TypeScript migrations, necessitating custom scripts, and no schema modification
 methods are included in the package.
 
-\texttt{@databases/pg} is a package that simplifies basic querying in TypeScript
-by providing a straightforward interface for CRUD operations. Although it lacks
-the extensive functionality of a traditional ORM, it offers compatibility with
+\texttt{@databases/pg} is a~package that simplifies basic querying in TypeScript
+by providing a~straightforward interface for CRUD operations. Although it lacks
+the extensive functionality of a~traditional ORM, it offers compatibility with
 multiple databases and has an active development community. However, the absence
 of inline documentation and limited support for complex queries and migrations
 may require developers to rely on additional resources and tools.
@@ -65,19 +65,19 @@ to exhibit superior performance in latency tests. Notably, this package is among
 the few capable of automatically converting Big Integer values to their
 corresponding JavaScript type.
 
-The benchmarks depended a lot on queries which were at least majorly manually
+The benchmarks depended a~lot on queries which were at least majorly manually
 written as shown in \autoref{lst:atdatabases/example}, only providing shortcut
 methods for basic operations, helpers for parameter insertion and parsers for
 basic where binary comparisons.
 
 Nevertheless, the \texttt{insertOrUpdate} method \cite{databases/pg}, meant for
-upsert operations, has a limitation, as it cannot differentiate between objects
+upsert operations, has a~limitation, as it cannot differentiate between objects
 designated for updates and those for inserts. This constraint poses challenges
 for operations such as value incrementation or decrementation.
 
 While @databases/pg does offer support for transactions, the package lacks an
 API for managing these transactions. Instead, it only provides the functionality
-to encapsulate operations within a transactional context. This aspect should be
+to encapsulate operations within a~transactional context. This aspect should be
 considered when evaluating the suitability of this package for particular
 applications.
 

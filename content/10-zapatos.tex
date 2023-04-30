@@ -1,7 +1,7 @@
 \section{Zapatos}
 The Zapatos package, developed by George MacKerron, is designed to provide type
 safety for database querying in TypeScript, specifically for PostgreSQL through
-the \texttt{pg} driver. It generates a TypeScript schema of the database via
+the \texttt{pg} driver. It generates a~TypeScript schema of the database via
 introspection, offering methods for basic CRUD operations that are instantly
 typed and function as shortcuts for generic queries. Additionally, it features
 tagged templates for writing arbitrary SQL \cite{zapatos}.
@@ -11,7 +11,7 @@ the inclusion of any value which was not specified in the manually types. This
 approach can lead to issues if the type is not defined correctly initially,
 potentially resulting in an unreliable type and is less explicit way to cast the
 result. Despite this limitation, the package supports lateral joins, enabling
-the return of nested objects, a feature typically not found in packages with
+the return of nested objects, a~feature typically not found in packages with
 such low abstraction levels. However, as with other TypeScript-dependent
 packages, Zapatos can generate compilation errors that are difficult to parse.
 
@@ -26,9 +26,9 @@ of the necessary information for getting started, although lacking in detail.
 Similarly, the annotations for types provide only brief information,
 insufficient for guiding development on their own.
 
-In summary, Zapatos is a package that provides type safety for database querying
+In summary, Zapatos is a~package that provides type safety for database querying
 with PostgreSQL, offering typed CRUD operations and tagged templates for SQL.
-Although it takes a different approach to type generation than \texttt{pgTyped},
+Although it takes a~different approach to type generation than \texttt{pgTyped},
 it supports lateral joins which result in nested objects which are natural way
 of representing data in OOP. The package has concise but sufficient
 documentation for most users \cite{zapatosDocs}. However, the package's
@@ -40,19 +40,19 @@ challenging compilation errors.
 In the performance evaluation, the Zapatos package proved notable, as it was,
 for example, among the few packages that permitted the utilization of distinct
 objects for updates and inserts during \texttt{upsert} operations without
-requiring a complete query. This package exhibited low latency in explicitly
+requiring a~complete query. This package exhibited low latency in explicitly
 written queries and shortcut functions, typically only surpassed by
-\textit{pgTyped} or \textit{@database/pg}, which both employ a more rudimentary
+\textit{pgTyped} or \textit{@database/pg}, which both employ a~more rudimentary
 representation of the SQL language.
 
-However, a significant challenge was encountered during the Big Integer data
+However, a~significant challenge was encountered during the Big Integer data
 type test, as the identifier's value was altered due to its conversion to a
 number before being returned. This issue was resolved by employing an explicit
 SQL query instead of the shortcut function \texttt{db.selectExactlyOne}. This
 unexpected result is particularly striking, given that the framework conducts
 introspection over the database, correctly identifying the schema as
 \texttt{int8}. Nevertheless, the shortcut function converts the column value
-into a JavaScript number runtime type, which, according to the specification, is
+into a~JavaScript number runtime type, which, according to the specification, is
 represented by \texttt{C++} double (\texttt{float64}) or equivalent
 \cite{MDNNumber}. Although both PostgreSQL and JavaScript use the same number of
 bytes to represent the value, the PostgreSQL type can accommodate a
@@ -63,7 +63,7 @@ precision \cite{PostgresNumeric}.
 \caption{Zapatos number precision loss}
 
 \begin{minted}{ts}
-// Value incorrectly converted into a number
+// Value incorrectly converted into a~number
 // Also see the specification of accessible 
 // and selected values as template types for the sql
 db

@@ -1,7 +1,7 @@
 \section{MikroORM}
 
-MikroORM, a project developed by Czech programmer Martin Adámek, has emerged as
-an ORM solution that offers both versatility and ease of use. With a focus on
+MikroORM, a~project developed by Czech programmer Martin Adámek, has emerged as
+an ORM solution that offers both versatility and ease of use. With a~focus on
 implicit transactions using the Unit of Work pattern, MikroORM offers native
 support for NoSQL databases, specifically MongoDB, alongside support for
 traditional relational databases such as MySQL, MariaDB, PostgreSQL, and SQLite
@@ -10,7 +10,7 @@ attention, with 189,128 weekly downloads and 5,777 stars on GitHub
 \cite{mikroORMGitHub} \cite{mikroORMNpm}.
 
 The internal architecture of MikroORM for relational databases is powered by
-Knex, a popular SQL query builder library, which allows developers to access the
+Knex, a~popular SQL query builder library, which allows developers to access the
 underlying query builder with type support provided by MikroORM's definitions.
 Users can therefore utilize the full power of knex while benefiting from the
 additional features and abstractions MikroORM provides. Database models are
@@ -81,14 +81,14 @@ notation for further related entities and filtering. While not strictly typed,
 simple nested objects have enough type support to provide essential information
 for query composition and function as anticipated. The results are well-typed,
 although BigInteger and Decimal types are returned as strings. Transaction
-support with a direct control sequence API is also implemented. For instances
+support with a~direct control sequence API is also implemented. For instances
 where the integrated interface lacks flexibility, pre-typed Knex.js instance is
 accessible for most queries.
 
 Entities in MikroORM are straightforward to implement, although documentation
 for their use with complex decomposition tables is limited and has to be
-implemented through a standard relations between three tables. A minor issue
+implemented through a~standard relations between three tables. a~minor issue
 arose due to an undocumented difference between the \texttt{columnType} and
 \texttt{type} options; however, the package's developer promptly addressed the
-concern. Overall, MikroORM offers a compelling balance of features and
-performance, making it a viable choice for various applications.
+concern. Overall, MikroORM offers a~compelling balance of features and
+performance, making it a~viable choice for various applications.

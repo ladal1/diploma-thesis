@@ -27,21 +27,21 @@ assurances.
 
 \subsection{Database Compatibility}
 
-Wide database compatibility is necessary when working with a large project that
-may encompass many services or when choosing a toolchain for a team working with
+Wide database compatibility is necessary when working with a~large project that
+may encompass many services or when choosing a~toolchain for a~team working with
 dynamic technology stack, as the one database may not satisfy all the needs the
 team might have, and building experience with multiple frameworks could be
-considered unnecessary spending. Providing a unified API over multiple databases
+considered unnecessary spending. Providing a~unified API over multiple databases
 can be one of the benefits of query builders or object-relational mapping
 frameworks.
 
 \subsection{Flexibility and Performance}
 
-Flexibility and performance are crucial in a database access framework. Suppose
+Flexibility and performance are crucial in a~database access framework. Suppose
 the package would restrict the ability to access the data, requiring roundabout
 ways to deal with basic operations. In that case, there are better ways to
 simplify development, just as if the framework creates excessively suboptimal
-queries or adds excessive overhead. One of the requirements for a comprehensive
+queries or adds excessive overhead. One of the requirements for a~comprehensive
 ORM framework is the ability to support many use cases and represent and work
 with many different data models. If ORM doesn't support possible use cases or
 cannot represent commonly used database design patterns, it is lacking in some
@@ -51,24 +51,24 @@ Performance is often secondary when choosing an ORM framework, as quite often,
 even frameworks adding significant overhead and creating suboptimal queries are
 usually not noticeably slowing down the application. As the application grows,
 the performance can become significantly more critical, and the resources needed
-can be more expensive to scale. A high-performing package can support this
+can be more expensive to scale. a~high-performing package can support this
 growth by maintaining efficacy under load and effectively using its available
 resources.
 
 Performance was measured in multiple ways; the first metric was the execution
-time of a single query to measure the latency added by using the framework,
+time of a~single query to measure the latency added by using the framework,
 compared to using other frameworks or plain database drivers. Benchmarking this
 way provides information about the amount of overhead the framework requires to
 function, and if the connection pool is well initialized, connections are
 assigned optimally, and data are correctly retrieved. The second benchmark run
 repeats the test multiple times to eliminate any inconsistency that could occur
-in a single run.
+in a~single run.
 
 \subsection{ECMAScript and CommonJS compatibility}
 There are two different primary standards for JavaScript syntax, ECMAScript and
 CommonJS. They primarily differ in how the inclusion of modules is written and
 the mechanism of the module import. While CommonJS was dominant in the server
-backend space for a long time, however, ECMAScript modules are becoming
+backend space for a~long time, however, ECMAScript modules are becoming
 significantly more popular, with support added in Node.js, TypeScript and many
 popular packages.
 
@@ -79,7 +79,7 @@ declarations.
 \subsection{Licence}
 As developers consider integrating packages into their projects, it is crucial
 to consider and understand the significance of licences governing their use.
-Open-source software is often regarded as a valuable resource, offering a large
+Open-source software is often regarded as a~valuable resource, offering a~large
 amount of reusable code and often the best solution. However, it is essential to
 understand that open-source does not necessarily equate to unregulated use.
 Licences still dictate the terms under which the package and its code can be
@@ -88,7 +88,7 @@ licences of potential packages to ensure their intended use aligns with the
 terms granted.
 
 The most permissive licences allow for usage, modification and redistribution
-with at most a requirement to credit the original author/authors and don't
+with at most a~requirement to credit the original author/authors and don't
 require the licensee to maintain the same licence in derivative works. Examples
 of such permissive licences are \textit{MIT License} \cite{MITLicense} or
 \textit{Apache License 2.0} \cite{ApacheLicense2}. These are generally preferable
@@ -101,13 +101,13 @@ licence is \textit{GNU General Public License} \cite{GNUGPL}, which requires
 derived works to be distributed under the same licence.
 
 Since copyleft or other provisions might limit the usability of libraries such
-as ORMs for many projects, it is necessary to include the licence as a grading
+as ORMs for many projects, it is necessary to include the licence as a~grading
 criterion.
 
 \section{Package Properties Criteria}
 
 However, technical criteria are only some that should be considered when
-selecting a framework. Many of these factors are interconnected; often, success
+selecting a~framework. Many of these factors are interconnected; often, success
 in one is either caused by or preceded by doing well in others. For example,
 while the popularity of the package can show the reliability and usability of
 the package, it also often results in more issues being reported, and more
@@ -127,11 +127,11 @@ highest number is listed.
 \subsection{Support}
 
 The number of resolved and still open issues can be used to show popularity and
-support of the project. With such a metric, support can be measured; however,
+support of the project. With such a~metric, support can be measured; however,
 more important than that are the patterns of behaviour which maintainers have
 shown previously. If the release schedule is predictable, bugs and security
 issues are fixed quickly, hesitant adopters can be assured that this pattern
-will continue, and the framework is a safe investment. On the contrary, a
+will continue, and the framework is a~safe investment. On the contrary, a
 project which is officially or probably no longer supported can be assumed to be
 a wrong choice, as it cannot react to newly found errors and problems with
 dependencies and might be unusable due to changes with TypeScript or Node.js
@@ -142,7 +142,7 @@ runtime.
 As dependencies require maintenance due to their changes and vulnerable
 versions, their amount should also be manageable. Otherwise, it might increase
 the maintenance cost for the package and application size. Even though data
-storage is less critical than previously, having a more storage-conscious
+storage is less critical than previously, having a~more storage-conscious
 package is still beneficial.
 
 \subsection{Documentation Quality}
@@ -156,6 +156,6 @@ features such as JSdoc annotations \cite{Typescript-jsdoc} which can be parsed
 by IDEs are used to contain or link to the documentation.
 
 
-The following chapters aim to provide a comprehensive and in-depth analysis of
+The following chapters aim to provide a~comprehensive and in-depth analysis of
 packages compared by evaluating each package by these comprehensive criteria
 with additional added when.

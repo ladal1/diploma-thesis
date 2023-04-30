@@ -9,14 +9,14 @@ same language used by the packages being tested.
 The benchmarking framework had to be designed to accommodate errors that could
 occur during development and testing of the packages. Additionally, it has to
 support testing of multiple database schemas and allow for results to be
-exported in a variety of formats for further analysis. The resulting
-benchmarking framework provides a robust and comprehensive means of comparing
+exported in a~variety of formats for further analysis. The resulting
+benchmarking framework provides a~robust and comprehensive means of comparing
 database access packages.
 
 \section{Test Suite and Schema Separation}
 
 The benchmarking framework was designed to support separation of tests into
-multiple test suites, a common practice with JavaScript test frameworks such as
+multiple test suites, a~common practice with JavaScript test frameworks such as
 Jest \cite{Jest} or Mocha \cite{Mocha}. Test suite separation allows for
 organization of tests by subject and contains specifications about the database
 schema and data expected to be executed. Input and output parameters must be
@@ -33,10 +33,10 @@ framework should allow for wider range of tests than is expected for
 implementation.
 
 \section{Database management}
-As the framework operates strictly over a database instance, the framework must
+As the framework operates strictly over a~database instance, the framework must
 be able to perform maintenance operations. These include initializing the
 database with its schema, seeding the database with test data and later tearing
-down the schema and replacing it with a different one, depending on which the
+down the schema and replacing it with a~different one, depending on which the
 test suite requires.
 
 \section{Test type and Error Handling}
@@ -64,7 +64,7 @@ standard library, meaning that no additional package has to be included.
 Returning an incorrect result is one of many ways the benchmark test can be
 failed; the package can return an unexpected error, or the test is impossible to
 perform. Both are fail-states, which the benchmark suite must account for with
-error handling. One choice during the design process was that a single failure
+error handling. One choice during the design process was that a~single failure
 would mark the real test as failed, even though other iterations succeeded. If
 the package caused the issue, that means the package is not reliable enough and
 such problem needs to be marked. If the failure is caused by external issue, for
@@ -76,7 +76,7 @@ The benchmarking bootstrap is designed for sequential testing of multiple
 packages. This design, rather than separate execution, allows for comprehensive
 comparison under the same conditions, ensuring accurate results. As managing the
 dependencies could prove problematic if packages had different dependencies
-required, npm workspaces \cite{npmWorkspaces} were selected as a project
+required, npm workspaces \cite{npmWorkspaces} were selected as a~project
 structure. That way, top-level dependencies of the framework can be separated
 from the individual implementations.
 
@@ -84,10 +84,10 @@ As each framework is initialized through its initialization method, abstraction
 over the package itself must be created. The initialization also has to account
 for delayed connection pool creation. Some packages only start the connection
 once the first request is sent to limit the number of open connections for the
-database. The database has a limited amount of connections it can support, which
+database. The database has a~limited amount of connections it can support, which
 is one way to optimize its usage. The benchmark database can easily handle the
 limited connections between the benchmarking framework and the individual
-connections; however, it should still contain a method for closing the
+connections; however, it should still contain a~method for closing the
 connection and destroying the context so subsequent frameworks can access the
 same amount of resources.
 
@@ -97,7 +97,7 @@ An integral part of the design was the inclusion of reporters. Reporters provide
 an interface and implementation of multiple output options, enabling the results
 to be saved and shown in various formats. Standard test frameworks utilize
 reporters to make code coverage or detailed error stack inspectable. The
-reporters can interpret the data in different formats with a benchmarking
+reporters can interpret the data in different formats with a~benchmarking
 framework. The reporter interface has to be designed to be extensible, in order
 to allow for the easy addition of other output options or data interpretations
 in the future.

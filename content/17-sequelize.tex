@@ -5,31 +5,31 @@ frameworks for the JavaScript ecosystem, with development starting in 2010.
 After over 12 years of development, it supports various databases, including
 PostgreSQL, MySQL, and SQLite3 \cite{sequelizeDocs}. Its popularity is
 attributed to its simple syntax and flexible usage. Sequelize supports read
-replication, using round-robin scheduling for read queries and a write pool for
-write or explicitly marked database calls. It also provides a command-line
+replication, using round-robin scheduling for read queries and a~write pool for
+write or explicitly marked database calls. It also provides a~command-line
 interface for managing schema and data, offering migration and seeding options.
 
 Sequelize can use either manually written migrations or automatically generated
 ones based on Model definitions. The framework also supports programmatic
 synchronization of the database state to reflect the Model definition using the
 \texttt{sequelize.sync()} method. Unlike other ORMs discussed in this work,
-Sequelize does not expose a query builder interface, only allowing for raw query
+Sequelize does not expose a~query builder interface, only allowing for raw query
 execution when integrated entity fetching is insufficient.
 
 Full TypeScript support for the main project is still in progress
-\cite{sequelizeTypescriptSupport}. However, a separate project called
+\cite{sequelizeTypescriptSupport}. However, a~separate project called
 \textit{sequelize-typescript} \cite{sequelizeTypescriptNpm} offers support for
 TypeScript native definitions, using decorators for Model and property
 specifications. One of the original features of Sequelize is its support for the
 automatic creation and update of timestamp fields on database tables and the
 option for \enquote{paranoid} tables \cite{sequelizeParanoid}. In this mode,
-calling a deletion method sets the \texttt{deletedAt} attribute instead of
+calling a~deletion method sets the \texttt{deletedAt} attribute instead of
 removing the record. The framework behaves like the deleted records do not exist
 unless previously restored.
 
 Both Sequelize and sequelize-typescript are provided under the MIT Licence and
 actively supported. Due to its extensive user base, the framework has over 750
-reported issues \cite{sequelizeGitHub}, with a minority marked as bugs and the
+reported issues \cite{sequelizeGitHub}, with a~minority marked as bugs and the
 majority being feature requests. The central repository of the package has
 27,729 stars on GitHub and the largest number of weekly downloads out of all
 packages compared, at 1,505,485 \cite{sequelizeNpm}.
@@ -79,7 +79,7 @@ Sequelize's filter types were limited, as even essential attribute matching for
 search by attribute equality is not typed as illustrated by example
 \autoref{lst:SequelizeWhereType}. This lack of typing support increases the
 likelihood of developers making errors that may only become apparent during
-runtime. Furthermore, Sequelize does not provide a dedicated API for WHERE
+runtime. Furthermore, Sequelize does not provide a~dedicated API for WHERE
 clauses on joined tables, requiring developers to rely on dot notation and
 unchecked fields to define such filters.
 
@@ -90,7 +90,7 @@ essential to mention such features in the introductory documentation for models
 to minimize confusion for developers.
 
 Like most other ORMs, Sequelize does not support abstracting upsert operations
-with increments or decrementation on updates. As a result, developers must
+with increments or decrementation on updates. As a~result, developers must
 resort to implementing such operations using raw queries. It also performed the
 worst among all tested packages during pagination test, as the query used by the
 package was identical to the one used by other packages and no discrepancy was

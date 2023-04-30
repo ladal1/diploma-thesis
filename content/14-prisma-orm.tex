@@ -2,7 +2,7 @@
 
 PrismaORM has rapidly gained popularity in the development community due to its
 innovative and modern approach to creating database clients and
-object-relational mapping. Adopting a unique method for defining database
+object-relational mapping. Adopting a~unique method for defining database
 schemas, PrismaORM utilizes its schema language \cite{prismaDocsSchema}, which
 aims to represent the database structure using concepts more closely aligned
 with relational syntax rather than complex objects found in traditional
@@ -11,12 +11,12 @@ schema language is shown in \autoref{lst:prismaSchema}.
 
 The schema in PrismaORM comprises three main components: the data source
 definition, the output specification for the schema (such as the Prisma database
-client), and the database schema itself. A custom client is generated from this
-schema (and, optionally, a context like the current system architecture, if not
+client), and the database schema itself. A~custom client is generated from this
+schema (and, optionally, a~context like the current system architecture, if not
 specified). This client includes type definitions for type safety, ensuring a
 robust and reliable database interaction experience. However, one potential
 drawback of this approach is the increased binary size of the generated client.
-For example, the resulting binary size in a test database was approximately 15
+For example, the resulting binary size in a~test database was approximately 15
 MB, which may lead to cold start issues in serverless environments. To address
 this concern, PrismaORM provides specific instructions for many cloud platforms
 to optimize the binary result and configuration as much as possible
@@ -37,7 +37,7 @@ model cat {
     \end{minted}
 \end{listing}
 
-The Prisma suite also includes a migration platform that automatically
+The Prisma suite also includes a~migration platform that automatically
 transforms schema changes into corresponding database updates. PrismaORM boasts
 impressive adoption rates, with 1,057,351 weekly downloads and 30,431 GitHub
 stars, making it the second most popular package by the GitHub metric
@@ -47,15 +47,15 @@ requirements.
 
 However, it should be noted that Prisma supports only CommonJS imports by
 default and does not offer an official method for generating ECMAScript
-module-compatible code \cite{prismaES6}. This limitation may be a challenge for
+module-compatible code \cite{prismaES6}. This limitation may be a~challenge for
 developers who prefer or have to use ECMAScript modules in their projects.
 
 \subsection*{Performance in benchmarks}
 
-PrismaORM, a competitive ORM package, has demonstrated performance on par with
+PrismaORM, a~competitive ORM package, has demonstrated performance on par with
 other leading ORM solutions, such as Sequelize and TypeORM. In the
 \texttt{getToysAvailableToCat} test, which measures relation traversal
-performance, PrismaORM generated a significantly faster query by employing
+performance, PrismaORM generated a~significantly faster query by employing
 multiple nested queries instead of the \texttt{LEFT JOIN} and \texttt{LEFT OUTER
 JOIN} operations utilized by its competitors. However, in the
 \texttt{countCatsByColor} test, the package produced an overly complicated query
@@ -69,8 +69,8 @@ itself. The package supported incrementing and decrementing operations in upsert
 queries, and although the filter objects became relatively complex, they
 remained comprehensible. While the transaction implementation does not allow for
 explicit handling, this approach is more understandable within an ORM context,
-where SQL queries are already opaque, as opposed to a query builder such as
-Kysely, which employs a similar methodology.
+where SQL queries are already opaque, as opposed to a~query builder such as
+Kysely, which employs a~similar methodology.
 
 Furthermore, PrismaORM can accurately convert and type unconventional runtime
 types, including Big Integer and JSON values. This capability enhances the
