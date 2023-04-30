@@ -39,7 +39,7 @@ usage with the current TypeScript version. These dependencies primarily relate
 to inflexion, code analysis for model dependency graphs, and various data types
 supported by the framework, including GeoJSON and advanced Date types. While the
 package offers extensive documentation, differences in Model definition when
-using, TypeScript can be confusing. Documentation for additional operators and
+using TypeScript can be confusing. Documentation for additional operators and
 decorators is lacking, as it is primarily contained in several Markdown files in
 its repository.
 
@@ -76,12 +76,12 @@ return Cat.count({
 \end{listing}
 
 Sequelize's filter types were limited, as even essential attribute matching for
-search by attribute equality is not typed as illustrated by example
-\autoref{lst:SequelizeWhereType}. This lack of typing support increases the
-likelihood of developers making errors that may only become apparent during
-runtime. Furthermore, Sequelize does not provide a~dedicated API for WHERE
-clauses on joined tables, requiring developers to rely on dot notation and
-unchecked fields to define such filters.
+search by attribute equality is not typed. This lack of typing support increases
+the likelihood of developers making errors that may only become apparent during
+runtime. Furthermore, Sequelize does not provide a~dedicated API for
+\texttt{WHERE} clauses on joined tables, requiring developers to rely on dot
+notation and unchecked fields to define such filters. Example of such
+functionality is shown in \autoref{lst:SequelizeWhereType}.
 
 While defining models is documented, the example code provided was found to
 throw errors related to shadowing attribute names. Although the solution to this

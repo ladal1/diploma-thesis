@@ -42,28 +42,29 @@ for example, among the few packages that permitted the utilization of distinct
 objects for updates and inserts during \texttt{upsert} operations without
 requiring a~complete query. This package exhibited low latency in explicitly
 written queries and shortcut functions, typically only surpassed by
-\textit{pgTyped} or \textit{@database/pg}, which both employ a~more rudimentary
+pgTyped or @database/pg, which both employ a~more rudimentary
 representation of the SQL language.
 
 However, a~significant challenge was encountered during the Big Integer data
-type test, as the identifier's value was altered due to its conversion to a
-number before being returned. This issue was resolved by employing an explicit
-SQL query instead of the shortcut function \texttt{db.selectExactlyOne}. This
-unexpected result is particularly striking, given that the framework conducts
-introspection over the database, correctly identifying the schema as
-\texttt{int8}. Nevertheless, the shortcut function converts the column value
-into a~JavaScript number runtime type, which, according to the specification, is
-represented by \texttt{C++} double (\texttt{float64}) or equivalent
-\cite{MDNNumber}. Although both PostgreSQL and JavaScript use the same number of
-bytes to represent the value, the PostgreSQL type can accommodate a
-significantly more extensive range of integer values, as it utilizes decimal
-precision \cite{PostgresNumeric}.
+type test, implementation of which in Zapatos is shown in
+\autoref{lst:ZapatosPrecision}. The identifier's value was altered due to its
+conversion to a number before being returned. This issue was resolved by
+employing an explicit SQL query instead of the shortcut function
+\texttt{db.selectExactlyOne}. This unexpected result is particularly striking,
+given that the framework conducts introspection over the database, correctly
+identifying the schema as \texttt{int8}. Nevertheless, the shortcut function
+converts the column value into a~JavaScript number runtime type, which,
+according to the specification, is represented by \texttt{C++} double
+(\texttt{float64}) or equivalent \cite{MDNNumber}. Although both PostgreSQL and
+JavaScript use the same number of bytes to represent the value, the PostgreSQL
+type can accommodate a significantly more extensive range of integer values, as
+it utilizes decimal precision \cite{PostgresNumeric}.
 
 \begin{listing}
 \caption{Zapatos number precision loss}
-
+\label{lst:ZapatosPrecision}
 \begin{minted}{ts}
-// Value incorrectly converted into a~number
+// Value incorrectly converted into a number
 // Also see the specification of accessible 
 // and selected values as template types for the sql
 db
@@ -89,13 +90,12 @@ the final comparison table), including transaction rollbacks. The framework only
 performs this task autonomously if the transaction encounters an error (and
 subsequently rethrows the error).
 
-A unique and valuable feature of the Zapatos package is its support for lateral
-joins, which the framework advocates. This approach generates nested objects
-that align more naturally with the object-oriented programming paradigm.
+A unique feature of the Zapatos package is its support for lateral joins, which
+the framework advocates. This approach generates nested objects that align more
+naturally with the object-oriented programming paradigm.
 
-Initially, due to limitations in the typings of Objection.js, the framework had
-to be compiled with the \texttt{StrictNullChecks} option of TypeScript disabled. This
-decision conflicted with the way Zapatos does its type checking. This option is
-one of the most common problems with out-of-date type definitions, so Zapatos
-will not be valid for projects that have to keep this option disabled due to
-other dependencies.
+Initially, due to limitations with other frameworks, the TypeScript compilation
+was done with the \texttt{StrictNullChecks} option disabled. This conflicted
+with the way Zapatos does its type checking. This option is one of the most
+common problems with out-of-date type definitions, so Zapatos is not suitable
+for projects that have to keep this option disabled due to other dependencies.

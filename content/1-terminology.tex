@@ -1,4 +1,4 @@
-\chapter{Preliminaries}
+\chapter{Preliminaries}\label{ch:preliminaries}
 
 In this chapter, we will establish a~solid foundation for the rest of the thesis
 by introducing the key concepts and definitions used later in the work.
@@ -33,8 +33,7 @@ code that is typically required.
 SQL query builder is derived from its function to create SQL queries and OOP
 pattern, which it implements, called \enquote{builder}. Object-oriented
 programming design patterns are reusable solutions commonly encountered during
-software development in OOP languages. These patterns propose interactions
-between objects and their internal structure. There is no single authority on
+software development in OOP languages. There is no single authority on
 how these patterns are defined, nor a~comprehensive list of these patterns, as
 every author prioritises different patterns and functionalities
 \cite{fowler-patterns-2003}.
@@ -404,12 +403,6 @@ memory on one machine are modified by a~different one.
 
 \section*{Active record}
 
-\begin{figure}[t]
-    \caption{Active pattern class diagram, recreated from Patterns of Enterprise Architecture}
-    \centering
-    \includegraphics[width=0.6\textwidth]{ActiveRecord}
-\end{figure}
-
 The Active Record pattern is a~design pattern defined by Martin Fowler in his
 book "Patterns of Enterprise Application Architecture"
 \cite[p. 160]{fowler-patterns-2003} and is commonly used to represent database
@@ -422,10 +415,18 @@ method call into the database. The base class also provides static methods for
 CRUD (create, read, update, delete) operations and possibly additional business
 logic.  
 
+\begin{figure}
+    \caption{Active pattern class diagram, recreated from Patterns of Enterprise Architecture}
+    \label{fig:ActivePattern}
+    \centering
+    \includegraphics[width=0.6\textwidth]{ActiveRecord}
+\end{figure}
+
 The main benefit of the Active Record pattern is a~simple and intuitive
 interface for objects and tables. Modifications of the object can be made right
 on the data in languages, which allow setters and getters on attributes, and
-static methods provide a~simple gateway to work with the table. 
+static methods provide a~simple gateway to work with the table. Diagram of the
+pattern can be seen in \autoref{fig:ActivePattern}.
 
 Limitations of the pattern come in the tight coupling between the application
 and database logic, as the object instance is inherently tied to the database
@@ -435,12 +436,6 @@ easily allow for the management of relations, so a~database schema with complex
 relations might not be able to represent the data easily. 
 
 \section*{Data mapper}
-
-\begin{figure}[t]
-    \caption{Data Mapper class diagram, recreated from Patterns of Enterprise Architecture}
-    \centering
-    \includegraphics[width=0.8\textwidth]{DataMapper}
-\end{figure}
 
 The Data Mapper pattern, as described by Martin Fowler in his seminal work on
 enterprise application architectures, provides a~clear separation between domain
@@ -454,11 +449,18 @@ design \cite[p. 165]{fowler-patterns-2003}.
 Distinguished from the Active Record pattern, the Data Mapper pattern ensures
 that business logic and data access responsibilities remain separate. In this
 approach, a~single entity represents the table or collection, while distinct
-entities represent individual records. The Data Mapper serves as a~data access
+entities represent individual records as seen in \autoref{fig:DataMapper}. The Data Mapper serves as a~data access
 layer that performs operations on the data storage representation without
 creating any direct bindings between in-memory objects and the database. This
 responsibility is solely managed by the Data Mapper, which takes care of any
 objects that utilize it.
+
+\begin{figure}[tb]
+    \caption{Data Mapper class diagram, recreated from Patterns of Enterprise Architecture}
+    \label{fig:DataMapper}
+    \centering
+    \includegraphics[width=0.8\textwidth]{DataMapper}
+\end{figure}
 
 By limiting the responsibilities class must service and ensure that it is not
 accountable for multiple unrelated tasks, the single responsibility principle

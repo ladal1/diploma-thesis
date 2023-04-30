@@ -9,7 +9,7 @@ but occasionally leading to complex errors, a~common issue with other highly
 typed language-based packages like Kysely.
 
 The package is compatible only with PostgreSQL, as each database requires its
-own parser and introspection process. PgTyped uses the 'pg' connection package,
+own parser and introspection process. PgTyped uses the \textit{pg} connection package,
 which is only compatible with PostgreSQL. It provides complete SQL flexibility
 with minimal overhead, allowing developers to use it without limitations that
 come with pure SQL queries. However, it lacks the abstraction typically found in
@@ -18,33 +18,37 @@ ORM or query builder packages, making direct comparisons challenging.
 PgTyped supports both ESM and CommonJS dependency initialization, ensuring
 excellent compatibility at the expense of a~slightly larger package size. It is
 released under the MIT license, a~highly permissive option. Its popularity ranks
-relatively low, with its main package, "\texttt{@pgtyped/cli}" receiving only
+relatively low, with its main package, \texttt{@pgtyped/cli} receiving only
 about 10,000 downloads weekly \cite{pgtyped/cli}. On GitHub, it has more stars
 but still falls within the lowest third of the packages compared.
 
 \begin{listing}[ht]
   \caption{Usage of pgTyped}
   \label{lst:pgTyped}
-  \begin{minted}{typescript}
-  // -- File: EntityTraversal.sql
-  /* @name countCatsByColor */
-  SELECT
-    COUNT(*)
-  FROM
-      cat
-      JOIN cat_color ON cat_color.id = cat.cat_color_id
-      JOIN color_hex ON color_hex.id = cat_color.id
-  WHERE
-      color_hex.hex_code = :hexCode;
-  
-  // -- File: EntityTraversal.ts 
-  import {
-    countCatsByColor,
-  } from './EntityTraversal.queries'
-  
-  return countCatsByColor
-    .run({ hexCode }, getClient())
-    .then(result => Number(result[0].count))
+  \begin{minted}{postgres}
+// -- File: EntityTraversal.sql
+/* @name countCatsByColor */
+SELECT
+  COUNT(*)
+FROM cat
+  JOIN cat_color ON cat_color.id = cat.cat_color_id
+  JOIN color_hex ON color_hex.id = cat_color.id
+WHERE
+  color_hex.hex_code = :hexCode;
+\end{minted}  
+\vspace{-\medskipamount}
+\vspace{-0.5\baselineskip}
+\vspace{0.8pt}% just to show a~very small white space
+
+\begin{minted}{typescript}
+// -- File: EntityTraversal.ts 
+import {
+  countCatsByColor,
+} from './EntityTraversal.queries'
+
+return countCatsByColor
+  .run({ hexCode }, getClient())
+  .then(result => Number(result[0].count))
   
   \end{minted}
 \end{listing}

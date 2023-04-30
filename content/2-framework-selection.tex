@@ -1,4 +1,4 @@
-\chapter{Framework selection}
+\chapter{Framework selection}\label{ch:selection}
 
 Selecting the optimal framework for any project can be difficult, with many
 parameters and options to consider, and quite often, there are better options
@@ -16,11 +16,12 @@ leading to the inclusion of widely-used packages with currently limited support
 and development and lesser-known packages with solid support. 
 
 \section{Typescript support}
+
 The primary selection criterion for the packages was TypeScript compatibility.
 Each package had to have at least a~basic functionality working and typed,
 requiring only reasonable effort to integrate. The degree of support varies
-among the packages, and their level was also measured in comparison, but the
-base level was necessary to be considered.
+among the packages, and their level was also compared, but the base level was
+necessary to be considered.
 
 The functionality considered essential is not easy to define either, but as the
 level of type support varied, the minimum settled on was package and connection
@@ -32,6 +33,17 @@ types they provide are some of the most useful. The result of a~simple
 non-joined query on one table should be able to return exact and correct types,
 and an update of the record should also at least suggest the attributes which
 can be changed.
+
+The quality of the typings provided by the package will be a subject of
+benchmarking. However, the packages included in this comparison had to advertise
+at least basic functionality.
+
+The quality of the typings provided by the package will also be a subject of
+benchmarking. However, the packages included in this comparison had to advertise
+at least basic functionality. Even packages with community-provided typings were
+considered for implementation. However, only one package - Waterline was found
+with at least basic quality typings provided in such a way, and it was not
+sufficient for implementation, as explained in \autoref{ch:waterline}.
 
 \section{Popularity and Support}
 Popularity was inherently a~factor in the selection of packages; if the package
@@ -59,6 +71,8 @@ compatibility with changes in underlying technologies.
 \section{Implementation criteria}
 Although some packages were initially selected for comparison, thanks to fitting
 the previous criteria, problems encountered during their implementation into the
-benchmarks were too great to allow for meaningful comparison. They will still be
-introduced, and the issues explained; however, they will only be included in
-comparisons outside the basic summary.
+benchmarks were too great to allow for meaningful comparison. They are still be
+introduced in \autoref{sec:disqualified}, and the issues explained; however,
+they will only be included in comparisons outside the basic summary.
+
+

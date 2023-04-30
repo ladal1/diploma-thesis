@@ -14,7 +14,7 @@ with CommonJS and ECMAScript. It offers automatic migrations based on its models
 and manually written migrations. However, it lacks support for seed files,
 requiring them to be included as migrations if executed through its CLI.
 
-\begin{listing}[h]
+\begin{listing}[hb]
   \caption{TypeORM Eager Loading example, implementation for getCatColor benchmark test}
   \label{lst:typeORMEagerLoad}
   \begin{minted}{typescript}
@@ -35,8 +35,8 @@ highest amount of stars among those compared, with 1,192,427 weekly downloads
 \cite{typeORMNpm} and 30,947 stars on GitHub \cite{typeORMGitHub}. Released
 under the MIT License, TypeORM is the ORM with the highest number of downloads
 and native support for TypeScript, as Sequelize only outperforms it when
-considering the \textit{sequelize} package's download numbers
-\cite{sequelizeNpm}, not the \textit{sequelize-typescript} package
+considering the Sequelize package's download numbers
+\cite{sequelizeNpm}, not the Sequelize-Typescript package
 \cite{sequelizeTypescriptNpm} used for comparison.
 
 Despite its stable support, TypeORM's development has shifted towards
@@ -80,10 +80,10 @@ effectively understand and work with these queries, one such query is shown in
 are computationally more demanding than INNER JOINs and, in this case, will
 yield the same output thanks to the database schema.
 
-\begin{listing}[hb]
+\begin{listing}[htb]
   \caption{TypeORM Query generated for getToysAvailableToCat benchmark (with hashes shortened)}
   \label{lst:typeorm-query}
-\begin{minted}[breaklines]{sql}
+\begin{minted}[breaklines]{postgres}
 SELECT 
   "Toy"."id"               AS "Toy_id",
   "Toy"."toy_name"         AS "Toy_toy_name",
@@ -108,7 +108,7 @@ WHERE ("521c7a07[...]88acfd85"."id" = 1)
 \end{minted}
 \end{listing}
 
-\newpage
+% \newpage
 
 Another issue encountered with TypeORM relates to its handling of automatically
 generated primary keys. The ORM disregards user input for these columns if they

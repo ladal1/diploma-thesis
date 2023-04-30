@@ -85,9 +85,10 @@ handling remains consistent with that of the pg driver. Like many other
 packages, Kysely lacks support for explicit transaction control, above
 encapsulation into one. However, this is at least supplemented with raw SQL
 queries inside the encapsulation. This will however result in additional call of
-COMMIT or ROLLBACK at the end of the encapsulation, even though the transaction
-was finished manually, and such behaviour is usually reserved for ORMs which
-abstract the database access further than common query builders.
+\texttt{COMMIT} or \texttt{ROLLBACK} at the end of the encapsulation, even
+though the transaction was finished manually, and such behaviour is usually
+reserved for ORMs which abstract the database access further than common query
+builders.
 
 Another advantage of Kysely is its utilization of tagged strings, akin to the
 approach employed by @databases/pg when composing raw SQL queries. This method
