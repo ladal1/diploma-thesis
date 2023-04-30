@@ -1,13 +1,14 @@
 \subsection{Waterline}
 
-The Sails framework, an MVC-style architecture framework for JavaScript, is
-designed for building modern web applications. As part of this framework, the
-Model component is implemented using an ORM called Waterline. Sails is
-relatively less popular in the JavaScript ecosystem, with only 31,492 downloads,
-which pales in comparison to giants like Express (28,825,585 weekly downloads
-\cite{express_2022}) or Koa (1,600,532 weekly downloads \cite{koa_2023}). While Waterline's
-primary purpose is to serve as a~component within the Sails framework, it is
-also available as a~standalone package.
+The Sails framework, an Model-View-Controller-style \cite[p.
+330]{fowler-patterns-2003} architecture framework for JavaScript, is designed
+for building modern web applications. As part of this framework, the Model
+component is implemented using an ORM called Waterline. Sails is relatively less
+popular in the JavaScript ecosystem, with only 31,492 downloads, which pales in
+comparison to giants like Express (28,825,585 weekly downloads
+\cite{express_2022}) or Koa (1,600,532 weekly downloads \cite{koa_2023}). While
+Waterline's primary purpose is to serve as a~component within the Sails
+framework, it is also available as a~standalone package.
 
 However, during the implementation process, several issues were encountered with
 Waterline. The package does not provide its own types but relies on optional

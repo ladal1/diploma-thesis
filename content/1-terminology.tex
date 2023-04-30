@@ -117,10 +117,6 @@ When talking about ORMs and database access, lazy loading usually takes place as
 replacing data retrieval from an object with a~call to retrieve the data from
 the database. In other words, the data of the database object does not need to
 be loaded when the object representation or its part is created in the program.
-This technique is often used for loading relations so that only one table needs
-to be queried to create the essential representation of the object while
-skipping the need for additional fetches or joins that are only invoked once
-needed.
 
 \section*{Eager loading}
 Eager loading is the programming practice of loading all the required data at
@@ -362,9 +358,7 @@ as supported by V8, the engine on which both it and Node.js run \cite{Deno}.
 \section*{npm}
 One of the key benefits of the Node.js ecosystem is the large number of
 third-party packages that can be incorporated into projects. For example, many
-popular web frameworks, such as Koa or Express.js, are built for Node. Database
-drivers are also provided in module form, and therefore there needs to be a~tool
-which allows users to incorporate such modules into their projects efficiently. 
+popular web frameworks, such as Koa or Express.js, are built for Node. 
 
 Originally an acronym for Node Package Manager \cite{npm-old-readme}, the
 three-letter name has been retroactively stripped of such meaning
@@ -410,7 +404,7 @@ memory on one machine are modified by a~different one.
 
 \section*{Active record}
 
-\begin{figure}[b]
+\begin{figure}[t]
     \caption{Active pattern class diagram, recreated from Patterns of Enterprise Architecture}
     \centering
     \includegraphics[width=0.6\textwidth]{ActiveRecord}
@@ -442,7 +436,7 @@ relations might not be able to represent the data easily.
 
 \section*{Data mapper}
 
-\begin{figure}[b]
+\begin{figure}[t]
     \caption{Data Mapper class diagram, recreated from Patterns of Enterprise Architecture}
     \centering
     \includegraphics[width=0.8\textwidth]{DataMapper}

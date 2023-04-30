@@ -84,7 +84,9 @@ Another challenge posed by Objection.js lies in its limited typing support. Many
 inherited methods from Knex lack template variables to specify the result,
 despite their original counterparts providing such functionality. Consequently,
 developers often need to cast the results manually to ensure the correct final
-type, except for the most basic queries.
+type, except for the most basic queries. It was the only package which provided
+completely incorrect resulting types, which forced the usage of \texttt{x as
+unknown as DesiredType} casting.
 
 The composition of Objection.js, which positions itself as not quite an ORM nor
 a pure query builder, often requires developers to have direct access to the

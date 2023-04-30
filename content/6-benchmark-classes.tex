@@ -149,7 +149,13 @@ this test does not evaluate whether the package is entirely vulnerable to SQL
 injection attacks but rather if the basic handling of arguments is not
 vulnerable.
 
-\todo{MaxQuery Test}
+In order to test the ability to use aggregate functions over a relation, the
+\textit{maxQuery} test examines the package's ability to query the relation's
+maximal value. The test is run over the Toy entity, with the highest price being
+searched for. In addition to aggregate function usage, this also tests the
+ability to parse \texttt{DECIMAL} type and work with it in terms of JavaScript
+type Number, which is more accurately reflected with PostgreSQL type
+\texttt{DOUBLE}.
 
 \subsection*{Special SQL Actions Benchmark}
 

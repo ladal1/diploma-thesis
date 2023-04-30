@@ -225,7 +225,6 @@ representations of the value.
     \end{threeparttable}
 \end{table}
 \section{Latency benchmark results}
-\input{content/more/observationGraphs.tex}
 
 The second aspect of the benchmarking process involved evaluating the
 performance of the various packages. This evaluation focused on the optimality
@@ -243,6 +242,8 @@ when utilizing the withGraphJoined method. While it would have been possible to
 rewrite the query using the integrated query builder and resolve the issue, this
 approach would compromise the flexibility testing and be thus considered
 inadvisable.
+
+\input{content/more/observationGraphs.tex}
 
 Another fascinating result was the exceptional performance of MikroORM in the
 JSONColumn test, results of which are in \autoref{fig:JSONColumn}, where it
@@ -294,9 +295,11 @@ the drawback is only prominent when dealing with complex queries involving
 multiple joins. It is preferable to use ORMs where the amount of data in the
 database will not result in suboptimal computation time, as the overhead of the
 package itself is negligible. Figures \ref{fig:countCatsByColor},
-\ref{fig:JSONColumn}, and \ref{fig:JSONWhere}, \ref{fig:transactions},
-\ref{fig:likeQuery}, \ref{fig:bulkDelete}, \ref{fig:bulkUpdate},
-\ref{fig:pagination} (included in the appendix), show that while the relative
+\ref{fig:JSONColumn}, and \ref{fig:JSONWhere} through 
+% \ref{fig:transactions},
+% \ref{fig:likeQuery}, \ref{fig:ilikeQuery}, \ref{fig:bulkDelete}, \ref{fig:bulkUpdate},
+% \ref{fig:pagination},
+ \ref{fig:maxQuery} (included in the appendix), show that while the relative
 performance of the queries is almost double that of reference, it is still minor
 for the amount of data usually considered for most smaller projects. When
 considering enterprise-level databases, the toll in which the suboptimal queries
