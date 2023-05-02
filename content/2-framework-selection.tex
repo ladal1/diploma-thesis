@@ -68,11 +68,22 @@ benchmark have forks that would relieve the issues encountered. High-quality
 support is crucial for addressing issues, incorporating new features and
 compatibility with changes in underlying technologies.
 
-\section{Implementation criteria}
+\section{Exclusion criteria}
 Although some packages were initially selected for comparison, thanks to fitting
 the previous criteria, problems encountered during their implementation into the
-benchmarks were too great to allow for meaningful comparison. They are still be
-introduced in \autoref{sec:disqualified}, and the issues explained; however,
-they will only be included in comparisons outside the basic summary.
+benchmarks needed to be better to allow for meaningful comparison. They are
+still introduced in \autoref{sec:disqualified}, and the issues explained;
+however, they will only be included in comparisons outside the basic summary.
 
+The one condition that could disqualify a package was the ability to function
+inside the TypeScript project. That means having up-to-date type definitions and
+functionality for package configuration with the test database. Even alternative
+type definition would be considered if, for example, a change in TypeScript
+behaviour would require a redefinition of types.
+
+If the issue of such deficiency lies in required dependencies, it's exacerbated,
+as changing to a newer version could break the package's functionality. In cases
+where such problems are encountered, derivative distributions of the framework
+were explored, but unless they are distributed through the npm repository, they
+were not tested.
 

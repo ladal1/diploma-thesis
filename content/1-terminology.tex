@@ -416,7 +416,7 @@ CRUD (create, read, update, delete) operations and possibly additional business
 logic.  
 
 \begin{figure}
-    \caption{Active pattern class diagram, recreated from Patterns of Enterprise Architecture}
+    \caption[Active pattern class diagram]{Active pattern class diagram, recreated from \cite[Fowler]{fowler-patterns-2003}}
     \label{fig:ActivePattern}
     \centering
     \includegraphics[width=0.6\textwidth]{ActiveRecord}
@@ -456,7 +456,7 @@ responsibility is solely managed by the Data Mapper, which takes care of any
 objects that utilize it.
 
 \begin{figure}[tb]
-    \caption{Data Mapper class diagram, recreated from Patterns of Enterprise Architecture}
+    \caption[Data Mapper class diagram]{Data Mapper class diagram, recreated from \cite{fowler-patterns-2003}}
     \label{fig:DataMapper}
     \centering
     \includegraphics[width=0.8\textwidth]{DataMapper}
@@ -468,10 +468,8 @@ aims to create more straightforward and more maintainable classes. Consequently,
 the Data Mapper pattern contributes to a~more robust and modular software
 architecture that is easier to develop, maintain, and extend.
 
-However, the Data Mapper pattern has drawbacks. One notable downside is the
-increased complexity introduced by the additional layer of abstraction. This
-added complexity could lead to a~steeper learning curve for developers
-unfamiliar with the pattern, as well as the potential for increased development
-time. Moreover, the mapping process between domain objects and the persistence
-layer may introduce performance overhead, which can be a~concern for
-applications with stringent performance requirements.
+However, the Data Mapper pattern has its own set of drawbacks. One notable
+downside is the increased complexity introduced by the additional layer of
+abstraction. This added complexity could lead to a~steeper learning curve for
+developers unfamiliar with the pattern, as well as the potential for increased
+development time \cite{David_2018}. 
