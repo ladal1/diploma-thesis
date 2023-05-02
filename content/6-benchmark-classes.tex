@@ -99,7 +99,7 @@ individual packages. In addition to comparing performance, the requirements for
 implementation are comparison, as an easily implemented framework is better than
 one that's difficult to, provided they otherwise have feature parity.
 
-\subsection*{MVP Benchmark}
+\subsection{MVP Benchmark}
 This test suite was only implemented under the \textit{Knex.js} package as its
 purpose is to test the functionality of the benchmarking framework and does not
 test any database functionality. It is proof of concept for correct validation
@@ -111,7 +111,7 @@ and a~test that throws generic error on execution. Additionally, MVPBench
 examines if test configurations are working as they should be, testing both
 validity and latency settings.
 
-\subsection*{Entity Traversal Benchmark}
+\subsection{Entity Traversal Benchmark}
 One of the generally provided functionalities of ORMs is the ability to define
 entities and their relations. This benchmark aims to test the ability to use
 these defined relations to find objects using these connections. The first test
@@ -129,7 +129,7 @@ how well the decomposition table can be accessed or avoided. The decomposition
 table exists because of the M:N relation between toys and houses, but the
 additional amount attribute is not used.
 
-\subsection*{Edge Cases Benchmark}
+\subsection{Edge Cases Benchmark}
 
 The edge cases benchmark aims to evaluate database adapter performance in
 specific situations that may not be commonly encountered but can potentially
@@ -167,7 +167,7 @@ ability to parse \texttt{DECIMAL} type and work with it in terms of JavaScript
 type Number, which is more accurately reflected with PostgreSQL type
 \texttt{DOUBLE}.
 
-\subsection*{Special SQL Actions Benchmark}
+\subsection{Special SQL Actions Benchmark}
 
 The Special SQL Actions benchmark evaluates the performance of frameworks in
 scenarios that go beyond basic querying, focusing on unique ways of interacting
@@ -209,7 +209,7 @@ aligns with their project's unique requirements. The benchmark ensures that
 developers are aware of each package's various capabilities and limitations,
 enabling them to choose the most suitable solution for their specific use cases.
 
-\subsection*{Bulk Operations Benchmark}
+\subsection{Bulk Operations Benchmark}
 The benchmark for bulk operation focuses on the usage limitations for more
 extensive operations and large amounts of data. With ORM abstracting through the
 Active Record pattern, more extensive scale analytics and data manipulation

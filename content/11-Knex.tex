@@ -15,6 +15,8 @@ drivers exist. With this extensive compatibility, Knex.js caters to a~diverse
 audience of developers working with different databases and drivers
 \cite{knexDocumentation}.
 
+\newpage
+
 Knex.js offers non-abstracted function-based query building, representing each
 SQL term with a~function call. This approach allows developers to construct
 queries in a~granular and modular manner. This all while keeping the syntax
@@ -34,14 +36,13 @@ await knexInstance
     .join('toy_house', 'toy_house.toy_id', 'toy.id')
     .join('house_cat', 'house_cat.house_id', 'toy_house.house_id')
     .where('house_cat.cat_id', '=', id)
-// Resulting SQL
 \end{minted} 
 
 \vspace{-\medskipamount}
-\vspace{-1.5\baselineskip}
-\vspace{0.8pt}% just to show a very small white space
+\vspace{-\baselineskip}
 
 \begin{minted}{postgresql}
+-- Resulting SQL
 SELECT
     toy.toy_name
 FROM
@@ -68,9 +69,9 @@ environments. The package is licensed under the MIT Licence, a~popular choice
 for open-source projects.
 
 Although Knex.js benefits from active support for its basic functionality, the
-vast range of databases it supports inevitably leads to a~considerable upkeep
-workload. Consequently, many bugs remain unaddressed for extended periods,
-potentially impacting developers who rely on the package for their projects.
+vast range of databases it supports inevitably leads to a~considerable upkeep.
+Consequently, many bugs remain unaddressed for extended periods, potentially
+impacting developers who rely on the package for their projects.
 
 Regarding documentation, Knex.js stands out with high-quality online resources,
 guiding users through setup and usage. As with many other packages in this

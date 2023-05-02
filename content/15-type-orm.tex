@@ -17,10 +17,13 @@ requiring them to be included as migrations if executed through its CLI.
 \begin{listing}[hb]
   \caption{TypeORM Eager Loading example, implementation for getCatColor benchmark test}
   \label{lst:typeORMEagerLoad}
+  \vspace{-0.5\baselineskip}
   \begin{minted}{typescript}
 await BenchDataSource.getRepository(Cat)
   .findOne({
-    where: { id: id.toString() },
+    where: { 
+      id: id.toString() 
+    },
     relations: {
       catColor: {
         colorHex: true,
@@ -28,6 +31,7 @@ await BenchDataSource.getRepository(Cat)
     },
   })
   \end{minted}
+  \vspace{-0.5\baselineskip}
 \end{listing}
 
 TypeORM is highly popular, boasting the second-highest download number and the
@@ -81,7 +85,7 @@ are computationally more demanding than INNER JOINs and, in this case, will
 yield the same output thanks to the database schema.
 
 \begin{listing}[htb]
-  \caption{TypeORM Query generated for getToysAvailableToCat benchmark (with hashes shortened)}
+  \caption[TypeORM Query generated for getToysAvailableToCat benchmark]{TypeORM Query generated for getToysAvailableToCat benchmark (with hashes shortened)}
   \label{lst:typeorm-query}
 \begin{minted}[breaklines]{postgres}
 SELECT 

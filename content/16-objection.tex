@@ -67,6 +67,8 @@ other ORM packages such as MikroORM and TypeORM. However, a~notable exception
 was observed in the getCatColor test, where Objection.js was significantly
 slower than its counterparts.
 
+\newpage
+
 This performance discrepancy was traced back to the method that was used for
 fetching related entities: \texttt{withGraphFetched}, the only type-supported
 way to fetch relations beyond a~single relationship in Objection.js without
