@@ -40,13 +40,13 @@ challenging compilation errors.
 In the performance evaluation, the Zapatos package proved notable, as it was,
 for example, among the few packages that permitted the utilization of distinct
 objects for updates and inserts during \texttt{upsert} operations without
-requiring a~complete query. This package exhibited low latency in explicitly
-written queries and shortcut functions, typically only surpassed by
-pgTyped or @database/pg, which both employ a~more rudimentary
-representation of the SQL language.
+requiring a usage of raw SQL query. This package generally exhibited low latency
+in explicitly written queries and shortcut functions, typically only surpassed
+by pgTyped or @database/pg, which both employ a~more rudimentary representation
+of the SQL language.
 
-However, a~significant challenge was encountered during the Big Integer data
-type test, implementation of which in Zapatos is shown in
+However, a~significant problem was encountered during the Big Integer data type
+test, implementation of which in Zapatos is shown in
 \autoref{lst:ZapatosPrecision}. The identifier's value was altered due to its
 conversion to a number before being returned. This issue was resolved by
 employing an explicit SQL query instead of the shortcut function

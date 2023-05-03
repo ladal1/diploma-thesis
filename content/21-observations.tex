@@ -85,11 +85,12 @@ than one that can perform such requests.
 
 Tables \ref{table:EntityTraversal}, \ref{table:SpecialSQLActions},
 \ref{table:EdgeCases}, and \ref{table:BulkOperations} showcase the layers used
-to perform the required functionality for the benchmark. A~requirement for each
-implementation was that the logic had to be consistently implemented on the
-database, with the framework only composing the query and parsing the result.
-For example, it was not allowed to check for an existing object in an upsert
-operation by querying the database independently.
+to perform the required functionality for the benchmark. The shortcuts for the
+methods are listed in the following list. A~requirement for each implementation
+was that the logic had to be consistently implemented on the database, with the
+framework only composing the query and parsing the result. For example, it was
+not allowed to check for an existing object in an upsert operation by querying
+the database independently.
 
 The order for implementation was as follows:
 \begin{enumerate}
@@ -222,7 +223,7 @@ representations of the value.
     PrismaORM & Native & Native & Native & Native \\ 
     Sequelize & Native & Native & Native & Native \\ 
     TypeORM & Native\tnote{1} & Native & Native & Native\tnote{2} \\ 
-    Zapatos & Native & Native & Native & Native \\ \hline
+    Zapatos & Native\tnote{1} & Native & Native & Native \\ \hline
     \end{tabular}
     \begin{tablenotes}
         \item [1] Bulk/Batch operations not supported, data chunked manually

@@ -74,11 +74,12 @@ traditional ORM or query builder solution.
 In line with expectations, the pgTyped package outperformed all other packages
 examined in the study. Most pgTyped operations are executed before or during
 compile time, yielding performance metrics comparable to those achieved using
-the plain \textit{pg} driver. While the package does not offer explicit support for
-parsing esoteric primitive types such as Decimal or Big Integer—resulting in
-their return as strings (akin to the \textit{pg} driver's approach) — it does provide a
-specific type for \texttt{JSON} and \texttt{JSONb} columns. However, these types
-must be sufficiently generic, which limits their overall value.
+the plain \textit{pg} driver. While the package does not offer explicit support
+for parsing esoteric primitive types such as Decimal or Big Integer, which would
+result in their return as strings (akin to the \textit{pg} driver's approach).
+The package does provide a specific type for \texttt{JSON} and \texttt{JSONB}
+columns. However, as these types must be sufficiently generic, this limits their
+overall value.
 
 As is typical with intricate TypeScript interfaces, the errors frequently
 encountered when using pgTyped can be challenging to interpret and offer

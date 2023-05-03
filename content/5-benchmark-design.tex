@@ -20,7 +20,7 @@ multiple test suites, a~common practice with JavaScript test frameworks such as
 Jest \cite{Jest} or Mocha \cite{Mocha}. Test suite separation allows for
 organization of tests by subject and contains specifications about the database
 schema and data expected to be executed. Input and output parameters must be
-typed to test types support, and the framework should provide sufficient
+typed to test TypeScript support, and the framework should provide sufficient
 functionality to avoid the need for casting.
 \newpage
 The tests are expected to be run simultaneously with snapshots of the database
@@ -28,8 +28,8 @@ schema and should not interfere with data used by another test suite. As a
 deliberate choice, this limits the scope of each test's modifications over the
 database and data. However, it eliminates the need to reset the database to the
 original state after each test suite, reducing the time it takes to run the
-benchmark. However, such functionality should still be supported, as the
-framework should allow for wider range of tests than is expected for
+benchmark. Even so, such functionality should still be supported, as the
+framework has to allow for wider range of tests than is expected for
 implementation.
 
 \section{Database management}

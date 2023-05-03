@@ -21,9 +21,9 @@ offering better integration and type safety without the need for casts. In
 contrast, others only provide basic typing or require result type definitions to
 be written into each request, which amounts to the same behaviour as if the
 result was cast. Such functionality often comes when the package initially
-written for JavaScript is not rewritten in TypeScript but is only provided with
-a \texttt{types} file, which specifies call signatures, but cannot provide other
-assurances.
+written for JavaScript is not rewritten in TypeScript, only provided with a
+\texttt{types} file for compatibility. The file specifies call signatures, but
+cannot provide other assurances, that TypeScript native code has.
 
 \subsection{Database Compatibility}
 
@@ -55,14 +55,12 @@ can be more expensive to scale. a~high-performing package can support this
 growth by maintaining efficacy under load and effectively using its available
 resources.
 
-Performance was measured in multiple ways; the first metric was the execution
-time of a~single query to measure the latency added by using the framework,
-compared to using other frameworks or plain database drivers. Benchmarking this
-way provides information about the amount of overhead the framework requires to
-function, and if the connection pool is well initialized, connections are
-assigned optimally, and data are correctly retrieved. The second benchmark run
-repeats the test multiple times to eliminate any inconsistency that could occur
-in a~single run.
+Performance was measured by comparing the request execution time to other
+implementations. Benchmarking this way provides information about the amount of
+overhead the framework requires to function and if the connection pool is
+correctly initialized, connections are assigned optimally, and data are
+retrieved in a proper form. The benchmark executes the run repeatedly to
+eliminate any inconsistency from a~single run.
 
 \subsection{ECMAScript and CommonJS compatibility}
 There are two different primary standards for JavaScript syntax, ECMAScript and
