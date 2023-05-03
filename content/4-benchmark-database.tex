@@ -7,6 +7,18 @@ and the toys' manufacturers. The database comprises six main entities -
 \texttt{cat}, \texttt{cat colours}, colour \texttt{hex codes}, \texttt{houses},
 \texttt{toys} and \texttt{toy producers}.
 
+The design of the database was guided by the aim to represent many different
+relational architectures and different commonly used data types. The schema was
+created to represent different cardinality between entities, foreign key usage
+and partiality. The data stored inside the schema was also selected only to test
+data parsing ability rather than fit logical use.
+
+The database was filled with testing data, designed with diversity and amount to
+allow for flexibility testing and for highly inefficient queries to be evident.
+However, the data in the database is insufficient to overfill the database
+buffers and test for excessive operation complexity, only to detect inefficiency
+in the query. This is one area which can be explored in further work.
+
 \begin{figure}[b]
     \centering
     \includegraphics[width=0.9\textwidth]{databaseSchema}
