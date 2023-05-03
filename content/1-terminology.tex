@@ -5,11 +5,11 @@ by introducing the key concepts and definitions used later in the work.
 
 \section*{Object-Relational Mapping}
 Object-relational mapping is a~way to access relational data in an
-object-centred programming language \cite{agile-mapping-objects}. The primary
+object-centred programming language \cite{agile-mapping-objects}. Its primary
 purpose is manipulating data without switching concepts from object-oriented
 paradigms to the relational representation of data in which most databases
 operate. The scope of this translation layer can (as shown later in this work)
-vary. Different people define packages as ORMs while providing diverse levels of
+vary. Different groups define packages as ORMs while providing diverse levels of
 functionality \cite{artima-abstractions}.
 
 At its base level, ORM provides an intermediary layer between applications' OOP
@@ -411,7 +411,7 @@ a~method call into the database. The base class also provides static methods for
 CRUD (create, read, update, delete) operations and possibly additional business
 logic.  
 
-\begin{figure}
+\begin{figure}[b]
     \caption[Active pattern class diagram]{Active pattern class diagram, recreated from \cite[Fowler]{fowler-patterns-2003}}
     \label{fig:ActivePattern}
     \centering
@@ -442,6 +442,13 @@ representations from the data storage mechanisms, the Data Mapper pattern
 promotes a~clean separation of concerns and enhanced flexibility in application
 design \cite[p. 165]{fowler-patterns-2003}.
 
+\begin{figure}[htb]
+    \caption[Data Mapper class diagram]{Data Mapper class diagram, recreated from \cite{fowler-patterns-2003}}
+    \label{fig:DataMapper}
+    \centering
+    \includegraphics[width=0.8\textwidth]{DataMapper}
+\end{figure}
+
 Distinguished from the Active Record pattern, the Data Mapper pattern ensures
 that business logic and data access responsibilities remain separate. In this
 approach, a~single entity represents the table or collection, while distinct
@@ -450,13 +457,6 @@ layer that performs operations on the data storage representation without
 creating any direct bindings between in-memory objects and the database. This
 responsibility is solely managed by the Data Mapper, which takes care of any
 objects that utilize it.
-
-\begin{figure}[tb]
-    \caption[Data Mapper class diagram]{Data Mapper class diagram, recreated from \cite{fowler-patterns-2003}}
-    \label{fig:DataMapper}
-    \centering
-    \includegraphics[width=0.8\textwidth]{DataMapper}
-\end{figure}
 
 By limiting the responsibilities class must service and ensure that it is not
 accountable for multiple unrelated tasks, the single responsibility principle

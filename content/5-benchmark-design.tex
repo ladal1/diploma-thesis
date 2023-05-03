@@ -63,7 +63,7 @@ standard library, meaning that no additional package has to be included.
 
 Returning an incorrect result is one of many ways the benchmark test can be
 failed; the package can return an unexpected error, or the test is impossible to
-perform. Both are fail-states, which the benchmark suite must account for with
+perform. Both are fail-states which the benchmark suite must account for with
 error handling. One choice during the design process was that a~single failure
 would mark the real test as failed, even though other iterations succeeded. If
 the package caused the issue, that means the package is not reliable enough and
